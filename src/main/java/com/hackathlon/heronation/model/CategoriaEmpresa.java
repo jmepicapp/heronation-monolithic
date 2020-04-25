@@ -1,20 +1,15 @@
 package com.hackathlon.heronation.model;
 
 
-import org.springframework.boot.autoconfigure.domain.EntityScan;
-import org.springframework.data.annotation.Id;
-
 import javax.persistence.*;
-
 import java.io.Serializable;
-import java.util.Objects;
 import java.util.HashSet;
 import java.util.Set;
 
 /**
  * A CategoriaEmpresa.
  */
-@EntityScan
+@Entity
 @Table(name = "categoria_empresa")
 public class CategoriaEmpresa implements Serializable {
 
