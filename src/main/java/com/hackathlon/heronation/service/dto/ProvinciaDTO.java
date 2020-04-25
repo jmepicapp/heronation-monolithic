@@ -1,0 +1,72 @@
+package com.hackathlon.heronation.service.dto;
+
+import java.io.Serializable;
+import java.util.Objects;
+import com.hackathlon.heronation.domain.enumeration.ComunidadAutonoma;
+
+/**
+ * A DTO for the {@link com.hackathlon.heronation.domain.Provincia} entity.
+ */
+public class ProvinciaDTO implements Serializable {
+    
+    private Long id;
+
+    private String nombre;
+
+    private ComunidadAutonoma comunidad;
+
+    
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public ComunidadAutonoma getComunidad() {
+        return comunidad;
+    }
+
+    public void setComunidad(ComunidadAutonoma comunidad) {
+        this.comunidad = comunidad;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        ProvinciaDTO provinciaDTO = (ProvinciaDTO) o;
+        if (provinciaDTO.getId() == null || getId() == null) {
+            return false;
+        }
+        return Objects.equals(getId(), provinciaDTO.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(getId());
+    }
+
+    @Override
+    public String toString() {
+        return "ProvinciaDTO{" +
+            "id=" + getId() +
+            ", nombre='" + getNombre() + "'" +
+            ", comunidad='" + getComunidad() + "'" +
+            "}";
+    }
+}
