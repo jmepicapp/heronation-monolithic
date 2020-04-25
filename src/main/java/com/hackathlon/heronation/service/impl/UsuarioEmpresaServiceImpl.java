@@ -9,6 +9,7 @@ import com.hackathlon.heronation.util.ModelMapperUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,7 @@ public class UsuarioEmpresaServiceImpl implements UsuarioEmpresaService {
 
     private final Logger log = LoggerFactory.getLogger(UsuarioEmpresaServiceImpl.class);
 
+    @Autowired
     private final UsuarioEmpresaRepository usuarioEmpresaRepository;
 
     public UsuarioEmpresaServiceImpl(UsuarioEmpresaRepository usuarioEmpresaRepository) {

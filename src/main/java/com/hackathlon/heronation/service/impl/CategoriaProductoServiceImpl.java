@@ -8,6 +8,7 @@ import com.hackathlon.heronation.util.ModelMapperUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,8 +24,8 @@ public class CategoriaProductoServiceImpl implements CategoriaProductoService {
 
     private final Logger log = LoggerFactory.getLogger(CategoriaProductoServiceImpl.class);
 
+    @Autowired
     private final CategoriaProductoRepository categoriaProductoRepository;
-
 
     public CategoriaProductoServiceImpl(CategoriaProductoRepository categoriaProductoRepository) {
         this.categoriaProductoRepository = categoriaProductoRepository;
