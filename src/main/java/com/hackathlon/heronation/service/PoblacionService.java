@@ -1,12 +1,12 @@
 package com.hackathlon.heronation.service;
 
-import com.hackathlon.heronation.service.dto.PoblacionDTO;
+import com.hackathlon.heronation.model.dto.PoblacionDTO;
 
 import java.util.List;
 import java.util.Optional;
 
 /**
- * Service Interface for managing {@link com.hackathlon.heronation.domain.Poblacion}.
+ * Service Interface for managing {@link com.hackathlon.heronation.model.Poblacion}.
  */
 public interface PoblacionService {
 

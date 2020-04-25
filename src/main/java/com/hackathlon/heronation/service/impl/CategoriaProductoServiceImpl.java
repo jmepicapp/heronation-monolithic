@@ -1,20 +1,18 @@
 package com.hackathlon.heronation.service.impl;
 
 import com.hackathlon.heronation.service.CategoriaProductoService;
-import com.hackathlon.heronation.domain.CategoriaProducto;
+import com.hackathlon.heronation.model.CategoriaProducto;
 import com.hackathlon.heronation.repository.CategoriaProductoRepository;
-import com.hackathlon.heronation.service.dto.CategoriaProductoDTO;
-import com.hackathlon.heronation.service.mapper.CategoriaProductoMapper;
+import com.hackathlon.heronation.model.dto.CategoriaProductoDTO;
+import com.hackathlon.heronation.util.ModelMapperUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 /**
  * Service Implementation for managing {@link CategoriaProducto}.
@@ -27,11 +25,9 @@ public class CategoriaProductoServiceImpl implements CategoriaProductoService {
 
     private final CategoriaProductoRepository categoriaProductoRepository;
 
-    private final CategoriaProductoMapper categoriaProductoMapper;
 
-    public CategoriaProductoServiceImpl(CategoriaProductoRepository categoriaProductoRepository, CategoriaProductoMapper categoriaProductoMapper) {
+    public CategoriaProductoServiceImpl(CategoriaProductoRepository categoriaProductoRepository) {
         this.categoriaProductoRepository = categoriaProductoRepository;
-        this.categoriaProductoMapper = categoriaProductoMapper;
     }
 
     /**
@@ -43,9 +39,9 @@ public class CategoriaProductoServiceImpl implements CategoriaProductoService {
     @Override
     public CategoriaProductoDTO save(CategoriaProductoDTO categoriaProductoDTO) {
         log.debug("Request to save CategoriaProducto : {}", categoriaProductoDTO);
-        CategoriaProducto categoriaProducto = categoriaProductoMapper.toEntity(categoriaProductoDTO);
+        CategoriaProducto categoriaProducto = ModelMapperUtils.map(categoriaProductoDTO, CategoriaProducto.class);
         categoriaProducto = categoriaProductoRepository.save(categoriaProducto);
-        return categoriaProductoMapper.toDto(categoriaProducto);
+        return ModelMapperUtils.map(categoriaProducto, CategoriaProductoDTO.class);
     }
 
     /**
@@ -57,9 +53,7 @@ public class CategoriaProductoServiceImpl implements CategoriaProductoService {
     @Transactional(readOnly = true)
     public List<CategoriaProductoDTO> findAll() {
         log.debug("Request to get all CategoriaProductos");
-        return categoriaProductoRepository.findAll().stream()
-            .map(categoriaProductoMapper::toDto)
-            .collect(Collectors.toCollection(LinkedList::new));
+        return ModelMapperUtils.mapAll(categoriaProductoRepository.findAll(), CategoriaProductoDTO.class);
     }
 
     /**
@@ -72,8 +66,8 @@ public class CategoriaProductoServiceImpl implements CategoriaProductoService {
     @Transactional(readOnly = true)
     public Optional<CategoriaProductoDTO> findOne(Long id) {
         log.debug("Request to get CategoriaProducto : {}", id);
-        return categoriaProductoRepository.findById(id)
-            .map(categoriaProductoMapper::toDto);
+        return Optional.of(ModelMapperUtils.map(categoriaProductoRepository.findById(id), CategoriaProductoDTO.class));
+
     }
 
     /**

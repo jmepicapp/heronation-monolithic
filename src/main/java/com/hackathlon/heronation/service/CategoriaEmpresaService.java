@@ -1,6 +1,6 @@
 package com.hackathlon.heronation.service;
 
-import com.hackathlon.heronation.service.dto.CategoriaEmpresaDTO;
+import com.hackathlon.heronation.model.dto.CategoriaEmpresaDTO;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Service Interface for managing {@link com.hackathlon.heronation.domain.CategoriaEmpresa}.
+ * Service Interface for managing {@link com.hackathlon.heronation.model.CategoriaEmpresa}.
  */
 public interface CategoriaEmpresaService {
 
@@ -33,7 +33,7 @@ public interface CategoriaEmpresaService {
      *
      * @return the list of entities.
      */
-    Page<CategoriaEmpresaDTO> findAllWithEagerRelationships(Pageable pageable);
+    List<CategoriaEmpresaDTO> findAllWithEagerRelationships(Pageable pageable);
 
     /**
      * Get the "id" categoriaEmpresa.

@@ -1,7 +1,7 @@
-package com.hackathlon.heronation.service.dto;
+package com.hackathlon.heronation.model.dto;
 
-import java.time.ZonedDateTime;
 import java.io.Serializable;
+import java.time.ZonedDateTime;
 import java.util.Objects;
 
 /**

@@ -3,20 +3,17 @@ package com.hackathlon.heronation.service.impl;
 import com.hackathlon.heronation.service.CategoriaEmpresaService;
 import com.hackathlon.heronation.model.CategoriaEmpresa;
 import com.hackathlon.heronation.repository.CategoriaEmpresaRepository;
-import com.hackathlon.heronation.service.dto.CategoriaEmpresaDTO;
-import com.hackathlon.heronation.service.mapper.CategoriaEmpresaMapper;
+import com.hackathlon.heronation.model.dto.CategoriaEmpresaDTO;
+import com.hackathlon.heronation.util.ModelMapperUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 /**
  * Service Implementation for managing {@link CategoriaEmpresa}.
@@ -29,11 +26,8 @@ public class CategoriaEmpresaServiceImpl implements CategoriaEmpresaService {
 
     private final CategoriaEmpresaRepository categoriaEmpresaRepository;
 
-    private final CategoriaEmpresaMapper categoriaEmpresaMapper;
-
-    public CategoriaEmpresaServiceImpl(CategoriaEmpresaRepository categoriaEmpresaRepository, CategoriaEmpresaMapper categoriaEmpresaMapper) {
+    public CategoriaEmpresaServiceImpl(CategoriaEmpresaRepository categoriaEmpresaRepository) {
         this.categoriaEmpresaRepository = categoriaEmpresaRepository;
-        this.categoriaEmpresaMapper = categoriaEmpresaMapper;
     }
 
     /**
@@ -45,9 +39,9 @@ public class CategoriaEmpresaServiceImpl implements CategoriaEmpresaService {
     @Override
     public CategoriaEmpresaDTO save(CategoriaEmpresaDTO categoriaEmpresaDTO) {
         log.debug("Request to save CategoriaEmpresa : {}", categoriaEmpresaDTO);
-        CategoriaEmpresa categoriaEmpresa = categoriaEmpresaMapper.toEntity(categoriaEmpresaDTO);
+        CategoriaEmpresa categoriaEmpresa = ModelMapperUtils.map(categoriaEmpresaDTO, CategoriaEmpresa.class);
         categoriaEmpresa = categoriaEmpresaRepository.save(categoriaEmpresa);
-        return categoriaEmpresaMapper.toDto(categoriaEmpresa);
+        return ModelMapperUtils.map(categoriaEmpresa, CategoriaEmpresaDTO.class);
     }
 
     /**
@@ -59,18 +53,12 @@ public class CategoriaEmpresaServiceImpl implements CategoriaEmpresaService {
     @Transactional(readOnly = true)
     public List<CategoriaEmpresaDTO> findAll() {
         log.debug("Request to get all CategoriaEmpresas");
-        return categoriaEmpresaRepository.findAllWithEagerRelationships().stream()
-            .map(categoriaEmpresaMapper::toDto)
-            .collect(Collectors.toCollection(LinkedList::new));
+        return ModelMapperUtils.mapAll(categoriaEmpresaRepository.findAllWithEagerRelationships(), CategoriaEmpresaDTO.class);
     }
 
-    /**
-     * Get all the categoriaEmpresas with eager load of many-to-many relationships.
-     *
-     * @return the list of entities.
-     */
-    public Page<CategoriaEmpresaDTO> findAllWithEagerRelationships(Pageable pageable) {
-        return categoriaEmpresaRepository.findAllWithEagerRelationships(pageable).map(categoriaEmpresaMapper::toDto);
+    @Override
+    public List<CategoriaEmpresaDTO> findAllWithEagerRelationships(Pageable pageable) {
+        return ModelMapperUtils.mapAll(categoriaEmpresaRepository.findAllWithEagerRelationships(pageable), CategoriaEmpresaDTO.class);
     }
 
     /**
@@ -83,8 +71,7 @@ public class CategoriaEmpresaServiceImpl implements CategoriaEmpresaService {
     @Transactional(readOnly = true)
     public Optional<CategoriaEmpresaDTO> findOne(Long id) {
         log.debug("Request to get CategoriaEmpresa : {}", id);
-        return categoriaEmpresaRepository.findOneWithEagerRelationships(id)
-            .map(categoriaEmpresaMapper::toDto);
+        return Optional.of(ModelMapperUtils.map(categoriaEmpresaRepository.findOneWithEagerRelationships(id), CategoriaEmpresaDTO.class));
     }
 
     /**

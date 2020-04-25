@@ -1,18 +1,18 @@
-package com.hackathlon.heronation.service.dto;
+package com.hackathlon.heronation.model.dto;
 
 import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * A DTO for the {@link com.hackathlon.heronation.domain.UsuarioDonante} entity.
+ * A DTO for the {@link com.hackathlon.heronation.domain.UsuarioEmpresa} entity.
  */
-public class UsuarioDonanteDTO implements Serializable {
+public class UsuarioEmpresaDTO implements Serializable {
     
     private Long id;
 
-    private String nombre;
+    private Long cif;
 
-    private String apellidos;
+    private String nombre;
 
     private String email;
 
@@ -22,10 +22,14 @@ public class UsuarioDonanteDTO implements Serializable {
 
     private Long direccion;
 
+    private Boolean activo;
+
     private Long rol;
 
+    private Long categoria;
 
-    private Long rolUsuarioDonanteId;
+
+    private Long rolUsuarioEmpresaId;
     
     public Long getId() {
         return id;
@@ -35,20 +39,20 @@ public class UsuarioDonanteDTO implements Serializable {
         this.id = id;
     }
 
+    public Long getCif() {
+        return cif;
+    }
+
+    public void setCif(Long cif) {
+        this.cif = cif;
+    }
+
     public String getNombre() {
         return nombre;
     }
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public String getApellidos() {
-        return apellidos;
-    }
-
-    public void setApellidos(String apellidos) {
-        this.apellidos = apellidos;
     }
 
     public String getEmail() {
@@ -83,6 +87,14 @@ public class UsuarioDonanteDTO implements Serializable {
         this.direccion = direccion;
     }
 
+    public Boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(Boolean activo) {
+        this.activo = activo;
+    }
+
     public Long getRol() {
         return rol;
     }
@@ -91,12 +103,20 @@ public class UsuarioDonanteDTO implements Serializable {
         this.rol = rol;
     }
 
-    public Long getRolUsuarioDonanteId() {
-        return rolUsuarioDonanteId;
+    public Long getCategoria() {
+        return categoria;
     }
 
-    public void setRolUsuarioDonanteId(Long rolId) {
-        this.rolUsuarioDonanteId = rolId;
+    public void setCategoria(Long categoria) {
+        this.categoria = categoria;
+    }
+
+    public Long getRolUsuarioEmpresaId() {
+        return rolUsuarioEmpresaId;
+    }
+
+    public void setRolUsuarioEmpresaId(Long rolId) {
+        this.rolUsuarioEmpresaId = rolId;
     }
 
     @Override
@@ -108,11 +128,11 @@ public class UsuarioDonanteDTO implements Serializable {
             return false;
         }
 
-        UsuarioDonanteDTO usuarioDonanteDTO = (UsuarioDonanteDTO) o;
-        if (usuarioDonanteDTO.getId() == null || getId() == null) {
+        UsuarioEmpresaDTO usuarioEmpresaDTO = (UsuarioEmpresaDTO) o;
+        if (usuarioEmpresaDTO.getId() == null || getId() == null) {
             return false;
         }
-        return Objects.equals(getId(), usuarioDonanteDTO.getId());
+        return Objects.equals(getId(), usuarioEmpresaDTO.getId());
     }
 
     @Override
@@ -122,16 +142,18 @@ public class UsuarioDonanteDTO implements Serializable {
 
     @Override
     public String toString() {
-        return "UsuarioDonanteDTO{" +
+        return "UsuarioEmpresaDTO{" +
             "id=" + getId() +
+            ", cif=" + getCif() +
             ", nombre='" + getNombre() + "'" +
-            ", apellidos='" + getApellidos() + "'" +
             ", email='" + getEmail() + "'" +
             ", telefono=" + getTelefono() +
             ", contrasena='" + getContrasena() + "'" +
             ", direccion=" + getDireccion() +
+            ", activo='" + isActivo() + "'" +
             ", rol=" + getRol() +
-            ", rolUsuarioDonanteId=" + getRolUsuarioDonanteId() +
+            ", categoria=" + getCategoria() +
+            ", rolUsuarioEmpresaId=" + getRolUsuarioEmpresaId() +
             "}";
     }
 }

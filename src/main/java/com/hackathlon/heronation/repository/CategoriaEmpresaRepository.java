@@ -1,6 +1,6 @@
 package com.hackathlon.heronation.repository;
 
-import com.hackathlon.heronation.domain.CategoriaEmpresa;
+import com.hackathlon.heronation.model.CategoriaEmpresa;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

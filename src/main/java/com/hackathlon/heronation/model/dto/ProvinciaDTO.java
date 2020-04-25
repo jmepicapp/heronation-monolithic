@@ -1,11 +1,12 @@
-package com.hackathlon.heronation.service.dto;
+package com.hackathlon.heronation.model.dto;
+
+import com.hackathlon.heronation.model.enumeration.ComunidadAutonoma;
 
 import java.io.Serializable;
 import java.util.Objects;
-import com.hackathlon.heronation.domain.enumeration.ComunidadAutonoma;
 
 /**
- * A DTO for the {@link com.hackathlon.heronation.domain.Provincia} entity.
+ * A DTO for the {@link com.hackathlon.heronation.model.Provincia} entity.
  */
 public class ProvinciaDTO implements Serializable {
     

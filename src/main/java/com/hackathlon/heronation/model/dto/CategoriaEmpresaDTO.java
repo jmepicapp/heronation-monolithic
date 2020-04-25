@@ -1,12 +1,14 @@
-package com.hackathlon.heronation.service.dto;
+package com.hackathlon.heronation.model.dto;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 /**
- * A DTO for the {@link com.hackathlon.heronation.domain.CategoriaProducto} entity.
+ * A DTO for the {@link com.hackathlon.heronation.model.CategoriaEmpresa} entity.
  */
-public class CategoriaProductoDTO implements Serializable {
+public class CategoriaEmpresaDTO implements Serializable {
     
     private Long id;
 
@@ -14,8 +16,7 @@ public class CategoriaProductoDTO implements Serializable {
 
     private String descripcion;
 
-
-    private Long preferenciaId;
+    private Set<UsuarioEmpresaDTO> usuarioEmpresas = new HashSet<>();
     
     public Long getId() {
         return id;
@@ -41,12 +42,12 @@ public class CategoriaProductoDTO implements Serializable {
         this.descripcion = descripcion;
     }
 
-    public Long getPreferenciaId() {
-        return preferenciaId;
+    public Set<UsuarioEmpresaDTO> getUsuarioEmpresas() {
+        return usuarioEmpresas;
     }
 
-    public void setPreferenciaId(Long preferenciaId) {
-        this.preferenciaId = preferenciaId;
+    public void setUsuarioEmpresas(Set<UsuarioEmpresaDTO> usuarioEmpresas) {
+        this.usuarioEmpresas = usuarioEmpresas;
     }
 
     @Override
@@ -58,11 +59,11 @@ public class CategoriaProductoDTO implements Serializable {
             return false;
         }
 
-        CategoriaProductoDTO categoriaProductoDTO = (CategoriaProductoDTO) o;
-        if (categoriaProductoDTO.getId() == null || getId() == null) {
+        CategoriaEmpresaDTO categoriaEmpresaDTO = (CategoriaEmpresaDTO) o;
+        if (categoriaEmpresaDTO.getId() == null || getId() == null) {
             return false;
         }
-        return Objects.equals(getId(), categoriaProductoDTO.getId());
+        return Objects.equals(getId(), categoriaEmpresaDTO.getId());
     }
 
     @Override
@@ -72,11 +73,11 @@ public class CategoriaProductoDTO implements Serializable {
 
     @Override
     public String toString() {
-        return "CategoriaProductoDTO{" +
+        return "CategoriaEmpresaDTO{" +
             "id=" + getId() +
             ", nombre='" + getNombre() + "'" +
             ", descripcion='" + getDescripcion() + "'" +
-            ", preferenciaId=" + getPreferenciaId() +
+            ", usuarioEmpresas='" + getUsuarioEmpresas() + "'" +
             "}";
     }
 }

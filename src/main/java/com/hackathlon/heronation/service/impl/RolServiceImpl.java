@@ -1,20 +1,18 @@
 package com.hackathlon.heronation.service.impl;
 
 import com.hackathlon.heronation.service.RolService;
-import com.hackathlon.heronation.domain.Rol;
+import com.hackathlon.heronation.model.Rol;
 import com.hackathlon.heronation.repository.RolRepository;
-import com.hackathlon.heronation.service.dto.RolDTO;
-import com.hackathlon.heronation.service.mapper.RolMapper;
+import com.hackathlon.heronation.model.dto.RolDTO;
+import com.hackathlon.heronation.util.ModelMapperUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 /**
  * Service Implementation for managing {@link Rol}.
@@ -27,11 +25,8 @@ public class RolServiceImpl implements RolService {
 
     private final RolRepository rolRepository;
 
-    private final RolMapper rolMapper;
-
-    public RolServiceImpl(RolRepository rolRepository, RolMapper rolMapper) {
+    public RolServiceImpl(RolRepository rolRepository) {
         this.rolRepository = rolRepository;
-        this.rolMapper = rolMapper;
     }
 
     /**
@@ -43,9 +38,9 @@ public class RolServiceImpl implements RolService {
     @Override
     public RolDTO save(RolDTO rolDTO) {
         log.debug("Request to save Rol : {}", rolDTO);
-        Rol rol = rolMapper.toEntity(rolDTO);
+        Rol rol = ModelMapperUtils.map(rolDTO, Rol.class);
         rol = rolRepository.save(rol);
-        return rolMapper.toDto(rol);
+        return ModelMapperUtils.map(rol, RolDTO.class);
     }
 
     /**
@@ -57,9 +52,8 @@ public class RolServiceImpl implements RolService {
     @Transactional(readOnly = true)
     public List<RolDTO> findAll() {
         log.debug("Request to get all Rols");
-        return rolRepository.findAll().stream()
-            .map(rolMapper::toDto)
-            .collect(Collectors.toCollection(LinkedList::new));
+        return ModelMapperUtils.mapAll(rolRepository.findAll(), RolDTO.class);
+
     }
 
     /**
@@ -72,8 +66,8 @@ public class RolServiceImpl implements RolService {
     @Transactional(readOnly = true)
     public Optional<RolDTO> findOne(Long id) {
         log.debug("Request to get Rol : {}", id);
-        return rolRepository.findById(id)
-            .map(rolMapper::toDto);
+        return Optional.of(ModelMapperUtils.map(rolRepository.findById(id), RolDTO.class));
+
     }
 
     /**

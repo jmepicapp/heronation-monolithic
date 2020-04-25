@@ -1,14 +1,15 @@
 package com.hackathlon.heronation.service;
 
-import com.hackathlon.heronation.service.dto.UsuarioEmpresaDTO;
+import com.hackathlon.heronation.model.dto.UsuarioEmpresaDTO;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
- * Service Interface for managing {@link com.hackathlon.heronation.domain.UsuarioEmpresa}.
+ * Service Interface for managing {@link com.hackathlon.heronation.model.UsuarioEmpresa}.
  */
 public interface UsuarioEmpresaService {
 
@@ -23,10 +24,9 @@ public interface UsuarioEmpresaService {
     /**
      * Get all the usuarioEmpresas.
      *
-     * @param pageable the pagination information.
      * @return the list of entities.
      */
-    Page<UsuarioEmpresaDTO> findAll(Pageable pageable);
+    List<UsuarioEmpresaDTO> findAll();
 
     /**
      * Get the "id" usuarioEmpresa.

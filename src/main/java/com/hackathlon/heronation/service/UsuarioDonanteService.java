@@ -1,12 +1,12 @@
 package com.hackathlon.heronation.service;
 
-import com.hackathlon.heronation.service.dto.UsuarioDonanteDTO;
+import com.hackathlon.heronation.model.dto.UsuarioDonanteDTO;
 
 import java.util.List;
 import java.util.Optional;
 
 /**
- * Service Interface for managing {@link com.hackathlon.heronation.domain.UsuarioDonante}.
+ * Service Interface for managing {@link com.hackathlon.heronation.model.UsuarioDonante}.
  */
 public interface UsuarioDonanteService {
 

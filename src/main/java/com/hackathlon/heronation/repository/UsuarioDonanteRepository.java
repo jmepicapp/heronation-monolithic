@@ -1,6 +1,6 @@
 package com.hackathlon.heronation.repository;
 
-import com.hackathlon.heronation.domain.UsuarioDonante;
+import com.hackathlon.heronation.model.UsuarioDonante;
 
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;

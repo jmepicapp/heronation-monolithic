@@ -1,20 +1,18 @@
 package com.hackathlon.heronation.service.impl;
 
 import com.hackathlon.heronation.service.UsuarioDonanteService;
-import com.hackathlon.heronation.domain.UsuarioDonante;
+import com.hackathlon.heronation.model.UsuarioDonante;
 import com.hackathlon.heronation.repository.UsuarioDonanteRepository;
-import com.hackathlon.heronation.service.dto.UsuarioDonanteDTO;
-import com.hackathlon.heronation.service.mapper.UsuarioDonanteMapper;
+import com.hackathlon.heronation.model.dto.UsuarioDonanteDTO;
+import com.hackathlon.heronation.util.ModelMapperUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 /**
  * Service Implementation for managing {@link UsuarioDonante}.
@@ -27,11 +25,8 @@ public class UsuarioDonanteServiceImpl implements UsuarioDonanteService {
 
     private final UsuarioDonanteRepository usuarioDonanteRepository;
 
-    private final UsuarioDonanteMapper usuarioDonanteMapper;
-
-    public UsuarioDonanteServiceImpl(UsuarioDonanteRepository usuarioDonanteRepository, UsuarioDonanteMapper usuarioDonanteMapper) {
+    public UsuarioDonanteServiceImpl(UsuarioDonanteRepository usuarioDonanteRepository) {
         this.usuarioDonanteRepository = usuarioDonanteRepository;
-        this.usuarioDonanteMapper = usuarioDonanteMapper;
     }
 
     /**
@@ -43,9 +38,9 @@ public class UsuarioDonanteServiceImpl implements UsuarioDonanteService {
     @Override
     public UsuarioDonanteDTO save(UsuarioDonanteDTO usuarioDonanteDTO) {
         log.debug("Request to save UsuarioDonante : {}", usuarioDonanteDTO);
-        UsuarioDonante usuarioDonante = usuarioDonanteMapper.toEntity(usuarioDonanteDTO);
+        UsuarioDonante usuarioDonante = ModelMapperUtils.map(usuarioDonanteDTO, UsuarioDonante.class);
         usuarioDonante = usuarioDonanteRepository.save(usuarioDonante);
-        return usuarioDonanteMapper.toDto(usuarioDonante);
+        return ModelMapperUtils.map(usuarioDonante, UsuarioDonanteDTO.class);
     }
 
     /**
@@ -57,9 +52,8 @@ public class UsuarioDonanteServiceImpl implements UsuarioDonanteService {
     @Transactional(readOnly = true)
     public List<UsuarioDonanteDTO> findAll() {
         log.debug("Request to get all UsuarioDonantes");
-        return usuarioDonanteRepository.findAll().stream()
-            .map(usuarioDonanteMapper::toDto)
-            .collect(Collectors.toCollection(LinkedList::new));
+        return ModelMapperUtils.mapAll(usuarioDonanteRepository.findAll(), UsuarioDonanteDTO.class);
+
     }
 
     /**
@@ -72,8 +66,8 @@ public class UsuarioDonanteServiceImpl implements UsuarioDonanteService {
     @Transactional(readOnly = true)
     public Optional<UsuarioDonanteDTO> findOne(Long id) {
         log.debug("Request to get UsuarioDonante : {}", id);
-        return usuarioDonanteRepository.findById(id)
-            .map(usuarioDonanteMapper::toDto);
+        return Optional.of(ModelMapperUtils.map(usuarioDonanteRepository.findById(id), UsuarioDonanteDTO.class));
+
     }
 
     /**

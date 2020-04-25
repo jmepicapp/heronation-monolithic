@@ -1,12 +1,12 @@
 package com.hackathlon.heronation.service;
 
-import com.hackathlon.heronation.service.dto.DireccionDTO;
+import com.hackathlon.heronation.model.dto.DireccionDTO;
 
 import java.util.List;
 import java.util.Optional;
 
 /**
- * Service Interface for managing {@link com.hackathlon.heronation.domain.Direccion}.
+ * Service Interface for managing {@link com.hackathlon.heronation.model.Direccion}.
  */
 public interface DireccionService {
 

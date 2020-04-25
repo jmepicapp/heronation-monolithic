@@ -1,6 +1,6 @@
 package com.hackathlon.heronation.repository;
 
-import com.hackathlon.heronation.domain.Poblacion;
+import com.hackathlon.heronation.model.Poblacion;
 
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;

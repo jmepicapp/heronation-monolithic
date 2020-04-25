@@ -1,10 +1,10 @@
-package com.hackathlon.heronation.service.dto;
+package com.hackathlon.heronation.model.dto;
 
 import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * A DTO for the {@link com.hackathlon.heronation.domain.Poblacion} entity.
+ * A DTO for the {@link com.hackathlon.heronation.model.Poblacion} entity.
  */
 public class PoblacionDTO implements Serializable {
     

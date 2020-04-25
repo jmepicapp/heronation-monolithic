@@ -1,20 +1,18 @@
 package com.hackathlon.heronation.service.impl;
 
 import com.hackathlon.heronation.service.PoblacionService;
-import com.hackathlon.heronation.domain.Poblacion;
+import com.hackathlon.heronation.model.Poblacion;
 import com.hackathlon.heronation.repository.PoblacionRepository;
-import com.hackathlon.heronation.service.dto.PoblacionDTO;
-import com.hackathlon.heronation.service.mapper.PoblacionMapper;
+import com.hackathlon.heronation.model.dto.PoblacionDTO;
+import com.hackathlon.heronation.util.ModelMapperUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 /**
  * Service Implementation for managing {@link Poblacion}.
@@ -27,11 +25,8 @@ public class PoblacionServiceImpl implements PoblacionService {
 
     private final PoblacionRepository poblacionRepository;
 
-    private final PoblacionMapper poblacionMapper;
-
-    public PoblacionServiceImpl(PoblacionRepository poblacionRepository, PoblacionMapper poblacionMapper) {
+    public PoblacionServiceImpl(PoblacionRepository poblacionRepository) {
         this.poblacionRepository = poblacionRepository;
-        this.poblacionMapper = poblacionMapper;
     }
 
     /**
@@ -43,9 +38,9 @@ public class PoblacionServiceImpl implements PoblacionService {
     @Override
     public PoblacionDTO save(PoblacionDTO poblacionDTO) {
         log.debug("Request to save Poblacion : {}", poblacionDTO);
-        Poblacion poblacion = poblacionMapper.toEntity(poblacionDTO);
+        Poblacion poblacion = ModelMapperUtils.map(poblacionDTO, Poblacion.class);
         poblacion = poblacionRepository.save(poblacion);
-        return poblacionMapper.toDto(poblacion);
+        return ModelMapperUtils.map(poblacion, PoblacionDTO.class);
     }
 
     /**
@@ -57,9 +52,7 @@ public class PoblacionServiceImpl implements PoblacionService {
     @Transactional(readOnly = true)
     public List<PoblacionDTO> findAll() {
         log.debug("Request to get all Poblacions");
-        return poblacionRepository.findAll().stream()
-            .map(poblacionMapper::toDto)
-            .collect(Collectors.toCollection(LinkedList::new));
+        return ModelMapperUtils.mapAll(poblacionRepository.findAll(), PoblacionDTO.class);
     }
 
     /**
@@ -72,8 +65,8 @@ public class PoblacionServiceImpl implements PoblacionService {
     @Transactional(readOnly = true)
     public Optional<PoblacionDTO> findOne(Long id) {
         log.debug("Request to get Poblacion : {}", id);
-        return poblacionRepository.findById(id)
-            .map(poblacionMapper::toDto);
+        return Optional.of(ModelMapperUtils.map(poblacionRepository.findById(id), PoblacionDTO.class));
+
     }
 
     /**

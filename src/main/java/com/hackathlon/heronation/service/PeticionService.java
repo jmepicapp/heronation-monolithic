@@ -1,12 +1,12 @@
 package com.hackathlon.heronation.service;
 
-import com.hackathlon.heronation.service.dto.PeticionDTO;
+import com.hackathlon.heronation.model.dto.PeticionDTO;
 
 import java.util.List;
 import java.util.Optional;
 
 /**
- * Service Interface for managing {@link com.hackathlon.heronation.domain.Peticion}.
+ * Service Interface for managing {@link com.hackathlon.heronation.model.Peticion}.
  */
 public interface PeticionService {
 

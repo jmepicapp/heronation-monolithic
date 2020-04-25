@@ -1,12 +1,12 @@
 package com.hackathlon.heronation.service;
 
-import com.hackathlon.heronation.service.dto.RolDTO;
+import com.hackathlon.heronation.model.dto.RolDTO;
 
 import java.util.List;
 import java.util.Optional;
 
 /**
- * Service Interface for managing {@link com.hackathlon.heronation.domain.Rol}.
+ * Service Interface for managing {@link com.hackathlon.heronation.model.Rol}.
  */
 public interface RolService {
 

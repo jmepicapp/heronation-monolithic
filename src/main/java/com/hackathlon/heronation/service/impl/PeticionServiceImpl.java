@@ -1,20 +1,18 @@
 package com.hackathlon.heronation.service.impl;
 
 import com.hackathlon.heronation.service.PeticionService;
-import com.hackathlon.heronation.domain.Peticion;
+import com.hackathlon.heronation.model.Peticion;
 import com.hackathlon.heronation.repository.PeticionRepository;
-import com.hackathlon.heronation.service.dto.PeticionDTO;
-import com.hackathlon.heronation.service.mapper.PeticionMapper;
+import com.hackathlon.heronation.model.dto.PeticionDTO;
+import com.hackathlon.heronation.util.ModelMapperUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 /**
  * Service Implementation for managing {@link Peticion}.
@@ -27,11 +25,8 @@ public class PeticionServiceImpl implements PeticionService {
 
     private final PeticionRepository peticionRepository;
 
-    private final PeticionMapper peticionMapper;
-
-    public PeticionServiceImpl(PeticionRepository peticionRepository, PeticionMapper peticionMapper) {
+    public PeticionServiceImpl(PeticionRepository peticionRepository) {
         this.peticionRepository = peticionRepository;
-        this.peticionMapper = peticionMapper;
     }
 
     /**
@@ -43,9 +38,9 @@ public class PeticionServiceImpl implements PeticionService {
     @Override
     public PeticionDTO save(PeticionDTO peticionDTO) {
         log.debug("Request to save Peticion : {}", peticionDTO);
-        Peticion peticion = peticionMapper.toEntity(peticionDTO);
+        Peticion peticion = ModelMapperUtils.map(peticionDTO, Peticion.class);
         peticion = peticionRepository.save(peticion);
-        return peticionMapper.toDto(peticion);
+        return ModelMapperUtils.map(peticion, PeticionDTO.class);
     }
 
     /**
@@ -57,9 +52,8 @@ public class PeticionServiceImpl implements PeticionService {
     @Transactional(readOnly = true)
     public List<PeticionDTO> findAll() {
         log.debug("Request to get all Peticions");
-        return peticionRepository.findAll().stream()
-            .map(peticionMapper::toDto)
-            .collect(Collectors.toCollection(LinkedList::new));
+        return ModelMapperUtils.mapAll(peticionRepository.findAll(), PeticionDTO.class);
+
     }
 
     /**
@@ -72,8 +66,8 @@ public class PeticionServiceImpl implements PeticionService {
     @Transactional(readOnly = true)
     public Optional<PeticionDTO> findOne(Long id) {
         log.debug("Request to get Peticion : {}", id);
-        return peticionRepository.findById(id)
-            .map(peticionMapper::toDto);
+        return Optional.of(ModelMapperUtils.map(peticionRepository.findById(id), PeticionDTO.class));
+
     }
 
     /**

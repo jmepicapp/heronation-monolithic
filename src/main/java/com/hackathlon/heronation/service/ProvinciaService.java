@@ -1,12 +1,12 @@
 package com.hackathlon.heronation.service;
 
-import com.hackathlon.heronation.service.dto.ProvinciaDTO;
+import com.hackathlon.heronation.model.dto.ProvinciaDTO;
 
 import java.util.List;
 import java.util.Optional;
 
 /**
- * Service Interface for managing {@link com.hackathlon.heronation.domain.Provincia}.
+ * Service Interface for managing {@link com.hackathlon.heronation.model.Provincia}.
  */
 public interface ProvinciaService {
 

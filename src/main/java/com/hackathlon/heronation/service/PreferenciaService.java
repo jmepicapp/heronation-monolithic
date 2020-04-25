@@ -1,12 +1,12 @@
 package com.hackathlon.heronation.service;
 
-import com.hackathlon.heronation.service.dto.PreferenciaDTO;
+import com.hackathlon.heronation.model.dto.PreferenciaDTO;
 
 import java.util.List;
 import java.util.Optional;
 
 /**
- * Service Interface for managing {@link com.hackathlon.heronation.domain.Preferencia}.
+ * Service Interface for managing {@link com.hackathlon.heronation.model.Preferencia}.
  */
 public interface PreferenciaService {
 

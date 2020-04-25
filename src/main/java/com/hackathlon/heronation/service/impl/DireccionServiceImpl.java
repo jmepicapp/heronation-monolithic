@@ -1,20 +1,18 @@
 package com.hackathlon.heronation.service.impl;
 
 import com.hackathlon.heronation.service.DireccionService;
-import com.hackathlon.heronation.domain.Direccion;
+import com.hackathlon.heronation.model.Direccion;
 import com.hackathlon.heronation.repository.DireccionRepository;
-import com.hackathlon.heronation.service.dto.DireccionDTO;
-import com.hackathlon.heronation.service.mapper.DireccionMapper;
+import com.hackathlon.heronation.model.dto.DireccionDTO;
+import com.hackathlon.heronation.util.ModelMapperUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 /**
  * Service Implementation for managing {@link Direccion}.
@@ -27,11 +25,8 @@ public class DireccionServiceImpl implements DireccionService {
 
     private final DireccionRepository direccionRepository;
 
-    private final DireccionMapper direccionMapper;
-
-    public DireccionServiceImpl(DireccionRepository direccionRepository, DireccionMapper direccionMapper) {
+    public DireccionServiceImpl(DireccionRepository direccionRepository) {
         this.direccionRepository = direccionRepository;
-        this.direccionMapper = direccionMapper;
     }
 
     /**
@@ -43,9 +38,9 @@ public class DireccionServiceImpl implements DireccionService {
     @Override
     public DireccionDTO save(DireccionDTO direccionDTO) {
         log.debug("Request to save Direccion : {}", direccionDTO);
-        Direccion direccion = direccionMapper.toEntity(direccionDTO);
+        Direccion direccion = ModelMapperUtils.map(direccionDTO, Direccion.class);
         direccion = direccionRepository.save(direccion);
-        return direccionMapper.toDto(direccion);
+        return ModelMapperUtils.map(direccion, DireccionDTO.class);
     }
 
     /**
@@ -57,9 +52,8 @@ public class DireccionServiceImpl implements DireccionService {
     @Transactional(readOnly = true)
     public List<DireccionDTO> findAll() {
         log.debug("Request to get all Direccions");
-        return direccionRepository.findAll().stream()
-            .map(direccionMapper::toDto)
-            .collect(Collectors.toCollection(LinkedList::new));
+        return ModelMapperUtils.mapAll(direccionRepository.findAll(), DireccionDTO.class);
+
     }
 
     /**
@@ -72,8 +66,8 @@ public class DireccionServiceImpl implements DireccionService {
     @Transactional(readOnly = true)
     public Optional<DireccionDTO> findOne(Long id) {
         log.debug("Request to get Direccion : {}", id);
-        return direccionRepository.findById(id)
-            .map(direccionMapper::toDto);
+        return Optional.of(ModelMapperUtils.map(direccionRepository.findById(id), DireccionDTO.class));
+
     }
 
     /**

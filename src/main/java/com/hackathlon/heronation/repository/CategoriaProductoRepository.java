@@ -1,6 +1,6 @@
 package com.hackathlon.heronation.repository;
 
-import com.hackathlon.heronation.domain.CategoriaProducto;
+import com.hackathlon.heronation.model.CategoriaProducto;
 
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;

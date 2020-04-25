@@ -1,20 +1,18 @@
 package com.hackathlon.heronation.service.impl;
 
 import com.hackathlon.heronation.service.PreferenciaService;
-import com.hackathlon.heronation.domain.Preferencia;
+import com.hackathlon.heronation.model.Preferencia;
 import com.hackathlon.heronation.repository.PreferenciaRepository;
-import com.hackathlon.heronation.service.dto.PreferenciaDTO;
-import com.hackathlon.heronation.service.mapper.PreferenciaMapper;
+import com.hackathlon.heronation.model.dto.PreferenciaDTO;
+import com.hackathlon.heronation.util.ModelMapperUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 /**
  * Service Implementation for managing {@link Preferencia}.
@@ -27,11 +25,8 @@ public class PreferenciaServiceImpl implements PreferenciaService {
 
     private final PreferenciaRepository preferenciaRepository;
 
-    private final PreferenciaMapper preferenciaMapper;
-
-    public PreferenciaServiceImpl(PreferenciaRepository preferenciaRepository, PreferenciaMapper preferenciaMapper) {
+    public PreferenciaServiceImpl(PreferenciaRepository preferenciaRepository) {
         this.preferenciaRepository = preferenciaRepository;
-        this.preferenciaMapper = preferenciaMapper;
     }
 
     /**
@@ -43,9 +38,9 @@ public class PreferenciaServiceImpl implements PreferenciaService {
     @Override
     public PreferenciaDTO save(PreferenciaDTO preferenciaDTO) {
         log.debug("Request to save Preferencia : {}", preferenciaDTO);
-        Preferencia preferencia = preferenciaMapper.toEntity(preferenciaDTO);
+        Preferencia preferencia = ModelMapperUtils.map(preferenciaDTO, Preferencia.class);
         preferencia = preferenciaRepository.save(preferencia);
-        return preferenciaMapper.toDto(preferencia);
+        return ModelMapperUtils.map(preferenciaRepository, PreferenciaDTO.class);
     }
 
     /**
@@ -57,9 +52,8 @@ public class PreferenciaServiceImpl implements PreferenciaService {
     @Transactional(readOnly = true)
     public List<PreferenciaDTO> findAll() {
         log.debug("Request to get all Preferencias");
-        return preferenciaRepository.findAll().stream()
-            .map(preferenciaMapper::toDto)
-            .collect(Collectors.toCollection(LinkedList::new));
+        return ModelMapperUtils.mapAll(preferenciaRepository.findAll(), PreferenciaDTO.class);
+
     }
 
     /**
@@ -72,8 +66,8 @@ public class PreferenciaServiceImpl implements PreferenciaService {
     @Transactional(readOnly = true)
     public Optional<PreferenciaDTO> findOne(Long id) {
         log.debug("Request to get Preferencia : {}", id);
-        return preferenciaRepository.findById(id)
-            .map(preferenciaMapper::toDto);
+        return Optional.of(ModelMapperUtils.map(preferenciaRepository.findById(id), PreferenciaDTO.class));
+
     }
 
     /**

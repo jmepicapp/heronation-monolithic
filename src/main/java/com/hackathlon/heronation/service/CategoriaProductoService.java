@@ -1,12 +1,12 @@
 package com.hackathlon.heronation.service;
 
-import com.hackathlon.heronation.service.dto.CategoriaProductoDTO;
+import com.hackathlon.heronation.model.dto.CategoriaProductoDTO;
 
 import java.util.List;
 import java.util.Optional;
 
 /**
- * Service Interface for managing {@link com.hackathlon.heronation.domain.CategoriaProducto}.
+ * Service Interface for managing {@link com.hackathlon.heronation.model.CategoriaProducto}.
  */
 public interface CategoriaProductoService {
 

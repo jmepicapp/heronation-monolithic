@@ -1,6 +1,6 @@
 package com.hackathlon.heronation.repository;
 
-import com.hackathlon.heronation.domain.Preferencia;
+import com.hackathlon.heronation.model.Preferencia;
 
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
