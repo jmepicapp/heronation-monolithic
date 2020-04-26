@@ -1,6 +1,6 @@
 package com.hackathlon.heronation.model.dto;
 
-import com.hackathlon.heronation.model.enumeration.ComunidadAutonoma;
+import com.hackathlon.heronation.model.ComunidadAutonoma;
 
 import java.io.Serializable;
 import java.util.Objects;
