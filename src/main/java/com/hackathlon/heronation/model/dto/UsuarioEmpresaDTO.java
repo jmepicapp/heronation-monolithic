@@ -29,8 +29,6 @@ public class UsuarioEmpresaDTO implements Serializable {
 
     private RolDTO rol;
 
-    private List<PreferenciaDTO> preferenciasCategoriaProductos = new ArrayList<>();
-
     private Long rolUsuarioEmpresaId;
     
     public Long getId() {
@@ -101,14 +99,6 @@ public class UsuarioEmpresaDTO implements Serializable {
         return activo;
     }
 
-    public List<PreferenciaDTO> getPreferenciasCategoriaProductos() {
-        return preferenciasCategoriaProductos;
-    }
-
-    public void setPreferenciasCategoriaProductos(List<PreferenciaDTO> preferenciasCategoriaProductos) {
-        this.preferenciasCategoriaProductos = preferenciasCategoriaProductos;
-    }
-
     public Long getRolUsuarioEmpresaId() {
         return rolUsuarioEmpresaId;
     }
@@ -149,7 +139,6 @@ public class UsuarioEmpresaDTO implements Serializable {
                 ", direccion=" + direccion +
                 ", activo=" + activo +
                 ", rol=" + rol +
-                ", preferenciasCategoriaProductos=" + preferenciasCategoriaProductos +
                 ", rolUsuarioEmpresaId=" + rolUsuarioEmpresaId +
                 '}';
     }

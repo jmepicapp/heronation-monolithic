@@ -61,6 +61,16 @@ public class PreferenciaServiceImpl implements PreferenciaService {
 
     }
 
+    public List<PreferenciaDTO> findAllByCategoriaProducto(List<Long> idCategorias){
+        return this.preferenciaRepository.findAll()
+                .stream()
+                .filter(pr -> idCategorias.contains(pr.getCategoriaProducto().getId()))
+                .filter(pr -> !pr.getExclusion())
+                .map(pr ->  ModelMapperUtils.map(pr, PreferenciaDTO.class))
+                .collect(Collectors.toList());
+
+    }
+
     /**
      * Get one preferencia by id.
      *

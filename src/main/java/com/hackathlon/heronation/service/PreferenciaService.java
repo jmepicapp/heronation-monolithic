@@ -1,6 +1,7 @@
 package com.hackathlon.heronation.service;
 
 import com.hackathlon.heronation.model.dto.PreferenciaDTO;
+import com.hackathlon.heronation.model.dto.UsuarioEmpresaDTO;
 
 import java.util.List;
 import java.util.Optional;
@@ -24,6 +25,14 @@ public interface PreferenciaService {
      * @return the list of entities.
      */
     List<PreferenciaDTO> findAll();
+
+    /**
+     * Get all the preferencias.
+     *
+     * @param id the categoriaProducto id
+     * @return the list of entities.
+     */
+    List<PreferenciaDTO> findAllByCategoriaProducto(List<Long> id);
 
     /**
      * Get the "id" preferencia.

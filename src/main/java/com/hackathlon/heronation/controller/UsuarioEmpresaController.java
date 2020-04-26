@@ -86,18 +86,6 @@ public class UsuarioEmpresaController {
     }
 
     /**
-     * {@code GET  /usuario-empresas/categoriaProducto/:id} : get all the usuario-empresas by categoria producto.
-     *
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of preferencias by categoria producto in body.
-     */
-    @GetMapping("/usuario-empresas/categoriaProducto")
-    public ResponseEntity<List<UsuarioEmpresaDTO>> getAllPreferenciasByCategoriaProducto(@RequestBody List<Long> idCategorias) {
-        log.debug("REST request to get all Preferencias by Categoria Producto");
-        List<UsuarioEmpresaDTO> list = usuarioEmpresaService.findAllEmpresasByCategoriaProducto(idCategorias);
-        return ResponseEntity.ok().body(list);
-    }
-
-    /**
      * {@code GET  /usuario-empresas/:id} : get the "id" usuarioEmpresa.
      *
      * @param id the id of the usuarioEmpresaDTO to retrieve.

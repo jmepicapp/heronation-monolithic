@@ -66,20 +66,6 @@ public class UsuarioEmpresaServiceImpl implements UsuarioEmpresaService {
 
     }
 
-    public List<UsuarioEmpresaDTO> findAllEmpresasByCategoriaProducto(List<Long> idCategorias){
-        List<UsuarioEmpresaDTO> usuarioEmpresaDTOList = new ArrayList<>();
-        List<PreferenciaDTO> preferenciaDTOList = this.preferenciaRepository.findAll()
-                .stream()
-                .filter(pr -> idCategorias.contains(pr.getCategoriaProducto().getId()))
-                .filter(pr -> !pr.getExclusion())
-                .map(pr ->  ModelMapperUtils.map(pr, PreferenciaDTO.class))
-                .collect(Collectors.toList());
-        for(PreferenciaDTO preferenciaDTO : preferenciaDTOList){
-            usuarioEmpresaDTOList.add(preferenciaDTO.getUsuarioEmpresa());
-        }
-        return usuarioEmpresaDTOList;
-    }
-
     /**
      * Get one usuarioEmpresa by id.
      *

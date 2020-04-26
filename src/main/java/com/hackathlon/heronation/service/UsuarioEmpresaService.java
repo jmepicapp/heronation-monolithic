@@ -30,14 +30,6 @@ public interface UsuarioEmpresaService {
     List<UsuarioEmpresaDTO> findAll();
 
     /**
-     * Get all the preferencias.
-     *
-     * @param id the categoriaProducto id
-     * @return the list of entities.
-     */
-    List<UsuarioEmpresaDTO> findAllEmpresasByCategoriaProducto(List<Long> id);
-
-    /**
      * Get the "id" usuarioEmpresa.
      *
      * @param id the id of the entity.

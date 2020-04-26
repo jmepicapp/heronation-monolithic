@@ -34,13 +34,13 @@ public class UsuarioEmpresa implements Serializable {
     private String contrasena;
 
     @Column(name = "direccion")
-    private Long direccion;
+    private Direccion direccion;
 
     @Column(name = "activo")
     private Boolean activo;
 
     @Column(name = "rol")
-    private Long rol;
+    private Rol rol;
 
     @OneToMany(mappedBy = "usuarioEmpresa")
     private List<Preferencia> preferenciasCategoriaProductos = new ArrayList<>();
@@ -113,16 +113,16 @@ public class UsuarioEmpresa implements Serializable {
         this.contrasena = contrasena;
     }
 
-    public Long getDireccion() {
+    public Direccion getDireccion() {
         return direccion;
     }
 
-    public UsuarioEmpresa direccion(Long direccion) {
+    public UsuarioEmpresa direccion(Direccion direccion) {
         this.direccion = direccion;
         return this;
     }
 
-    public void setDireccion(Long direccion) {
+    public void setDireccion(Direccion direccion) {
         this.direccion = direccion;
     }
 
@@ -139,16 +139,16 @@ public class UsuarioEmpresa implements Serializable {
         this.activo = activo;
     }
 
-    public Long getRol() {
+    public Rol getRol() {
         return rol;
     }
 
-    public UsuarioEmpresa rol(Long rol) {
+    public UsuarioEmpresa rol(Rol rol) {
         this.rol = rol;
         return this;
     }
 
-    public void setRol(Long rol) {
+    public void setRol(Rol rol) {
         this.rol = rol;
     }
 

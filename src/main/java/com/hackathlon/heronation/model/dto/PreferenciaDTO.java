@@ -13,10 +13,12 @@ import java.util.Objects;
  */
 public class PreferenciaDTO implements Serializable {
 
+    @JsonIgnore
     private PreferenciaId id;
 
     private UsuarioEmpresaDTO usuarioEmpresa;
 
+    @JsonIgnore
     private CategoriaProductoDTO categoriaProducto;
 
     private Boolean necesidad;
