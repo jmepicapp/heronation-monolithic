@@ -7,9 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 
 import java.io.Serializable;
-import java.util.Objects;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * A UsuarioEmpresa.
@@ -21,11 +19,7 @@ public class UsuarioEmpresa implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(name = "cif")
-    private Long cif;
 
     @Column(name = "nombre")
     private String nombre;
@@ -48,17 +42,14 @@ public class UsuarioEmpresa implements Serializable {
     @Column(name = "rol")
     private Long rol;
 
-    @Column(name = "categoria")
-    private Long categoria;
-
     @OneToMany(mappedBy = "usuarioEmpresa")
-    private Set<Preferencia> preferenciaUsuarioEmpresas = new HashSet<>();
+    private List<Preferencia> preferenciasCategoriaProductos = new ArrayList<>();
 
     @OneToMany(mappedBy = "usuarioEmpresa")
     private Set<Peticion> peticionUsuarioEmpresas = new HashSet<>();
 
     @ManyToOne
-    @JsonIgnoreProperties("usuarioEmpresas")
+    @JsonIgnore
     private Rol rolUsuarioEmpresa;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
@@ -68,19 +59,6 @@ public class UsuarioEmpresa implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getCif() {
-        return cif;
-    }
-
-    public UsuarioEmpresa cif(Long cif) {
-        this.cif = cif;
-        return this;
-    }
-
-    public void setCif(Long cif) {
-        this.cif = cif;
     }
 
     public String getNombre() {
@@ -174,42 +152,30 @@ public class UsuarioEmpresa implements Serializable {
         this.rol = rol;
     }
 
-    public Long getCategoria() {
-        return categoria;
+
+    public List<Preferencia> getPreferenciasCategoriaProductos() {
+        return preferenciasCategoriaProductos;
     }
 
-    public UsuarioEmpresa categoria(Long categoria) {
-        this.categoria = categoria;
+    public UsuarioEmpresa preferenciasCategoriaProductos(List<Preferencia> preferencias) {
+        this.preferenciasCategoriaProductos = preferencias;
         return this;
     }
 
-    public void setCategoria(Long categoria) {
-        this.categoria = categoria;
-    }
-
-    public Set<Preferencia> getPreferenciaUsuarioEmpresas() {
-        return preferenciaUsuarioEmpresas;
-    }
-
-    public UsuarioEmpresa preferenciaUsuarioEmpresas(Set<Preferencia> preferencias) {
-        this.preferenciaUsuarioEmpresas = preferencias;
-        return this;
-    }
-
-    public UsuarioEmpresa addPreferenciaUsuarioEmpresa(Preferencia preferencia) {
-        this.preferenciaUsuarioEmpresas.add(preferencia);
+    public UsuarioEmpresa addPreferenciasCategoriaProductos(Preferencia preferencia) {
+        this.preferenciasCategoriaProductos.add(preferencia);
         preferencia.setUsuarioEmpresa(this);
         return this;
     }
 
-    public UsuarioEmpresa removePreferenciaUsuarioEmpresa(Preferencia preferencia) {
-        this.preferenciaUsuarioEmpresas.remove(preferencia);
+    public UsuarioEmpresa removePreferenciasCategoriaProductos(Preferencia preferencia) {
+        this.preferenciasCategoriaProductos.remove(preferencia);
         preferencia.setUsuarioEmpresa(null);
         return this;
     }
 
-    public void setPreferenciaUsuarioEmpresas(Set<Preferencia> preferencias) {
-        this.preferenciaUsuarioEmpresas = preferencias;
+    public void setPreferenciasCategoriaProductos(List<Preferencia> preferencias) {
+        this.preferenciasCategoriaProductos = preferencias;
     }
 
     public Set<Peticion> getPeticionUsuarioEmpresas() {
@@ -271,16 +237,17 @@ public class UsuarioEmpresa implements Serializable {
     @Override
     public String toString() {
         return "UsuarioEmpresa{" +
-            "id=" + getId() +
-            ", cif=" + getCif() +
-            ", nombre='" + getNombre() + "'" +
-            ", email='" + getEmail() + "'" +
-            ", telefono=" + getTelefono() +
-            ", contrasena='" + getContrasena() + "'" +
-            ", direccion=" + getDireccion() +
-            ", activo='" + isActivo() + "'" +
-            ", rol=" + getRol() +
-            ", categoria=" + getCategoria() +
-            "}";
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", email='" + email + '\'' +
+                ", telefono=" + telefono +
+                ", contrasena='" + contrasena + '\'' +
+                ", direccion=" + direccion +
+                ", activo=" + activo +
+                ", rol=" + rol +
+                ", preferenciasCategoriaProductos=" + preferenciasCategoriaProductos +
+                ", peticionUsuarioEmpresas=" + peticionUsuarioEmpresas +
+                ", rolUsuarioEmpresa=" + rolUsuarioEmpresa +
+                '}';
     }
 }

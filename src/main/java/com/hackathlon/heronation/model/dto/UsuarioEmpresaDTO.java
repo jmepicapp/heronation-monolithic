@@ -1,16 +1,19 @@
 package com.hackathlon.heronation.model.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.hackathlon.heronation.model.Preferencia;
+
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
- * A DTO for the {@link com.hackathlon.heronation.domain.UsuarioEmpresa} entity.
+ * A DTO for the {@link com.hackathlon.heronation.model.UsuarioEmpresa} entity.
  */
 public class UsuarioEmpresaDTO implements Serializable {
     
     private Long id;
-
-    private Long cif;
 
     private String nombre;
 
@@ -20,14 +23,13 @@ public class UsuarioEmpresaDTO implements Serializable {
 
     private String contrasena;
 
-    private Long direccion;
+    private DireccionDTO direccion;
 
     private Boolean activo;
 
-    private Long rol;
+    private RolDTO rol;
 
-    private Long categoria;
-
+    private List<PreferenciaDTO> preferenciasCategoriaProductos = new ArrayList<>();
 
     private Long rolUsuarioEmpresaId;
     
@@ -37,14 +39,6 @@ public class UsuarioEmpresaDTO implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getCif() {
-        return cif;
-    }
-
-    public void setCif(Long cif) {
-        this.cif = cif;
     }
 
     public String getNombre() {
@@ -79,11 +73,11 @@ public class UsuarioEmpresaDTO implements Serializable {
         this.contrasena = contrasena;
     }
 
-    public Long getDireccion() {
+    public DireccionDTO getDireccion() {
         return direccion;
     }
 
-    public void setDireccion(Long direccion) {
+    public void setDireccion(DireccionDTO direccion) {
         this.direccion = direccion;
     }
 
@@ -95,20 +89,24 @@ public class UsuarioEmpresaDTO implements Serializable {
         this.activo = activo;
     }
 
-    public Long getRol() {
+    public RolDTO getRol() {
         return rol;
     }
 
-    public void setRol(Long rol) {
+    public void setRol(RolDTO rol) {
         this.rol = rol;
     }
 
-    public Long getCategoria() {
-        return categoria;
+    public Boolean getActivo() {
+        return activo;
     }
 
-    public void setCategoria(Long categoria) {
-        this.categoria = categoria;
+    public List<PreferenciaDTO> getPreferenciasCategoriaProductos() {
+        return preferenciasCategoriaProductos;
+    }
+
+    public void setPreferenciasCategoriaProductos(List<PreferenciaDTO> preferenciasCategoriaProductos) {
+        this.preferenciasCategoriaProductos = preferenciasCategoriaProductos;
     }
 
     public Long getRolUsuarioEmpresaId() {
@@ -143,17 +141,16 @@ public class UsuarioEmpresaDTO implements Serializable {
     @Override
     public String toString() {
         return "UsuarioEmpresaDTO{" +
-            "id=" + getId() +
-            ", cif=" + getCif() +
-            ", nombre='" + getNombre() + "'" +
-            ", email='" + getEmail() + "'" +
-            ", telefono=" + getTelefono() +
-            ", contrasena='" + getContrasena() + "'" +
-            ", direccion=" + getDireccion() +
-            ", activo='" + isActivo() + "'" +
-            ", rol=" + getRol() +
-            ", categoria=" + getCategoria() +
-            ", rolUsuarioEmpresaId=" + getRolUsuarioEmpresaId() +
-            "}";
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", email='" + email + '\'' +
+                ", telefono=" + telefono +
+                ", contrasena='" + contrasena + '\'' +
+                ", direccion=" + direccion +
+                ", activo=" + activo +
+                ", rol=" + rol +
+                ", preferenciasCategoriaProductos=" + preferenciasCategoriaProductos +
+                ", rolUsuarioEmpresaId=" + rolUsuarioEmpresaId +
+                '}';
     }
 }

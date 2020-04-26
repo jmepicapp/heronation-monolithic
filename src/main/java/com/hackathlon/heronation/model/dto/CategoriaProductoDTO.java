@@ -1,10 +1,14 @@
 package com.hackathlon.heronation.model.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.hackathlon.heronation.model.Preferencia;
+
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 /**
- * A DTO for the {@link com.hackathlon.heronation.domain.CategoriaProducto} entity.
+ * A DTO for the {@link com.hackathlon.heronation.model.CategoriaProducto} entity.
  */
 public class CategoriaProductoDTO implements Serializable {
     
@@ -14,8 +18,8 @@ public class CategoriaProductoDTO implements Serializable {
 
     private String descripcion;
 
-
-    private Long preferenciaId;
+    @JsonIgnore
+    private List<Preferencia> usuariosEmpresa;
     
     public Long getId() {
         return id;
@@ -41,12 +45,12 @@ public class CategoriaProductoDTO implements Serializable {
         this.descripcion = descripcion;
     }
 
-    public Long getPreferenciaId() {
-        return preferenciaId;
+    public List<Preferencia> getUsuariosEmpresa() {
+        return usuariosEmpresa;
     }
 
-    public void setPreferenciaId(Long preferenciaId) {
-        this.preferenciaId = preferenciaId;
+    public void setUsuariosEmpresa(List<Preferencia> usuariosEmpresa) {
+        this.usuariosEmpresa = usuariosEmpresa;
     }
 
     @Override
@@ -73,10 +77,10 @@ public class CategoriaProductoDTO implements Serializable {
     @Override
     public String toString() {
         return "CategoriaProductoDTO{" +
-            "id=" + getId() +
-            ", nombre='" + getNombre() + "'" +
-            ", descripcion='" + getDescripcion() + "'" +
-            ", preferenciaId=" + getPreferenciaId() +
-            "}";
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", descripcion='" + descripcion + '\'' +
+                ", usuariosEmpresa=" + usuariosEmpresa +
+                '}';
     }
 }

@@ -1,5 +1,6 @@
 package com.hackathlon.heronation.service;
 
+import com.hackathlon.heronation.model.dto.PreferenciaDTO;
 import com.hackathlon.heronation.model.dto.UsuarioEmpresaDTO;
 
 import org.springframework.data.domain.Page;
@@ -27,6 +28,14 @@ public interface UsuarioEmpresaService {
      * @return the list of entities.
      */
     List<UsuarioEmpresaDTO> findAll();
+
+    /**
+     * Get all the preferencias.
+     *
+     * @param id the categoriaProducto id
+     * @return the list of entities.
+     */
+    List<UsuarioEmpresaDTO> findAllEmpresasByCategoriaProducto(List<Long> id);
 
     /**
      * Get the "id" usuarioEmpresa.
