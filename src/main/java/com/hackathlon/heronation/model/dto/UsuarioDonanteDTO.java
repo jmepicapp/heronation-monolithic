@@ -14,11 +14,7 @@ public class UsuarioDonanteDTO implements Serializable {
 
     private String apellidos;
 
-    private String email;
-
     private Integer telefono;
-
-    private String password;
 
     private Long direccion;
 
@@ -51,13 +47,6 @@ public class UsuarioDonanteDTO implements Serializable {
         this.apellidos = apellidos;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
 
     public Integer getTelefono() {
         return telefono;
@@ -67,13 +56,6 @@ public class UsuarioDonanteDTO implements Serializable {
         this.telefono = telefono;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
     public Long getDireccion() {
         return direccion;
@@ -126,9 +108,7 @@ public class UsuarioDonanteDTO implements Serializable {
             "id=" + getId() +
             ", nombre='" + getNombre() + "'" +
             ", apellidos='" + getApellidos() + "'" +
-            ", email='" + getEmail() + "'" +
             ", telefono=" + getTelefono() +
-            ", contrasena='" + getPassword() + "'" +
             ", direccion=" + getDireccion() +
             ", rol=" + getRol() +
             ", rolUsuarioDonanteId=" + getRolUsuarioDonanteId() +
