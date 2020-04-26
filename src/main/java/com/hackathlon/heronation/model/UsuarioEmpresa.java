@@ -30,23 +30,14 @@ public class UsuarioEmpresa implements Serializable {
     @Column(name = "nombre")
     private String nombre;
 
-    @Column(name = "email")
-    private String email;
-
     @Column(name = "telefono")
     private Integer telefono;
-
-    @Column(name = "contrasena")
-    private String contrasena;
 
     @Column(name = "direccion")
     private Long direccion;
 
     @Column(name = "activo")
     private Boolean activo;
-
-    @Column(name = "rol")
-    private Long rol;
 
     @Column(name = "categoria")
     private Long categoria;
@@ -57,9 +48,9 @@ public class UsuarioEmpresa implements Serializable {
     @OneToMany(mappedBy = "usuarioEmpresa")
     private Set<Peticion> peticionUsuarioEmpresas = new HashSet<>();
 
-    @ManyToOne
-    @JsonIgnoreProperties("usuarioEmpresas")
-    private Rol rolUsuarioEmpresa;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "usuario_id", referencedColumnName = "id")
+    private Usuario usuarioEmpresas;
 
     @ManyToMany(mappedBy = "usuarioEmpresas")
     @JsonIgnore
@@ -100,19 +91,6 @@ public class UsuarioEmpresa implements Serializable {
         this.nombre = nombre;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public UsuarioEmpresa email(String email) {
-        this.email = email;
-        return this;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public Integer getTelefono() {
         return telefono;
     }
@@ -124,19 +102,6 @@ public class UsuarioEmpresa implements Serializable {
 
     public void setTelefono(Integer telefono) {
         this.telefono = telefono;
-    }
-
-    public String getContrasena() {
-        return contrasena;
-    }
-
-    public UsuarioEmpresa contrasena(String contrasena) {
-        this.contrasena = contrasena;
-        return this;
-    }
-
-    public void setContrasena(String contrasena) {
-        this.contrasena = contrasena;
     }
 
     public Long getDireccion() {
@@ -163,19 +128,6 @@ public class UsuarioEmpresa implements Serializable {
 
     public void setActivo(Boolean activo) {
         this.activo = activo;
-    }
-
-    public Long getRol() {
-        return rol;
-    }
-
-    public UsuarioEmpresa rol(Long rol) {
-        this.rol = rol;
-        return this;
-    }
-
-    public void setRol(Long rol) {
-        this.rol = rol;
     }
 
     public Long getCategoria() {
@@ -241,19 +193,6 @@ public class UsuarioEmpresa implements Serializable {
         this.peticionUsuarioEmpresas = peticions;
     }
 
-    public Rol getRolUsuarioEmpresa() {
-        return rolUsuarioEmpresa;
-    }
-
-    public UsuarioEmpresa rolUsuarioEmpresa(Rol rol) {
-        this.rolUsuarioEmpresa = rol;
-        return this;
-    }
-
-    public void setRolUsuarioEmpresa(Rol rol) {
-        this.rolUsuarioEmpresa = rol;
-    }
-
     public Set<CategoriaEmpresa> getCategoriaEmpresas() {
         return categoriaEmpresas;
     }
@@ -291,6 +230,18 @@ public class UsuarioEmpresa implements Serializable {
         return id != null && id.equals(((UsuarioEmpresa) o).id);
     }
 
+    public Boolean getActivo() {
+        return activo;
+    }
+
+    public Usuario getUsuarioEmpresas() {
+        return usuarioEmpresas;
+    }
+
+    public void setUsuarioEmpresas(Usuario usuarioEmpresas) {
+        this.usuarioEmpresas = usuarioEmpresas;
+    }
+
     @Override
     public int hashCode() {
         return 31;
@@ -302,12 +253,9 @@ public class UsuarioEmpresa implements Serializable {
             "id=" + getId() +
             ", cif=" + getCif() +
             ", nombre='" + getNombre() + "'" +
-            ", email='" + getEmail() + "'" +
             ", telefono=" + getTelefono() +
-            ", contrasena='" + getContrasena() + "'" +
             ", direccion=" + getDireccion() +
             ", activo='" + isActivo() + "'" +
-            ", rol=" + getRol() +
             ", categoria=" + getCategoria() +
             "}";
     }
