@@ -32,20 +32,6 @@ public class ProvinciaServiceImpl implements ProvinciaService {
     }
 
     /**
-     * Save a provincia.
-     *
-     * @param provinciaDTO the entity to save.
-     * @return the persisted entity.
-     */
-    @Override
-    public ProvinciaDTO save(ProvinciaDTO provinciaDTO) {
-        log.debug("Request to save Provincia : {}", provinciaDTO);
-        Provincia provincia = ModelMapperUtils.map(provinciaDTO, Provincia.class);
-        provincia = provinciaRepository.save(provincia);
-        return ModelMapperUtils.map(provincia, ProvinciaDTO.class);
-    }
-
-    /**
      * Get all the provincias.
      *
      * @return the list of entities.
@@ -56,6 +42,11 @@ public class ProvinciaServiceImpl implements ProvinciaService {
         log.debug("Request to get all Provincias");
         return ModelMapperUtils.mapAll(provinciaRepository.findAll(), ProvinciaDTO.class);
 
+    }
+
+    @Override
+    public List<ProvinciaDTO> findAllByComunidad(Long id) {
+        return ModelMapperUtils.mapAll(provinciaRepository.findAllByComunidad(id), ProvinciaDTO.class);
     }
 
     /**
@@ -72,14 +63,4 @@ public class ProvinciaServiceImpl implements ProvinciaService {
 
     }
 
-    /**
-     * Delete the provincia by id.
-     *
-     * @param id the id of the entity.
-     */
-    @Override
-    public void delete(Long id) {
-        log.debug("Request to delete Provincia : {}", id);
-        provinciaRepository.deleteById(id);
-    }
 }

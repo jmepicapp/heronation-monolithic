@@ -11,19 +11,19 @@ import java.util.Optional;
 public interface ProvinciaService {
 
     /**
-     * Save a provincia.
-     *
-     * @param provinciaDTO the entity to save.
-     * @return the persisted entity.
-     */
-    ProvinciaDTO save(ProvinciaDTO provinciaDTO);
-
-    /**
      * Get all the provincias.
      *
      * @return the list of entities.
      */
     List<ProvinciaDTO> findAll();
+
+    /**
+     * Get all the provincias by comunidad.
+     *
+     * @param id the comunidad_id
+     * @return the list of entities.
+     */
+    List<ProvinciaDTO> findAllByComunidad(Long id);
 
     /**
      * Get the "id" provincia.
@@ -33,10 +33,4 @@ public interface ProvinciaService {
      */
     Optional<ProvinciaDTO> findOne(Long id);
 
-    /**
-     * Delete the "id" provincia.
-     *
-     * @param id the id of the entity.
-     */
-    void delete(Long id);
 }

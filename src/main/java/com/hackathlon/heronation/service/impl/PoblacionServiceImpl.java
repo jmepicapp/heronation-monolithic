@@ -32,20 +32,6 @@ public class PoblacionServiceImpl implements PoblacionService {
     }
 
     /**
-     * Save a poblacion.
-     *
-     * @param poblacionDTO the entity to save.
-     * @return the persisted entity.
-     */
-    @Override
-    public PoblacionDTO save(PoblacionDTO poblacionDTO) {
-        log.debug("Request to save Poblacion : {}", poblacionDTO);
-        Poblacion poblacion = ModelMapperUtils.map(poblacionDTO, Poblacion.class);
-        poblacion = poblacionRepository.save(poblacion);
-        return ModelMapperUtils.map(poblacion, PoblacionDTO.class);
-    }
-
-    /**
      * Get all the poblacions.
      *
      * @return the list of entities.
@@ -55,6 +41,17 @@ public class PoblacionServiceImpl implements PoblacionService {
     public List<PoblacionDTO> findAll() {
         log.debug("Request to get all Poblacions");
         return ModelMapperUtils.mapAll(poblacionRepository.findAll(), PoblacionDTO.class);
+    }
+
+    /**
+     * Get all the poblacions by provincia.
+     *
+     * @param id the provincia_id
+     * @return the list of entities.
+     */
+    @Override
+    public List<PoblacionDTO> findAllByProvincia(Long id) {
+        return ModelMapperUtils.mapAll(poblacionRepository.findAllByPoblacionProvincia(id), PoblacionDTO.class);
     }
 
     /**
@@ -69,16 +66,5 @@ public class PoblacionServiceImpl implements PoblacionService {
         log.debug("Request to get Poblacion : {}", id);
         return Optional.of(ModelMapperUtils.map(poblacionRepository.findById(id), PoblacionDTO.class));
 
-    }
-
-    /**
-     * Delete the poblacion by id.
-     *
-     * @param id the id of the entity.
-     */
-    @Override
-    public void delete(Long id) {
-        log.debug("Request to delete Poblacion : {}", id);
-        poblacionRepository.deleteById(id);
     }
 }

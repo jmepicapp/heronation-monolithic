@@ -1,21 +1,17 @@
 package com.hackathlon.heronation.model.dto;
 
-import com.hackathlon.heronation.model.ComunidadAutonoma;
-
 import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * A DTO for the {@link com.hackathlon.heronation.model.Provincia} entity.
+ * A DTO for the {@link com.hackathlon.heronation.model.ComunidadAutonoma} entity.
  */
-public class ProvinciaDTO implements Serializable {
+public class ComunidadAutonomaDTO implements Serializable {
     
     private Long id;
 
     private String nombre;
 
-    private ComunidadAutonoma comunidad;
-    
     public Long getId() {
         return id;
     }
@@ -32,14 +28,6 @@ public class ProvinciaDTO implements Serializable {
         this.nombre = nombre;
     }
 
-    public ComunidadAutonoma getComunidad() {
-        return comunidad;
-    }
-
-    public void setComunidad(ComunidadAutonoma comunidad) {
-        this.comunidad = comunidad;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -49,11 +37,11 @@ public class ProvinciaDTO implements Serializable {
             return false;
         }
 
-        ProvinciaDTO provinciaDTO = (ProvinciaDTO) o;
-        if (provinciaDTO.getId() == null || getId() == null) {
+        ComunidadAutonomaDTO poblacionDTO = (ComunidadAutonomaDTO) o;
+        if (poblacionDTO.getId() == null || getId() == null) {
             return false;
         }
-        return Objects.equals(getId(), provinciaDTO.getId());
+        return Objects.equals(getId(), poblacionDTO.getId());
     }
 
     @Override
@@ -63,10 +51,9 @@ public class ProvinciaDTO implements Serializable {
 
     @Override
     public String toString() {
-        return "ProvinciaDTO{" +
+        return "PoblacionDTO{" +
             "id=" + getId() +
-            ", nombre='" + getNombre() + "'" +
-            ", comunidad='" + getComunidad() + "'" +
-            "}";
+            ", nombre='" + getNombre() +
+            "'}";
     }
 }
