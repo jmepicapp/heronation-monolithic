@@ -107,19 +107,6 @@ public class UsuarioEmpresa implements Serializable {
         this.activo = activo;
     }
 
-    public Long getCategoria() {
-        return categoria;
-    }
-
-    public UsuarioEmpresa categoria(Long categoria) {
-        this.categoria = categoria;
-        return this;
-    }
-
-    public void setCategoria(Long categoria) {
-        this.categoria = categoria;
-    }
-
     public List<Preferencia> getPreferenciasCategoriaProductos() {
         return preferenciasCategoriaProductos;
     }
@@ -202,12 +189,10 @@ public class UsuarioEmpresa implements Serializable {
     public String toString() {
         return "UsuarioEmpresa{" +
             "id=" + getId() +
-            ", cif=" + getCif() +
             ", nombre='" + getNombre() + "'" +
             ", telefono=" + getTelefono() +
             ", direccion=" + getDireccion() +
             ", activo='" + isActivo() + "'" +
-            ", categoria=" + getCategoria() +
             "}";
     }
 }

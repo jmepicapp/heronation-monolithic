@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * A DTO for the {@link com.hackathlon.heronation.domain.Rol} entity.
+ * A DTO for the {@link com.hackathlon.heronation.model.Rol} entity.
  */
 public class RolDTO implements Serializable {
     
@@ -12,7 +12,6 @@ public class RolDTO implements Serializable {
 
     private String nombre;
 
-    
     public Long getId() {
         return id;
     }

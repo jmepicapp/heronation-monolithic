@@ -18,12 +18,12 @@ public class UsuarioEmpresaDTO implements Serializable {
     private String nombre;
 
     private Integer telefono;
+
     private DireccionDTO direccion;
 
     private Boolean activo;
 
-
-    private RolDTO rolUsuarioEmpresaId;
+    private RolDTO rolUsuarioEmpresa;
     
     public Long getId() {
         return id;
@@ -67,24 +67,16 @@ public class UsuarioEmpresaDTO implements Serializable {
         this.activo = activo;
     }
 
-    public RolDTO getRol() {
-        return rol;
+    public RolDTO getRolUsuarioEmpresa() {
+        return rolUsuarioEmpresa;
     }
 
-    public void setRol(RolDTO rol) {
-        this.rol = rol;
+    public void setRolUsuarioEmpresa(RolDTO rol) {
+        this.rolUsuarioEmpresa = rol;
     }
 
     public Boolean getActivo() {
         return activo;
-    }
-
-    public Long getRolUsuarioEmpresaId() {
-        return rolUsuarioEmpresaId;
-    }
-
-    public void setRolUsuarioEmpresaId(Long rolId) {
-        this.rolUsuarioEmpresaId = rolId;
     }
 
     @Override
@@ -111,15 +103,12 @@ public class UsuarioEmpresaDTO implements Serializable {
     @Override
     public String toString() {
         return "UsuarioEmpresaDTO{" +
-            "id=" + getId() +
-            ", cif=" + getCif() +
-            ", nombre='" + getNombre() + "'" +
-            ", telefono=" + getTelefono() +
-            ", direccion=" + getDireccion() +
-            ", activo='" + isActivo() + "'" +
-            ", rol=" + getRol() +
-            ", categoria=" + getCategoria() +
-            ", rolUsuarioEmpresaId=" + getRolUsuarioEmpresaId() +
-            "}";
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", telefono=" + telefono +
+                ", direccion=" + direccion +
+                ", activo=" + activo +
+                ", rolUsuarioEmpresa=" + rolUsuarioEmpresa +
+                '}';
     }
 }
