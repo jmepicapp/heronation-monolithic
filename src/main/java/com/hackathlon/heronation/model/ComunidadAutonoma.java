@@ -2,17 +2,14 @@ package com.hackathlon.heronation.model;
 
 
 import javax.persistence.*;
-
 import java.io.Serializable;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
  * A Provincia.
  */
 @Entity
-@Table(name = "provincia")
-public class Provincia implements Serializable {
+@Table(name = "comunidad_autonoma")
+public class ComunidadAutonoma implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -22,10 +19,6 @@ public class Provincia implements Serializable {
 
     @Column(name = "nombre")
     private String nombre;
-
-    @ManyToOne
-    @JsonIgnoreProperties("comunidadAutonomas")
-    private ComunidadAutonoma comunidad;
 
     public Long getId() {
         return id;
@@ -39,7 +32,7 @@ public class Provincia implements Serializable {
         return nombre;
     }
 
-    public Provincia nombre(String nombre) {
+    public ComunidadAutonoma nombre(String nombre) {
         this.nombre = nombre;
         return this;
     }
@@ -48,29 +41,15 @@ public class Provincia implements Serializable {
         this.nombre = nombre;
     }
 
-    public ComunidadAutonoma getComunidad() {
-        return comunidad;
-    }
-
-    public Provincia comunidad(ComunidadAutonoma comunidad) {
-        this.comunidad = comunidad;
-        return this;
-    }
-
-    public void setComunidad(ComunidadAutonoma comunidad) {
-        this.comunidad = comunidad;
-    }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof Provincia)) {
+        if (!(o instanceof ComunidadAutonoma)) {
             return false;
         }
-        return id != null && id.equals(((Provincia) o).id);
+        return id != null && id.equals(((ComunidadAutonoma) o).id);
     }
 
     @Override
@@ -82,8 +61,7 @@ public class Provincia implements Serializable {
     public String toString() {
         return "Provincia{" +
             "id=" + getId() +
-            ", nombre='" + getNombre() + "'" +
-            ", comunidad='" + getComunidad() + "'" +
-            "}";
+            ", nombre='" + getNombre() +
+            "'}";
     }
 }

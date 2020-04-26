@@ -24,14 +24,10 @@ public class Poblacion implements Serializable {
     @Column(name = "nombre")
     private String nombre;
 
-    @Column(name = "provincia")
-    private Long provincia;
-
     @ManyToOne
     @JsonIgnoreProperties("poblacions")
     private Provincia poblacionProvincia;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
     }
@@ -53,19 +49,6 @@ public class Poblacion implements Serializable {
         this.nombre = nombre;
     }
 
-    public Long getProvincia() {
-        return provincia;
-    }
-
-    public Poblacion provincia(Long provincia) {
-        this.provincia = provincia;
-        return this;
-    }
-
-    public void setProvincia(Long provincia) {
-        this.provincia = provincia;
-    }
-
     public Provincia getPoblacionProvincia() {
         return poblacionProvincia;
     }
@@ -78,7 +61,6 @@ public class Poblacion implements Serializable {
     public void setPoblacionProvincia(Provincia provincia) {
         this.poblacionProvincia = provincia;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
     public boolean equals(Object o) {
@@ -101,7 +83,7 @@ public class Poblacion implements Serializable {
         return "Poblacion{" +
             "id=" + getId() +
             ", nombre='" + getNombre() + "'" +
-            ", provincia=" + getProvincia() +
+            ", provincia=" + getPoblacionProvincia() +
             "}";
     }
 }
