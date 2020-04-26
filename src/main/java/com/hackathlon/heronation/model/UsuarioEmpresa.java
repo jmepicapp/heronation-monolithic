@@ -7,9 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 
 import java.io.Serializable;
-import java.util.Objects;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * A UsuarioEmpresa.
@@ -21,11 +19,7 @@ public class UsuarioEmpresa implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(name = "cif")
-    private Long cif;
 
     @Column(name = "nombre")
     private String nombre;
@@ -34,16 +28,16 @@ public class UsuarioEmpresa implements Serializable {
     private Integer telefono;
 
     @Column(name = "direccion")
-    private Long direccion;
+    private Direccion direccion;
 
     @Column(name = "activo")
     private Boolean activo;
 
-    @Column(name = "categoria")
-    private Long categoria;
+    @Column(name = "rol")
+    private Rol rol;
 
     @OneToMany(mappedBy = "usuarioEmpresa")
-    private Set<Preferencia> preferenciaUsuarioEmpresas = new HashSet<>();
+    private List<Preferencia> preferenciasCategoriaProductos = new ArrayList<>();
 
     @OneToMany(mappedBy = "usuarioEmpresa")
     private Set<Peticion> peticionUsuarioEmpresas = new HashSet<>();
@@ -59,19 +53,6 @@ public class UsuarioEmpresa implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getCif() {
-        return cif;
-    }
-
-    public UsuarioEmpresa cif(Long cif) {
-        this.cif = cif;
-        return this;
-    }
-
-    public void setCif(Long cif) {
-        this.cif = cif;
     }
 
     public String getNombre() {
@@ -100,16 +81,16 @@ public class UsuarioEmpresa implements Serializable {
         this.telefono = telefono;
     }
 
-    public Long getDireccion() {
+    public Direccion getDireccion() {
         return direccion;
     }
 
-    public UsuarioEmpresa direccion(Long direccion) {
+    public UsuarioEmpresa direccion(Direccion direccion) {
         this.direccion = direccion;
         return this;
     }
 
-    public void setDireccion(Long direccion) {
+    public void setDireccion(Direccion direccion) {
         this.direccion = direccion;
     }
 
@@ -139,29 +120,29 @@ public class UsuarioEmpresa implements Serializable {
         this.categoria = categoria;
     }
 
-    public Set<Preferencia> getPreferenciaUsuarioEmpresas() {
-        return preferenciaUsuarioEmpresas;
+    public List<Preferencia> getPreferenciasCategoriaProductos() {
+        return preferenciasCategoriaProductos;
     }
 
-    public UsuarioEmpresa preferenciaUsuarioEmpresas(Set<Preferencia> preferencias) {
-        this.preferenciaUsuarioEmpresas = preferencias;
+    public UsuarioEmpresa preferenciasCategoriaProductos(List<Preferencia> preferencias) {
+        this.preferenciasCategoriaProductos = preferencias;
         return this;
     }
 
-    public UsuarioEmpresa addPreferenciaUsuarioEmpresa(Preferencia preferencia) {
-        this.preferenciaUsuarioEmpresas.add(preferencia);
+    public UsuarioEmpresa addPreferenciasCategoriaProductos(Preferencia preferencia) {
+        this.preferenciasCategoriaProductos.add(preferencia);
         preferencia.setUsuarioEmpresa(this);
         return this;
     }
 
-    public UsuarioEmpresa removePreferenciaUsuarioEmpresa(Preferencia preferencia) {
-        this.preferenciaUsuarioEmpresas.remove(preferencia);
+    public UsuarioEmpresa removePreferenciasCategoriaProductos(Preferencia preferencia) {
+        this.preferenciasCategoriaProductos.remove(preferencia);
         preferencia.setUsuarioEmpresa(null);
         return this;
     }
 
-    public void setPreferenciaUsuarioEmpresas(Set<Preferencia> preferencias) {
-        this.preferenciaUsuarioEmpresas = preferencias;
+    public void setPreferenciasCategoriaProductos(List<Preferencia> preferencias) {
+        this.preferenciasCategoriaProductos = preferencias;
     }
 
     public Set<Peticion> getPeticionUsuarioEmpresas() {

@@ -1,6 +1,7 @@
 package com.hackathlon.heronation.service.impl;
 
-import com.hackathlon.heronation.model.dto.CategoriaProductoDTO;
+import com.hackathlon.heronation.model.dto.PreferenciaDTO;
+import com.hackathlon.heronation.repository.PreferenciaRepository;
 import com.hackathlon.heronation.service.UsuarioEmpresaService;
 import com.hackathlon.heronation.model.UsuarioEmpresa;
 import com.hackathlon.heronation.repository.UsuarioEmpresaRepository;
@@ -10,13 +11,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Service Implementation for managing {@link UsuarioEmpresa}.
@@ -30,8 +31,12 @@ public class UsuarioEmpresaServiceImpl implements UsuarioEmpresaService {
     @Autowired
     private final UsuarioEmpresaRepository usuarioEmpresaRepository;
 
-    public UsuarioEmpresaServiceImpl(UsuarioEmpresaRepository usuarioEmpresaRepository) {
+    @Autowired
+    private final PreferenciaRepository preferenciaRepository;
+
+    public UsuarioEmpresaServiceImpl(UsuarioEmpresaRepository usuarioEmpresaRepository, PreferenciaRepository preferenciaRepository) {
         this.usuarioEmpresaRepository = usuarioEmpresaRepository;
+        this.preferenciaRepository = preferenciaRepository;
     }
 
     /**

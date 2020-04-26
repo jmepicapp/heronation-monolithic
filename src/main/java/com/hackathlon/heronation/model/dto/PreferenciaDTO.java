@@ -1,72 +1,68 @@
 package com.hackathlon.heronation.model.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.hackathlon.heronation.model.CategoriaProducto;
+import com.hackathlon.heronation.model.PreferenciaId;
+import com.hackathlon.heronation.model.UsuarioEmpresa;
+
 import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * A DTO for the {@link com.hackathlon.heronation.domain.Preferencia} entity.
+ * A DTO for the {@link com.hackathlon.heronation.model.Preferencia} entity.
  */
 public class PreferenciaDTO implements Serializable {
-    
-    private Long id;
 
-    private String nombre;
+    @JsonIgnore
+    private PreferenciaId id;
 
-    private String descripcion;
+    private UsuarioEmpresaDTO usuarioEmpresa;
 
-    private Long categoria;
+    @JsonIgnore
+    private CategoriaProductoDTO categoriaProducto;
+
+    private Boolean necesidad;
 
     private Boolean exclusion;
 
-
-    private Long usuarioEmpresaId;
-    
-    public Long getId() {
+    public PreferenciaId getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(PreferenciaId id) {
         this.id = id;
     }
 
-    public String getNombre() {
-        return nombre;
+    public UsuarioEmpresaDTO getUsuarioEmpresa() {
+        return usuarioEmpresa;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setUsuarioEmpresa(UsuarioEmpresaDTO usuarioEmpresa) {
+        this.usuarioEmpresa = usuarioEmpresa;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public CategoriaProductoDTO getCategoriaProducto() {
+        return categoriaProducto;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setCategoriaProducto(CategoriaProductoDTO categoriaProducto) {
+        this.categoriaProducto = categoriaProducto;
     }
 
-    public Long getCategoria() {
-        return categoria;
+    public Boolean getNecesidad() {
+        return necesidad;
     }
 
-    public void setCategoria(Long categoria) {
-        this.categoria = categoria;
+    public void setNecesidad(Boolean necesidad) {
+        this.necesidad = necesidad;
     }
 
-    public Boolean isExclusion() {
+    public Boolean getExclusion() {
         return exclusion;
     }
 
     public void setExclusion(Boolean exclusion) {
         this.exclusion = exclusion;
-    }
-
-    public Long getUsuarioEmpresaId() {
-        return usuarioEmpresaId;
-    }
-
-    public void setUsuarioEmpresaId(Long usuarioEmpresaId) {
-        this.usuarioEmpresaId = usuarioEmpresaId;
     }
 
     @Override
@@ -93,12 +89,11 @@ public class PreferenciaDTO implements Serializable {
     @Override
     public String toString() {
         return "PreferenciaDTO{" +
-            "id=" + getId() +
-            ", nombre='" + getNombre() + "'" +
-            ", descripcion='" + getDescripcion() + "'" +
-            ", categoria=" + getCategoria() +
-            ", exclusion='" + isExclusion() + "'" +
-            ", usuarioEmpresaId=" + getUsuarioEmpresaId() +
-            "}";
+                "id=" + id +
+                ", usuarioEmpresa=" + usuarioEmpresa +
+                ", categoriaProducto=" + categoriaProducto +
+                ", necesidad=" + necesidad +
+                ", exclusion=" + exclusion +
+                '}';
     }
 }

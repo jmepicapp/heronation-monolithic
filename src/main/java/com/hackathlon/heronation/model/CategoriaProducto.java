@@ -1,10 +1,12 @@
 package com.hackathlon.heronation.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -26,9 +28,17 @@ public class CategoriaProducto implements Serializable {
     @Column(name = "descripcion")
     private String descripcion;
 
-    @ManyToOne
-    @JsonIgnoreProperties("categoriaPreferencias")
-    private Preferencia preferencia;
+    @OneToMany(mappedBy = "categoriaProducto")
+    @JsonIgnore
+    private List<Preferencia> usuariosEmpresa;
+
+    public List<Preferencia> getUsuariosEmpresa() {
+        return usuariosEmpresa;
+    }
+
+    public void setUsuariosEmpresa(List<Preferencia> usuariosEmpresa) {
+        this.usuariosEmpresa = usuariosEmpresa;
+    }
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -65,20 +75,6 @@ public class CategoriaProducto implements Serializable {
         this.descripcion = descripcion;
     }
 
-    public Preferencia getPreferencia() {
-        return preferencia;
-    }
-
-    public CategoriaProducto preferencia(Preferencia preferencia) {
-        this.preferencia = preferencia;
-        return this;
-    }
-
-    public void setPreferencia(Preferencia preferencia) {
-        this.preferencia = preferencia;
-    }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -98,9 +94,9 @@ public class CategoriaProducto implements Serializable {
     @Override
     public String toString() {
         return "CategoriaProducto{" +
-            "id=" + getId() +
-            ", nombre='" + getNombre() + "'" +
-            ", descripcion='" + getDescripcion() + "'" +
-            "}";
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", descripcion='" + descripcion + '\'' +
+                '}';
     }
 }

@@ -1,6 +1,11 @@
 package com.hackathlon.heronation.model.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.hackathlon.heronation.model.Preferencia;
+
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -10,22 +15,15 @@ public class UsuarioEmpresaDTO implements Serializable {
     
     private Long id;
 
-    private Long cif;
-
     private String nombre;
 
     private Integer telefono;
-
-    private Long direccion;
+    private DireccionDTO direccion;
 
     private Boolean activo;
 
-    private Long rol;
 
-    private Long categoria;
-
-
-    private Long rolUsuarioEmpresaId;
+    private RolDTO rolUsuarioEmpresaId;
     
     public Long getId() {
         return id;
@@ -33,14 +31,6 @@ public class UsuarioEmpresaDTO implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getCif() {
-        return cif;
-    }
-
-    public void setCif(Long cif) {
-        this.cif = cif;
     }
 
     public String getNombre() {
@@ -61,11 +51,11 @@ public class UsuarioEmpresaDTO implements Serializable {
     }
 
 
-    public Long getDireccion() {
+    public DireccionDTO getDireccion() {
         return direccion;
     }
 
-    public void setDireccion(Long direccion) {
+    public void setDireccion(DireccionDTO direccion) {
         this.direccion = direccion;
     }
 
@@ -77,20 +67,16 @@ public class UsuarioEmpresaDTO implements Serializable {
         this.activo = activo;
     }
 
-    public Long getRol() {
+    public RolDTO getRol() {
         return rol;
     }
 
-    public void setRol(Long rol) {
+    public void setRol(RolDTO rol) {
         this.rol = rol;
     }
 
-    public Long getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(Long categoria) {
-        this.categoria = categoria;
+    public Boolean getActivo() {
+        return activo;
     }
 
     public Long getRolUsuarioEmpresaId() {

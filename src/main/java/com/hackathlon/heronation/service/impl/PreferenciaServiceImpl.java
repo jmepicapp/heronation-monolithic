@@ -1,5 +1,6 @@
 package com.hackathlon.heronation.service.impl;
 
+import com.hackathlon.heronation.model.dto.UsuarioEmpresaDTO;
 import com.hackathlon.heronation.service.PreferenciaService;
 import com.hackathlon.heronation.model.Preferencia;
 import com.hackathlon.heronation.repository.PreferenciaRepository;
@@ -12,8 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Service Implementation for managing {@link Preferencia}.
@@ -55,6 +58,16 @@ public class PreferenciaServiceImpl implements PreferenciaService {
     public List<PreferenciaDTO> findAll() {
         log.debug("Request to get all Preferencias");
         return ModelMapperUtils.mapAll(preferenciaRepository.findAll(), PreferenciaDTO.class);
+
+    }
+
+    public List<PreferenciaDTO> findAllByCategoriaProducto(List<Long> idCategorias){
+        return this.preferenciaRepository.findAll()
+                .stream()
+                .filter(pr -> idCategorias.contains(pr.getCategoriaProducto().getId()))
+                .filter(pr -> !pr.getExclusion())
+                .map(pr ->  ModelMapperUtils.map(pr, PreferenciaDTO.class))
+                .collect(Collectors.toList());
 
     }
 

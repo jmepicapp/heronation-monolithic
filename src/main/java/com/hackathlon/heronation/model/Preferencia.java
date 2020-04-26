@@ -1,5 +1,6 @@
 package com.hackathlon.heronation.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -18,117 +19,65 @@ public class Preferencia implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @EmbeddedId
+    private PreferenciaId id;
 
-    @Column(name = "nombre")
-    private String nombre;
+    @ManyToOne
+    @MapsId("usuarioEmpresaId")
+    @JoinColumn(name = "usuario_empresa_id")
+    @JsonIgnore
+    private UsuarioEmpresa usuarioEmpresa;
 
-    @Column(name = "descripcion")
-    private String descripcion;
+    @ManyToOne
+    @MapsId("categoriaProductoId")
+    @JoinColumn(name = "categoria_producto_id")
+    private CategoriaProducto categoriaProducto;
 
-    @Column(name = "categoria")
-    private Long categoria;
+    @Column(name = "necesidad")
+    private Boolean necesidad;
 
     @Column(name = "exclusion")
     private Boolean exclusion;
 
-    @OneToMany(mappedBy = "preferencia")
-    private Set<CategoriaProducto> categoriaPreferencias = new HashSet<>();
-
-    @ManyToOne
-    @JsonIgnoreProperties("preferenciaUsuarioEmpresas")
-    private UsuarioEmpresa usuarioEmpresa;
-
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
-    public Long getId() {
+    public PreferenciaId getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(PreferenciaId id) {
         this.id = id;
     }
 
-    public String getNombre() {
-        return nombre;
+    public UsuarioEmpresa getUsuarioEmpresa() {
+        return usuarioEmpresa;
     }
 
-    public Preferencia nombre(String nombre) {
-        this.nombre = nombre;
-        return this;
+    public CategoriaProducto getCategoriaProducto() {
+        return categoriaProducto;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setCategoriaProducto(CategoriaProducto categoriaProducto) {
+        this.categoriaProducto = categoriaProducto;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public Boolean getNecesidad() {
+        return necesidad;
     }
 
-    public Preferencia descripcion(String descripcion) {
-        this.descripcion = descripcion;
-        return this;
+    public void setNecesidad(Boolean necesidad) {
+        this.necesidad = necesidad;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public Long getCategoria() {
-        return categoria;
-    }
-
-    public Preferencia categoria(Long categoria) {
-        this.categoria = categoria;
-        return this;
-    }
-
-    public void setCategoria(Long categoria) {
-        this.categoria = categoria;
-    }
-
-    public Boolean isExclusion() {
+    public Boolean getExclusion() {
         return exclusion;
-    }
-
-    public Preferencia exclusion(Boolean exclusion) {
-        this.exclusion = exclusion;
-        return this;
     }
 
     public void setExclusion(Boolean exclusion) {
         this.exclusion = exclusion;
     }
 
-    public Set<CategoriaProducto> getCategoriaPreferencias() {
-        return categoriaPreferencias;
-    }
-
-    public Preferencia categoriaPreferencias(Set<CategoriaProducto> categoriaProductos) {
-        this.categoriaPreferencias = categoriaProductos;
+    public Preferencia exclusion(Boolean exclusion) {
+        this.exclusion = exclusion;
         return this;
-    }
-
-    public Preferencia addCategoriaPreferencia(CategoriaProducto categoriaProducto) {
-        this.categoriaPreferencias.add(categoriaProducto);
-        categoriaProducto.setPreferencia(this);
-        return this;
-    }
-
-    public Preferencia removeCategoriaPreferencia(CategoriaProducto categoriaProducto) {
-        this.categoriaPreferencias.remove(categoriaProducto);
-        categoriaProducto.setPreferencia(null);
-        return this;
-    }
-
-    public void setCategoriaPreferencias(Set<CategoriaProducto> categoriaProductos) {
-        this.categoriaPreferencias = categoriaProductos;
-    }
-
-    public UsuarioEmpresa getUsuarioEmpresa() {
-        return usuarioEmpresa;
     }
 
     public Preferencia usuarioEmpresa(UsuarioEmpresa usuarioEmpresa) {
@@ -139,7 +88,6 @@ public class Preferencia implements Serializable {
     public void setUsuarioEmpresa(UsuarioEmpresa usuarioEmpresa) {
         this.usuarioEmpresa = usuarioEmpresa;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
     public boolean equals(Object o) {
@@ -160,11 +108,10 @@ public class Preferencia implements Serializable {
     @Override
     public String toString() {
         return "Preferencia{" +
-            "id=" + getId() +
-            ", nombre='" + getNombre() + "'" +
-            ", descripcion='" + getDescripcion() + "'" +
-            ", categoria=" + getCategoria() +
-            ", exclusion='" + isExclusion() + "'" +
-            "}";
+                "id=" + id +
+                ", usuarioEmpresa=" + usuarioEmpresa +
+                ", categoriaProducto=" + categoriaProducto +
+                ", exclusion=" + exclusion +
+                '}';
     }
 }

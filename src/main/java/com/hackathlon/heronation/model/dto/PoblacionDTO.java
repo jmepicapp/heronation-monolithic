@@ -14,7 +14,7 @@ public class PoblacionDTO implements Serializable {
 
     private String nombre;
 
-    private Provincia provincia;
+    private ProvinciaDTO provincia;
     
     public Long getId() {
         return id;
@@ -32,11 +32,11 @@ public class PoblacionDTO implements Serializable {
         this.nombre = nombre;
     }
 
-    public Provincia getProvincia() {
+    public ProvinciaDTO getProvincia() {
         return provincia;
     }
 
-    public void setProvincia(Provincia provincia) {
+    public void setProvincia(ProvinciaDTO provincia) {
         this.provincia = provincia;
     }
 
