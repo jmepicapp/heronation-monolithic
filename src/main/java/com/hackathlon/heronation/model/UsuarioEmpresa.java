@@ -61,10 +61,6 @@ public class UsuarioEmpresa implements Serializable {
     @JsonIgnoreProperties("usuarioEmpresas")
     private Rol rolUsuarioEmpresa;
 
-    @ManyToMany(mappedBy = "usuarioEmpresas")
-    @JsonIgnore
-    private Set<CategoriaEmpresa> categoriaEmpresas = new HashSet<>();
-
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -254,30 +250,6 @@ public class UsuarioEmpresa implements Serializable {
         this.rolUsuarioEmpresa = rol;
     }
 
-    public Set<CategoriaEmpresa> getCategoriaEmpresas() {
-        return categoriaEmpresas;
-    }
-
-    public UsuarioEmpresa categoriaEmpresas(Set<CategoriaEmpresa> categoriaEmpresas) {
-        this.categoriaEmpresas = categoriaEmpresas;
-        return this;
-    }
-
-    public UsuarioEmpresa addCategoriaEmpresa(CategoriaEmpresa categoriaEmpresa) {
-        this.categoriaEmpresas.add(categoriaEmpresa);
-        categoriaEmpresa.getUsuarioEmpresas().add(this);
-        return this;
-    }
-
-    public UsuarioEmpresa removeCategoriaEmpresa(CategoriaEmpresa categoriaEmpresa) {
-        this.categoriaEmpresas.remove(categoriaEmpresa);
-        categoriaEmpresa.getUsuarioEmpresas().remove(this);
-        return this;
-    }
-
-    public void setCategoriaEmpresas(Set<CategoriaEmpresa> categoriaEmpresas) {
-        this.categoriaEmpresas = categoriaEmpresas;
-    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
