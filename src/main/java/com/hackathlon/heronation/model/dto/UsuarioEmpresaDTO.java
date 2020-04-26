@@ -41,7 +41,6 @@ public class UsuarioEmpresaDTO implements Serializable {
         this.nombre = nombre;
     }
 
-
     public Integer getTelefono() {
         return telefono;
     }
@@ -49,7 +48,6 @@ public class UsuarioEmpresaDTO implements Serializable {
     public void setTelefono(Integer telefono) {
         this.telefono = telefono;
     }
-
 
     public DireccionDTO getDireccion() {
         return direccion;

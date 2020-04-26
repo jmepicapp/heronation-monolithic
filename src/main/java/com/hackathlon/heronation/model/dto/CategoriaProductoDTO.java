@@ -1,10 +1,6 @@
 package com.hackathlon.heronation.model.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.hackathlon.heronation.model.Preferencia;
-
 import java.io.Serializable;
-import java.util.List;
 import java.util.Objects;
 
 /**
@@ -17,9 +13,6 @@ public class CategoriaProductoDTO implements Serializable {
     private String nombre;
 
     private String descripcion;
-
-    @JsonIgnore
-    private List<Preferencia> usuariosEmpresa;
     
     public Long getId() {
         return id;
@@ -43,14 +36,6 @@ public class CategoriaProductoDTO implements Serializable {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
-    }
-
-    public List<Preferencia> getUsuariosEmpresa() {
-        return usuariosEmpresa;
-    }
-
-    public void setUsuariosEmpresa(List<Preferencia> usuariosEmpresa) {
-        this.usuariosEmpresa = usuariosEmpresa;
     }
 
     @Override
@@ -80,7 +65,6 @@ public class CategoriaProductoDTO implements Serializable {
                 "id=" + id +
                 ", nombre='" + nombre + '\'' +
                 ", descripcion='" + descripcion + '\'' +
-                ", usuariosEmpresa=" + usuariosEmpresa +
                 '}';
     }
 }

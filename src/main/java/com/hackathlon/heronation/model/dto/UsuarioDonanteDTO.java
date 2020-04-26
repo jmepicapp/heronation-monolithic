@@ -16,13 +16,10 @@ public class UsuarioDonanteDTO implements Serializable {
 
     private Integer telefono;
 
-    private Long direccion;
+    private DireccionDTO direccion;
 
-    private Long rol;
+    private RolDTO rol;
 
-
-    private Long rolUsuarioDonanteId;
-    
     public Long getId() {
         return id;
     }
@@ -57,28 +54,20 @@ public class UsuarioDonanteDTO implements Serializable {
     }
 
 
-    public Long getDireccion() {
+    public DireccionDTO getDireccion() {
         return direccion;
     }
 
-    public void setDireccion(Long direccion) {
+    public void setDireccion(DireccionDTO direccion) {
         this.direccion = direccion;
     }
 
-    public Long getRol() {
+    public RolDTO getRol() {
         return rol;
     }
 
-    public void setRol(Long rol) {
+    public void setRol(RolDTO rol) {
         this.rol = rol;
-    }
-
-    public Long getRolUsuarioDonanteId() {
-        return rolUsuarioDonanteId;
-    }
-
-    public void setRolUsuarioDonanteId(Long rolId) {
-        this.rolUsuarioDonanteId = rolId;
     }
 
     @Override
@@ -111,7 +100,6 @@ public class UsuarioDonanteDTO implements Serializable {
             ", telefono=" + getTelefono() +
             ", direccion=" + getDireccion() +
             ", rol=" + getRol() +
-            ", rolUsuarioDonanteId=" + getRolUsuarioDonanteId() +
             "}";
     }
 }
