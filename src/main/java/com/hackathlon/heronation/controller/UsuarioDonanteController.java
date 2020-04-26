@@ -6,6 +6,7 @@ import com.hackathlon.heronation.service.UsuarioDonanteService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +28,7 @@ public class UsuarioDonanteController {
 
     private static final String ENTITY_NAME = "usuarioDonante";
 
+    @Autowired
     private final UsuarioDonanteService usuarioDonanteService;
 
     public UsuarioDonanteController(UsuarioDonanteService usuarioDonanteService) {
