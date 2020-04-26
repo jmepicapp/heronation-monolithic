@@ -3,6 +3,7 @@ package com.hackathlon.heronation.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table
@@ -15,13 +16,10 @@ public class Usuario {
     private String email;
     private String password;
 
-    @ManyToOne
-    @JsonIgnoreProperties("usuarioDonantes")
-    private Rol rolUsuario;
 
-    public Rol getRolUsuarioDonante() {
-        return rolUsuario;
-    }
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "usuario_rol", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "id"))
+    private Set<Rol> rolUsuario;
 
     public Long getId() {
         return id;
@@ -47,13 +45,11 @@ public class Usuario {
         this.password = password;
     }
 
-    public Usuario rolUsuario(Rol rol) {
-        this.rolUsuario = rol;
-        return this;
+    public Set<Rol> getRolUsuario() {
+        return rolUsuario;
     }
 
-    public void setRolUsuario(Rol rol) {
-        this.rolUsuario = rol;
+    public void setRolUsuario(Set<Rol> rolUsuario) {
+        this.rolUsuario = rolUsuario;
     }
-
 }
