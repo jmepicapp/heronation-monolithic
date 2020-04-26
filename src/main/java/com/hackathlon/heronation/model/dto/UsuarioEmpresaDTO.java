@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * A DTO for the {@link com.hackathlon.heronation.domain.UsuarioEmpresa} entity.
+ * A DTO for the {@link com.hackathlon.heronation.model.UsuarioEmpresa} entity.
  */
 public class UsuarioEmpresaDTO implements Serializable {
     
@@ -18,7 +18,7 @@ public class UsuarioEmpresaDTO implements Serializable {
 
     private Integer telefono;
 
-    private String contrasena;
+    private String password;
 
     private Long direccion;
 
@@ -71,12 +71,12 @@ public class UsuarioEmpresaDTO implements Serializable {
         this.telefono = telefono;
     }
 
-    public String getContrasena() {
-        return contrasena;
+    public String getPassword() {
+        return password;
     }
 
-    public void setContrasena(String contrasena) {
-        this.contrasena = contrasena;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public Long getDireccion() {
@@ -148,7 +148,7 @@ public class UsuarioEmpresaDTO implements Serializable {
             ", nombre='" + getNombre() + "'" +
             ", email='" + getEmail() + "'" +
             ", telefono=" + getTelefono() +
-            ", contrasena='" + getContrasena() + "'" +
+            ", contrasena='" + getPassword() + "'" +
             ", direccion=" + getDireccion() +
             ", activo='" + isActivo() + "'" +
             ", rol=" + getRol() +

@@ -28,27 +28,18 @@ public class UsuarioDonante implements Serializable {
     @Column(name = "apellidos")
     private String apellidos;
 
-    @Column(name = "email")
-    private String email;
-
     @Column(name = "telefono")
     private Integer telefono;
-
-    @Column(name = "contrasena")
-    private String contrasena;
 
     @Column(name = "direccion")
     private Long direccion;
 
-    @Column(name = "rol")
-    private Long rol;
-
     @OneToMany(mappedBy = "usuarioDonante")
     private Set<Peticion> peticionUsuarioDonantes = new HashSet<>();
 
-    @ManyToOne
-    @JsonIgnoreProperties("usuarioDonantes")
-    private Rol rolUsuarioDonante;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "usuario_id", referencedColumnName = "id")
+    private Usuario usuarioDonante;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -85,19 +76,6 @@ public class UsuarioDonante implements Serializable {
         this.apellidos = apellidos;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public UsuarioDonante email(String email) {
-        this.email = email;
-        return this;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public Integer getTelefono() {
         return telefono;
     }
@@ -109,19 +87,6 @@ public class UsuarioDonante implements Serializable {
 
     public void setTelefono(Integer telefono) {
         this.telefono = telefono;
-    }
-
-    public String getContrasena() {
-        return contrasena;
-    }
-
-    public UsuarioDonante contrasena(String contrasena) {
-        this.contrasena = contrasena;
-        return this;
-    }
-
-    public void setContrasena(String contrasena) {
-        this.contrasena = contrasena;
     }
 
     public Long getDireccion() {
@@ -137,18 +102,6 @@ public class UsuarioDonante implements Serializable {
         this.direccion = direccion;
     }
 
-    public Long getRol() {
-        return rol;
-    }
-
-    public UsuarioDonante rol(Long rol) {
-        this.rol = rol;
-        return this;
-    }
-
-    public void setRol(Long rol) {
-        this.rol = rol;
-    }
 
     public Set<Peticion> getPeticionUsuarioDonantes() {
         return peticionUsuarioDonantes;
@@ -175,19 +128,13 @@ public class UsuarioDonante implements Serializable {
         this.peticionUsuarioDonantes = peticions;
     }
 
-    public Rol getRolUsuarioDonante() {
-        return rolUsuarioDonante;
+    public Usuario getUsuarioDonante() {
+        return usuarioDonante;
     }
 
-    public UsuarioDonante rolUsuarioDonante(Rol rol) {
-        this.rolUsuarioDonante = rol;
-        return this;
+    public void setUsuarioDonante(Usuario rolUsuarioDonante) {
+        this.usuarioDonante = rolUsuarioDonante;
     }
-
-    public void setRolUsuarioDonante(Rol rol) {
-        this.rolUsuarioDonante = rol;
-    }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
     public boolean equals(Object o) {
@@ -211,11 +158,9 @@ public class UsuarioDonante implements Serializable {
             "id=" + getId() +
             ", nombre='" + getNombre() + "'" +
             ", apellidos='" + getApellidos() + "'" +
-            ", email='" + getEmail() + "'" +
             ", telefono=" + getTelefono() +
-            ", contrasena='" + getContrasena() + "'" +
             ", direccion=" + getDireccion() +
-            ", rol=" + getRol() +
+            ", rol=" + getUsuarioDonante() +
             "}";
     }
 }
