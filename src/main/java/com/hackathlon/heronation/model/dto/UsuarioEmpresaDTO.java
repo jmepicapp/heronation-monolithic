@@ -14,11 +14,7 @@ public class UsuarioEmpresaDTO implements Serializable {
 
     private String nombre;
 
-    private String email;
-
     private Integer telefono;
-
-    private String password;
 
     private Long direccion;
 
@@ -55,13 +51,6 @@ public class UsuarioEmpresaDTO implements Serializable {
         this.nombre = nombre;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
 
     public Integer getTelefono() {
         return telefono;
@@ -71,13 +60,6 @@ public class UsuarioEmpresaDTO implements Serializable {
         this.telefono = telefono;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
     public Long getDireccion() {
         return direccion;
@@ -146,9 +128,7 @@ public class UsuarioEmpresaDTO implements Serializable {
             "id=" + getId() +
             ", cif=" + getCif() +
             ", nombre='" + getNombre() + "'" +
-            ", email='" + getEmail() + "'" +
             ", telefono=" + getTelefono() +
-            ", contrasena='" + getPassword() + "'" +
             ", direccion=" + getDireccion() +
             ", activo='" + isActivo() + "'" +
             ", rol=" + getRol() +
