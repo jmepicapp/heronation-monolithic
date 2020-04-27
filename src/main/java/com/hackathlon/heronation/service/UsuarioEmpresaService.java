@@ -1,5 +1,6 @@
 package com.hackathlon.heronation.service;
 
+import com.hackathlon.heronation.model.dto.PreferenciaDTO;
 import com.hackathlon.heronation.model.dto.UsuarioEmpresaDTO;
 
 import org.springframework.data.domain.Page;

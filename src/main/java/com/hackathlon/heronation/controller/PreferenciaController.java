@@ -1,5 +1,6 @@
 package com.hackathlon.heronation.controller;
 
+import com.hackathlon.heronation.model.dto.UsuarioEmpresaDTO;
 import com.hackathlon.heronation.service.PreferenciaService;
 import com.hackathlon.heronation.model.dto.PreferenciaDTO;
 import com.hackathlon.heronation.controller.error.BadRequestAlertException;
@@ -80,6 +81,31 @@ public class PreferenciaController {
     public List<PreferenciaDTO> getAllPreferencias() {
         log.debug("REST request to get all Preferencias");
         return preferenciaService.findAll();
+    }
+
+    /**
+     * {@code GET  /preferencias/categoriaProducto/} : get all the preferencias by categoria producto.
+     *
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of preferencias by categoria producto in body.
+     */
+    @GetMapping("/preferencias/categoriaProducto")
+    public ResponseEntity<List<PreferenciaDTO>> getAllByCategoriaProducto(@RequestBody List<Long> idCategorias) {
+        log.debug("REST request to get all Preferencias by Categoria Producto");
+        List<PreferenciaDTO> list = preferenciaService.findAllByCategoriaProducto(idCategorias);
+        return ResponseEntity.ok().body(list);
+    }
+
+    /**
+     * {@code GET  /preferencias/categoriaProducto/:idEmpresa} : get all the preferencias by categoria producto.
+     *
+     * @param idEmpresa
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of preferencias by categoria producto in body.
+     */
+    @GetMapping("/preferencias/empresa/{idEmpresa}")
+    public ResponseEntity<List<PreferenciaDTO>> getAllByCategoriaProducto(@PathVariable Long idEmpresa) {
+        log.debug("REST request to get all Preferencias by Empresa");
+        List<PreferenciaDTO> list = preferenciaService.findAllByUsuarioEmpresa(idEmpresa);
+        return ResponseEntity.ok().body(list);
     }
 
     /**

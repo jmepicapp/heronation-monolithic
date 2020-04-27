@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * A DTO for the {@link com.hackathlon.heronation.domain.UsuarioDonante} entity.
+ * A DTO for the {@link com.hackathlon.heronation.model.UsuarioDonante} entity.
  */
 public class UsuarioDonanteDTO implements Serializable {
     
@@ -14,19 +14,12 @@ public class UsuarioDonanteDTO implements Serializable {
 
     private String apellidos;
 
-    private String email;
-
     private Integer telefono;
 
-    private String contrasena;
+    private DireccionDTO direccion;
 
-    private Long direccion;
+    private RolDTO rol;
 
-    private Long rol;
-
-
-    private Long rolUsuarioDonanteId;
-    
     public Long getId() {
         return id;
     }
@@ -51,13 +44,6 @@ public class UsuarioDonanteDTO implements Serializable {
         this.apellidos = apellidos;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
 
     public Integer getTelefono() {
         return telefono;
@@ -67,36 +53,21 @@ public class UsuarioDonanteDTO implements Serializable {
         this.telefono = telefono;
     }
 
-    public String getContrasena() {
-        return contrasena;
-    }
 
-    public void setContrasena(String contrasena) {
-        this.contrasena = contrasena;
-    }
-
-    public Long getDireccion() {
+    public DireccionDTO getDireccion() {
         return direccion;
     }
 
-    public void setDireccion(Long direccion) {
+    public void setDireccion(DireccionDTO direccion) {
         this.direccion = direccion;
     }
 
-    public Long getRol() {
+    public RolDTO getRol() {
         return rol;
     }
 
-    public void setRol(Long rol) {
+    public void setRol(RolDTO rol) {
         this.rol = rol;
-    }
-
-    public Long getRolUsuarioDonanteId() {
-        return rolUsuarioDonanteId;
-    }
-
-    public void setRolUsuarioDonanteId(Long rolId) {
-        this.rolUsuarioDonanteId = rolId;
     }
 
     @Override
@@ -126,12 +97,9 @@ public class UsuarioDonanteDTO implements Serializable {
             "id=" + getId() +
             ", nombre='" + getNombre() + "'" +
             ", apellidos='" + getApellidos() + "'" +
-            ", email='" + getEmail() + "'" +
             ", telefono=" + getTelefono() +
-            ", contrasena='" + getContrasena() + "'" +
             ", direccion=" + getDireccion() +
             ", rol=" + getRol() +
-            ", rolUsuarioDonanteId=" + getRolUsuarioDonanteId() +
             "}";
     }
 }

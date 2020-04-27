@@ -1,5 +1,6 @@
 package com.hackathlon.heronation.controller;
 
+import com.hackathlon.heronation.model.dto.PreferenciaDTO;
 import com.hackathlon.heronation.service.UsuarioEmpresaService;
 import com.hackathlon.heronation.model.dto.UsuarioEmpresaDTO;
 import com.hackathlon.heronation.controller.error.BadRequestAlertException;

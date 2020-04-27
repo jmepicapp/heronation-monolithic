@@ -1,35 +1,29 @@
 package com.hackathlon.heronation.model.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.hackathlon.heronation.model.Preferencia;
+
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
- * A DTO for the {@link com.hackathlon.heronation.domain.UsuarioEmpresa} entity.
+ * A DTO for the {@link com.hackathlon.heronation.model.UsuarioEmpresa} entity.
  */
 public class UsuarioEmpresaDTO implements Serializable {
     
     private Long id;
 
-    private Long cif;
-
     private String nombre;
-
-    private String email;
 
     private Integer telefono;
 
-    private String contrasena;
-
-    private Long direccion;
+    private DireccionDTO direccion;
 
     private Boolean activo;
 
-    private Long rol;
-
-    private Long categoria;
-
-
-    private Long rolUsuarioEmpresaId;
+    private RolDTO rolUsuarioEmpresa;
     
     public Long getId() {
         return id;
@@ -37,14 +31,6 @@ public class UsuarioEmpresaDTO implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getCif() {
-        return cif;
-    }
-
-    public void setCif(Long cif) {
-        this.cif = cif;
     }
 
     public String getNombre() {
@@ -55,14 +41,6 @@ public class UsuarioEmpresaDTO implements Serializable {
         this.nombre = nombre;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public Integer getTelefono() {
         return telefono;
     }
@@ -71,19 +49,11 @@ public class UsuarioEmpresaDTO implements Serializable {
         this.telefono = telefono;
     }
 
-    public String getContrasena() {
-        return contrasena;
-    }
-
-    public void setContrasena(String contrasena) {
-        this.contrasena = contrasena;
-    }
-
-    public Long getDireccion() {
+    public DireccionDTO getDireccion() {
         return direccion;
     }
 
-    public void setDireccion(Long direccion) {
+    public void setDireccion(DireccionDTO direccion) {
         this.direccion = direccion;
     }
 
@@ -95,28 +65,16 @@ public class UsuarioEmpresaDTO implements Serializable {
         this.activo = activo;
     }
 
-    public Long getRol() {
-        return rol;
+    public RolDTO getRolUsuarioEmpresa() {
+        return rolUsuarioEmpresa;
     }
 
-    public void setRol(Long rol) {
-        this.rol = rol;
+    public void setRolUsuarioEmpresa(RolDTO rol) {
+        this.rolUsuarioEmpresa = rol;
     }
 
-    public Long getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(Long categoria) {
-        this.categoria = categoria;
-    }
-
-    public Long getRolUsuarioEmpresaId() {
-        return rolUsuarioEmpresaId;
-    }
-
-    public void setRolUsuarioEmpresaId(Long rolId) {
-        this.rolUsuarioEmpresaId = rolId;
+    public Boolean getActivo() {
+        return activo;
     }
 
     @Override
@@ -143,17 +101,12 @@ public class UsuarioEmpresaDTO implements Serializable {
     @Override
     public String toString() {
         return "UsuarioEmpresaDTO{" +
-            "id=" + getId() +
-            ", cif=" + getCif() +
-            ", nombre='" + getNombre() + "'" +
-            ", email='" + getEmail() + "'" +
-            ", telefono=" + getTelefono() +
-            ", contrasena='" + getContrasena() + "'" +
-            ", direccion=" + getDireccion() +
-            ", activo='" + isActivo() + "'" +
-            ", rol=" + getRol() +
-            ", categoria=" + getCategoria() +
-            ", rolUsuarioEmpresaId=" + getRolUsuarioEmpresaId() +
-            "}";
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", telefono=" + telefono +
+                ", direccion=" + direccion +
+                ", activo=" + activo +
+                ", rolUsuarioEmpresa=" + rolUsuarioEmpresa +
+                '}';
     }
 }

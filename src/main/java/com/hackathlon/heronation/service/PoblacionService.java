@@ -1,6 +1,7 @@
 package com.hackathlon.heronation.service;
 
 import com.hackathlon.heronation.model.dto.PoblacionDTO;
+import com.hackathlon.heronation.model.dto.ProvinciaDTO;
 
 import java.util.List;
 import java.util.Optional;
@@ -11,19 +12,19 @@ import java.util.Optional;
 public interface PoblacionService {
 
     /**
-     * Save a poblacion.
-     *
-     * @param poblacionDTO the entity to save.
-     * @return the persisted entity.
-     */
-    PoblacionDTO save(PoblacionDTO poblacionDTO);
-
-    /**
      * Get all the poblacions.
      *
      * @return the list of entities.
      */
     List<PoblacionDTO> findAll();
+
+    /**
+     * Get all the provincias by comunidad.
+     *
+     * @param id the provincia_id
+     * @return the list of entities.
+     */
+    List<PoblacionDTO> findAllByProvincia(Long id);
 
     /**
      * Get the "id" poblacion.
@@ -33,10 +34,4 @@ public interface PoblacionService {
      */
     Optional<PoblacionDTO> findOne(Long id);
 
-    /**
-     * Delete the "id" poblacion.
-     *
-     * @param id the id of the entity.
-     */
-    void delete(Long id);
 }

@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * A DTO for the {@link com.hackathlon.heronation.domain.Direccion} entity.
+ * A DTO for the {@link com.hackathlon.heronation.model.Direccion} entity.
  */
 public class DireccionDTO implements Serializable {
     

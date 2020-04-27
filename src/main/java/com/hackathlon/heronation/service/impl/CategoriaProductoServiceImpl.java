@@ -67,7 +67,7 @@ public class CategoriaProductoServiceImpl implements CategoriaProductoService {
     @Transactional(readOnly = true)
     public Optional<CategoriaProductoDTO> findOne(Long id) {
         log.debug("Request to get CategoriaProducto : {}", id);
-        return Optional.of(ModelMapperUtils.map(categoriaProductoRepository.findById(id), CategoriaProductoDTO.class));
+        return Optional.of(ModelMapperUtils.map(categoriaProductoRepository.findById(id).get(), CategoriaProductoDTO.class));
 
     }
 

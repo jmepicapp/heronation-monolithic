@@ -7,9 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 
 import java.io.Serializable;
-import java.util.Objects;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * A UsuarioEmpresa.
@@ -21,49 +19,32 @@ public class UsuarioEmpresa implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(name = "cif")
-    private Long cif;
 
     @Column(name = "nombre")
     private String nombre;
 
-    @Column(name = "email")
-    private String email;
-
     @Column(name = "telefono")
     private Integer telefono;
 
-    @Column(name = "contrasena")
-    private String contrasena;
-
     @Column(name = "direccion")
-    private Long direccion;
+    private Direccion direccion;
 
     @Column(name = "activo")
     private Boolean activo;
 
     @Column(name = "rol")
-    private Long rol;
-
-    @Column(name = "categoria")
-    private Long categoria;
+    private Rol rol;
 
     @OneToMany(mappedBy = "usuarioEmpresa")
-    private Set<Preferencia> preferenciaUsuarioEmpresas = new HashSet<>();
+    private List<Preferencia> preferenciasCategoriaProductos = new ArrayList<>();
 
     @OneToMany(mappedBy = "usuarioEmpresa")
     private Set<Peticion> peticionUsuarioEmpresas = new HashSet<>();
 
-    @ManyToOne
-    @JsonIgnoreProperties("usuarioEmpresas")
-    private Rol rolUsuarioEmpresa;
-
-    @ManyToMany(mappedBy = "usuarioEmpresas")
-    @JsonIgnore
-    private Set<CategoriaEmpresa> categoriaEmpresas = new HashSet<>();
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "usuario_id", referencedColumnName = "id")
+    private Usuario usuarioEmpresas;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -72,19 +53,6 @@ public class UsuarioEmpresa implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getCif() {
-        return cif;
-    }
-
-    public UsuarioEmpresa cif(Long cif) {
-        this.cif = cif;
-        return this;
-    }
-
-    public void setCif(Long cif) {
-        this.cif = cif;
     }
 
     public String getNombre() {
@@ -100,19 +68,6 @@ public class UsuarioEmpresa implements Serializable {
         this.nombre = nombre;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public UsuarioEmpresa email(String email) {
-        this.email = email;
-        return this;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public Integer getTelefono() {
         return telefono;
     }
@@ -126,29 +81,16 @@ public class UsuarioEmpresa implements Serializable {
         this.telefono = telefono;
     }
 
-    public String getContrasena() {
-        return contrasena;
-    }
-
-    public UsuarioEmpresa contrasena(String contrasena) {
-        this.contrasena = contrasena;
-        return this;
-    }
-
-    public void setContrasena(String contrasena) {
-        this.contrasena = contrasena;
-    }
-
-    public Long getDireccion() {
+    public Direccion getDireccion() {
         return direccion;
     }
 
-    public UsuarioEmpresa direccion(Long direccion) {
+    public UsuarioEmpresa direccion(Direccion direccion) {
         this.direccion = direccion;
         return this;
     }
 
-    public void setDireccion(Long direccion) {
+    public void setDireccion(Direccion direccion) {
         this.direccion = direccion;
     }
 
@@ -165,55 +107,29 @@ public class UsuarioEmpresa implements Serializable {
         this.activo = activo;
     }
 
-    public Long getRol() {
-        return rol;
+    public List<Preferencia> getPreferenciasCategoriaProductos() {
+        return preferenciasCategoriaProductos;
     }
 
-    public UsuarioEmpresa rol(Long rol) {
-        this.rol = rol;
+    public UsuarioEmpresa preferenciasCategoriaProductos(List<Preferencia> preferencias) {
+        this.preferenciasCategoriaProductos = preferencias;
         return this;
     }
 
-    public void setRol(Long rol) {
-        this.rol = rol;
-    }
-
-    public Long getCategoria() {
-        return categoria;
-    }
-
-    public UsuarioEmpresa categoria(Long categoria) {
-        this.categoria = categoria;
-        return this;
-    }
-
-    public void setCategoria(Long categoria) {
-        this.categoria = categoria;
-    }
-
-    public Set<Preferencia> getPreferenciaUsuarioEmpresas() {
-        return preferenciaUsuarioEmpresas;
-    }
-
-    public UsuarioEmpresa preferenciaUsuarioEmpresas(Set<Preferencia> preferencias) {
-        this.preferenciaUsuarioEmpresas = preferencias;
-        return this;
-    }
-
-    public UsuarioEmpresa addPreferenciaUsuarioEmpresa(Preferencia preferencia) {
-        this.preferenciaUsuarioEmpresas.add(preferencia);
+    public UsuarioEmpresa addPreferenciasCategoriaProductos(Preferencia preferencia) {
+        this.preferenciasCategoriaProductos.add(preferencia);
         preferencia.setUsuarioEmpresa(this);
         return this;
     }
 
-    public UsuarioEmpresa removePreferenciaUsuarioEmpresa(Preferencia preferencia) {
-        this.preferenciaUsuarioEmpresas.remove(preferencia);
+    public UsuarioEmpresa removePreferenciasCategoriaProductos(Preferencia preferencia) {
+        this.preferenciasCategoriaProductos.remove(preferencia);
         preferencia.setUsuarioEmpresa(null);
         return this;
     }
 
-    public void setPreferenciaUsuarioEmpresas(Set<Preferencia> preferencias) {
-        this.preferenciaUsuarioEmpresas = preferencias;
+    public void setPreferenciasCategoriaProductos(List<Preferencia> preferencias) {
+        this.preferenciasCategoriaProductos = preferencias;
     }
 
     public Set<Peticion> getPeticionUsuarioEmpresas() {
@@ -241,45 +157,6 @@ public class UsuarioEmpresa implements Serializable {
         this.peticionUsuarioEmpresas = peticions;
     }
 
-    public Rol getRolUsuarioEmpresa() {
-        return rolUsuarioEmpresa;
-    }
-
-    public UsuarioEmpresa rolUsuarioEmpresa(Rol rol) {
-        this.rolUsuarioEmpresa = rol;
-        return this;
-    }
-
-    public void setRolUsuarioEmpresa(Rol rol) {
-        this.rolUsuarioEmpresa = rol;
-    }
-
-    public Set<CategoriaEmpresa> getCategoriaEmpresas() {
-        return categoriaEmpresas;
-    }
-
-    public UsuarioEmpresa categoriaEmpresas(Set<CategoriaEmpresa> categoriaEmpresas) {
-        this.categoriaEmpresas = categoriaEmpresas;
-        return this;
-    }
-
-    public UsuarioEmpresa addCategoriaEmpresa(CategoriaEmpresa categoriaEmpresa) {
-        this.categoriaEmpresas.add(categoriaEmpresa);
-        categoriaEmpresa.getUsuarioEmpresas().add(this);
-        return this;
-    }
-
-    public UsuarioEmpresa removeCategoriaEmpresa(CategoriaEmpresa categoriaEmpresa) {
-        this.categoriaEmpresas.remove(categoriaEmpresa);
-        categoriaEmpresa.getUsuarioEmpresas().remove(this);
-        return this;
-    }
-
-    public void setCategoriaEmpresas(Set<CategoriaEmpresa> categoriaEmpresas) {
-        this.categoriaEmpresas = categoriaEmpresas;
-    }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -291,6 +168,18 @@ public class UsuarioEmpresa implements Serializable {
         return id != null && id.equals(((UsuarioEmpresa) o).id);
     }
 
+    public Boolean getActivo() {
+        return activo;
+    }
+
+    public Usuario getUsuarioEmpresas() {
+        return usuarioEmpresas;
+    }
+
+    public void setUsuarioEmpresas(Usuario usuarioEmpresas) {
+        this.usuarioEmpresas = usuarioEmpresas;
+    }
+
     @Override
     public int hashCode() {
         return 31;
@@ -300,15 +189,10 @@ public class UsuarioEmpresa implements Serializable {
     public String toString() {
         return "UsuarioEmpresa{" +
             "id=" + getId() +
-            ", cif=" + getCif() +
             ", nombre='" + getNombre() + "'" +
-            ", email='" + getEmail() + "'" +
             ", telefono=" + getTelefono() +
-            ", contrasena='" + getContrasena() + "'" +
             ", direccion=" + getDireccion() +
             ", activo='" + isActivo() + "'" +
-            ", rol=" + getRol() +
-            ", categoria=" + getCategoria() +
             "}";
     }
 }

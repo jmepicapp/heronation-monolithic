@@ -68,7 +68,7 @@ public class RolServiceImpl implements RolService {
     @Transactional(readOnly = true)
     public Optional<RolDTO> findOne(Long id) {
         log.debug("Request to get Rol : {}", id);
-        return Optional.of(ModelMapperUtils.map(rolRepository.findById(id), RolDTO.class));
+        return Optional.of(ModelMapperUtils.map(rolRepository.findById(id).get(), RolDTO.class));
 
     }
 

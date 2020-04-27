@@ -1,12 +1,17 @@
 package com.hackathlon.heronation.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import javax.persistence.*;
-
 import java.io.Serializable;
-import java.util.Objects;
 import java.time.ZonedDateTime;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
  * A Peticion.
@@ -21,12 +26,6 @@ public class Peticion implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "empresa")
-    private Long empresa;
-
-    @Column(name = "donante")
-    private Long donante;
-
     @Column(name = "descripcion_donante")
     private String descripcionDonante;
 
@@ -35,6 +34,8 @@ public class Peticion implements Serializable {
 
     @Column(name = "fecha")
     private ZonedDateTime fecha;
+
+    private String estado;
 
     @ManyToOne
     @JsonIgnoreProperties("peticionUsuarioDonantes")
@@ -51,32 +52,6 @@ public class Peticion implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getEmpresa() {
-        return empresa;
-    }
-
-    public Peticion empresa(Long empresa) {
-        this.empresa = empresa;
-        return this;
-    }
-
-    public void setEmpresa(Long empresa) {
-        this.empresa = empresa;
-    }
-
-    public Long getDonante() {
-        return donante;
-    }
-
-    public Peticion donante(Long donante) {
-        this.donante = donante;
-        return this;
-    }
-
-    public void setDonante(Long donante) {
-        this.donante = donante;
     }
 
     public String getDescripcionDonante() {
@@ -145,6 +120,14 @@ public class Peticion implements Serializable {
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -165,8 +148,6 @@ public class Peticion implements Serializable {
     public String toString() {
         return "Peticion{" +
             "id=" + getId() +
-            ", empresa=" + getEmpresa() +
-            ", donante=" + getDonante() +
             ", descripcionDonante='" + getDescripcionDonante() + "'" +
             ", descripcionEmpresa='" + getDescripcionEmpresa() + "'" +
             ", fecha='" + getFecha() + "'" +

@@ -1,5 +1,6 @@
 package com.hackathlon.heronation.controller;
 
+import com.hackathlon.heronation.model.dto.ProvinciaDTO;
 import com.hackathlon.heronation.service.PoblacionService;
 import com.hackathlon.heronation.model.dto.PoblacionDTO;
 import com.hackathlon.heronation.controller.error.BadRequestAlertException;
@@ -36,42 +37,6 @@ public class PoblacionController {
     }
 
     /**
-     * {@code POST  /poblacions} : Create a new poblacion.
-     *
-     * @param poblacionDTO the poblacionDTO to create.
-     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new poblacionDTO, or with status {@code 400 (Bad Request)} if the poblacion has already an ID.
-     * @throws URISyntaxException if the Location URI syntax is incorrect.
-     */
-    @PostMapping("/poblacions")
-    public ResponseEntity<PoblacionDTO> createPoblacion(@RequestBody PoblacionDTO poblacionDTO) throws URISyntaxException {
-        log.debug("REST request to save Poblacion : {}", poblacionDTO);
-        if (poblacionDTO.getId() != null) {
-            throw new BadRequestAlertException("A new poblacion cannot already have an ID", ENTITY_NAME, "idexists");
-        }
-        PoblacionDTO result = poblacionService.save(poblacionDTO);
-        return ResponseEntity.created(new URI("/api/poblacions/" + result.getId())).body(result);
-    }
-
-    /**
-     * {@code PUT  /poblacions} : Updates an existing poblacion.
-     *
-     * @param poblacionDTO the poblacionDTO to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated poblacionDTO,
-     * or with status {@code 400 (Bad Request)} if the poblacionDTO is not valid,
-     * or with status {@code 500 (Internal Server Error)} if the poblacionDTO couldn't be updated.
-     * @throws URISyntaxException if the Location URI syntax is incorrect.
-     */
-    @PutMapping("/poblacions")
-    public ResponseEntity<PoblacionDTO> updatePoblacion(@RequestBody PoblacionDTO poblacionDTO) throws URISyntaxException {
-        log.debug("REST request to update Poblacion : {}", poblacionDTO);
-        if (poblacionDTO.getId() == null) {
-            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
-        }
-        PoblacionDTO result = poblacionService.save(poblacionDTO);
-        return ResponseEntity.ok().body(result);
-    }
-
-    /**
      * {@code GET  /poblacions} : get all the poblacions.
      *
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of poblacions in body.
@@ -80,6 +45,18 @@ public class PoblacionController {
     public List<PoblacionDTO> getAllPoblacions() {
         log.debug("REST request to get all Poblacions");
         return poblacionService.findAll();
+    }
+
+    /**
+     * {@code GET  /poblacions/provincia/:id} : get all the poblaciones by the "provincia_id".
+     *
+     * @param id the id of the provinciaDTO to filter poblaciones.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of poblaciones by provincia in body.
+     */
+    @GetMapping("/poblacions/provincia/{id}")
+    public List<PoblacionDTO> getAllPoblacionsByProvincia(@PathVariable Long id) {
+        log.debug("REST request to get all Poblacions by Provincias");
+        return poblacionService.findAllByProvincia(id);
     }
 
     /**
@@ -96,16 +73,4 @@ public class PoblacionController {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
-    /**
-     * {@code DELETE  /poblacions/:id} : delete the "id" poblacion.
-     *
-     * @param id the id of the poblacionDTO to delete.
-     * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
-     */
-    @DeleteMapping("/poblacions/{id}")
-    public ResponseEntity<Void> deletePoblacion(@PathVariable Long id) {
-        log.debug("REST request to delete Poblacion : {}", id);
-        poblacionService.delete(id);
-        return ResponseEntity.noContent().build();
-    }
 }

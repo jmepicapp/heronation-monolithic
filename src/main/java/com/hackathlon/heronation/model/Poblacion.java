@@ -26,7 +26,7 @@ public class Poblacion implements Serializable {
 
     @ManyToOne
     @JsonIgnoreProperties("poblacions")
-    private Provincia poblacionProvincia;
+    private Provincia provincia;
 
     public Long getId() {
         return id;
@@ -49,17 +49,17 @@ public class Poblacion implements Serializable {
         this.nombre = nombre;
     }
 
-    public Provincia getPoblacionProvincia() {
-        return poblacionProvincia;
+    public Provincia getProvincia() {
+        return provincia;
     }
 
-    public Poblacion poblacionProvincia(Provincia provincia) {
-        this.poblacionProvincia = provincia;
+    public Poblacion provincia(Provincia provincia) {
+        this.provincia = provincia;
         return this;
     }
 
-    public void setPoblacionProvincia(Provincia provincia) {
-        this.poblacionProvincia = provincia;
+    public void setProvincia(Provincia provincia) {
+        this.provincia = provincia;
     }
 
     @Override
@@ -83,7 +83,7 @@ public class Poblacion implements Serializable {
         return "Poblacion{" +
             "id=" + getId() +
             ", nombre='" + getNombre() + "'" +
-            ", provincia=" + getPoblacionProvincia() +
+            ", provincia=" + getProvincia() +
             "}";
     }
 }

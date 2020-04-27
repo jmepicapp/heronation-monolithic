@@ -1,7 +1,5 @@
 package com.hackathlon.heronation.model.dto;
 
-import com.hackathlon.heronation.model.ComunidadAutonoma;
-
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -14,8 +12,7 @@ public class ProvinciaDTO implements Serializable {
 
     private String nombre;
 
-    private ComunidadAutonoma comunidad;
-
+    private ComunidadAutonomaDTO comunidad;
     
     public Long getId() {
         return id;
@@ -33,11 +30,11 @@ public class ProvinciaDTO implements Serializable {
         this.nombre = nombre;
     }
 
-    public ComunidadAutonoma getComunidad() {
+    public ComunidadAutonomaDTO getComunidad() {
         return comunidad;
     }
 
-    public void setComunidad(ComunidadAutonoma comunidad) {
+    public void setComunidad(ComunidadAutonomaDTO comunidad) {
         this.comunidad = comunidad;
     }
 

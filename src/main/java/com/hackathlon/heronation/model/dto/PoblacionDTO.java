@@ -1,5 +1,7 @@
 package com.hackathlon.heronation.model.dto;
 
+import com.hackathlon.heronation.model.Provincia;
+
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -12,10 +14,7 @@ public class PoblacionDTO implements Serializable {
 
     private String nombre;
 
-    private Long provincia;
-
-
-    private Long poblacionProvinciaId;
+    private ProvinciaDTO provincia;
     
     public Long getId() {
         return id;
@@ -33,20 +32,12 @@ public class PoblacionDTO implements Serializable {
         this.nombre = nombre;
     }
 
-    public Long getProvincia() {
+    public ProvinciaDTO getProvincia() {
         return provincia;
     }
 
-    public void setProvincia(Long provincia) {
+    public void setProvincia(ProvinciaDTO provincia) {
         this.provincia = provincia;
-    }
-
-    public Long getPoblacionProvinciaId() {
-        return poblacionProvinciaId;
-    }
-
-    public void setPoblacionProvinciaId(Long provinciaId) {
-        this.poblacionProvinciaId = provinciaId;
     }
 
     @Override
@@ -76,7 +67,6 @@ public class PoblacionDTO implements Serializable {
             "id=" + getId() +
             ", nombre='" + getNombre() + "'" +
             ", provincia=" + getProvincia() +
-            ", poblacionProvinciaId=" + getPoblacionProvinciaId() +
             "}";
     }
 }

@@ -4,16 +4,14 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * A DTO for the {@link com.hackathlon.heronation.model.CategoriaProducto} entity.
+ * A DTO for the {@link com.hackathlon.heronation.model.ComunidadAutonoma} entity.
  */
-public class CategoriaProductoDTO implements Serializable {
+public class ComunidadAutonomaDTO implements Serializable {
     
     private Long id;
 
     private String nombre;
 
-    private String descripcion;
-    
     public Long getId() {
         return id;
     }
@@ -30,14 +28,6 @@ public class CategoriaProductoDTO implements Serializable {
         this.nombre = nombre;
     }
 
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -47,11 +37,11 @@ public class CategoriaProductoDTO implements Serializable {
             return false;
         }
 
-        CategoriaProductoDTO categoriaProductoDTO = (CategoriaProductoDTO) o;
-        if (categoriaProductoDTO.getId() == null || getId() == null) {
+        ComunidadAutonomaDTO poblacionDTO = (ComunidadAutonomaDTO) o;
+        if (poblacionDTO.getId() == null || getId() == null) {
             return false;
         }
-        return Objects.equals(getId(), categoriaProductoDTO.getId());
+        return Objects.equals(getId(), poblacionDTO.getId());
     }
 
     @Override
@@ -61,10 +51,9 @@ public class CategoriaProductoDTO implements Serializable {
 
     @Override
     public String toString() {
-        return "CategoriaProductoDTO{" +
-                "id=" + id +
-                ", nombre='" + nombre + '\'' +
-                ", descripcion='" + descripcion + '\'' +
-                '}';
+        return "PoblacionDTO{" +
+            "id=" + getId() +
+            ", nombre='" + getNombre() +
+            "'}";
     }
 }

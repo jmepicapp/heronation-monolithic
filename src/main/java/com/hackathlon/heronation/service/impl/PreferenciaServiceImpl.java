@@ -1,5 +1,6 @@
 package com.hackathlon.heronation.service.impl;
 
+import com.hackathlon.heronation.model.dto.UsuarioEmpresaDTO;
 import com.hackathlon.heronation.service.PreferenciaService;
 import com.hackathlon.heronation.model.Preferencia;
 import com.hackathlon.heronation.repository.PreferenciaRepository;
@@ -12,8 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Service Implementation for managing {@link Preferencia}.
@@ -59,6 +62,33 @@ public class PreferenciaServiceImpl implements PreferenciaService {
     }
 
     /**
+     * Get all the preferencias by categorias producto id.
+     *
+     * @param idCategorias the list of categorias producto id
+     * @return the list of entities.
+     */
+    public List<PreferenciaDTO> findAllByCategoriaProducto(List<Long> idCategorias){
+        return this.preferenciaRepository.findAll()
+                .stream()
+                .filter(pr -> idCategorias.contains(pr.getCategoriaProducto().getId()))
+                .filter(pr -> !pr.getExclusion())
+                .map(pr ->  ModelMapperUtils.map(pr, PreferenciaDTO.class))
+                .collect(Collectors.toList());
+
+    }
+
+    /**
+     * Get all the preferencias by empresa id.
+     *
+     * @param idEmpresa the list of categorias producto id
+     * @return the list of entities.
+     */
+    public List<PreferenciaDTO> findAllByUsuarioEmpresa(Long idEmpresa){
+        return ModelMapperUtils.mapAll(this.preferenciaRepository.findAllByUsuarioEmpresa(idEmpresa), PreferenciaDTO.class);
+
+    }
+
+    /**
      * Get one preferencia by id.
      *
      * @param id the id of the entity.
@@ -68,7 +98,7 @@ public class PreferenciaServiceImpl implements PreferenciaService {
     @Transactional(readOnly = true)
     public Optional<PreferenciaDTO> findOne(Long id) {
         log.debug("Request to get Preferencia : {}", id);
-        return Optional.of(ModelMapperUtils.map(preferenciaRepository.findById(id), PreferenciaDTO.class));
+        return Optional.of(ModelMapperUtils.map(preferenciaRepository.findById(id).get(), PreferenciaDTO.class));
 
     }
 
