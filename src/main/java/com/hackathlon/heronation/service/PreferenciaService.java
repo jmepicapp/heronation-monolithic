@@ -35,6 +35,14 @@ public interface PreferenciaService {
     List<PreferenciaDTO> findAllByCategoriaProducto(List<Long> id);
 
     /**
+     * Get all the preferencias.
+     *
+     * @param idEmpresa the usuario empresa id
+     * @return the list of entities.
+     */
+    List<PreferenciaDTO> findAllByUsuarioEmpresa(Long idEmpresa);
+
+    /**
      * Get the "id" preferencia.
      *
      * @param id the id of the entity.
