@@ -18,7 +18,6 @@ public class PreferenciaDTO implements Serializable {
 
     private UsuarioEmpresaDTO usuarioEmpresa;
 
-    @JsonIgnore
     private CategoriaProductoDTO categoriaProducto;
 
     private Boolean necesidad;

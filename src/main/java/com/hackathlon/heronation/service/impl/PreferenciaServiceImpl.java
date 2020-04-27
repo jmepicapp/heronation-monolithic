@@ -61,6 +61,12 @@ public class PreferenciaServiceImpl implements PreferenciaService {
 
     }
 
+    /**
+     * Get all the preferencias by categorias producto id.
+     *
+     * @param idCategorias the list of categorias producto id
+     * @return the list of entities.
+     */
     public List<PreferenciaDTO> findAllByCategoriaProducto(List<Long> idCategorias){
         return this.preferenciaRepository.findAll()
                 .stream()
@@ -68,6 +74,17 @@ public class PreferenciaServiceImpl implements PreferenciaService {
                 .filter(pr -> !pr.getExclusion())
                 .map(pr ->  ModelMapperUtils.map(pr, PreferenciaDTO.class))
                 .collect(Collectors.toList());
+
+    }
+
+    /**
+     * Get all the preferencias by empresa id.
+     *
+     * @param idEmpresa the list of categorias producto id
+     * @return the list of entities.
+     */
+    public List<PreferenciaDTO> findAllByUsuarioEmpresa(Long idEmpresa){
+        return ModelMapperUtils.mapAll(this.preferenciaRepository.findAllByUsuarioEmpresa(idEmpresa), PreferenciaDTO.class);
 
     }
 
