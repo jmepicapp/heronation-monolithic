@@ -52,7 +52,7 @@ public class ComunidadAutonomaServiceImpl implements ComunidadAutonomaService {
     @Transactional(readOnly = true)
     public Optional<ComunidadAutonomaDTO> findOne(Long id) {
         log.debug("Request to get Comunidad Autonoma : {}", id);
-        return Optional.of(ModelMapperUtils.map(comunidadAutonomaRepository.findById(id), ComunidadAutonomaDTO.class));
+        return Optional.of(ModelMapperUtils.map(comunidadAutonomaRepository.findById(id).get(), ComunidadAutonomaDTO.class));
 
     }
 

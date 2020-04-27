@@ -68,7 +68,7 @@ public class DireccionServiceImpl implements DireccionService {
     @Transactional(readOnly = true)
     public Optional<DireccionDTO> findOne(Long id) {
         log.debug("Request to get Direccion : {}", id);
-        return Optional.of(ModelMapperUtils.map(direccionRepository.findById(id), DireccionDTO.class));
+        return Optional.of(ModelMapperUtils.map(direccionRepository.findById(id).get(), DireccionDTO.class));
 
     }
 

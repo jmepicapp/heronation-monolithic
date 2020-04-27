@@ -98,7 +98,7 @@ public class PreferenciaServiceImpl implements PreferenciaService {
     @Transactional(readOnly = true)
     public Optional<PreferenciaDTO> findOne(Long id) {
         log.debug("Request to get Preferencia : {}", id);
-        return Optional.of(ModelMapperUtils.map(preferenciaRepository.findById(id), PreferenciaDTO.class));
+        return Optional.of(ModelMapperUtils.map(preferenciaRepository.findById(id).get(), PreferenciaDTO.class));
 
     }
 

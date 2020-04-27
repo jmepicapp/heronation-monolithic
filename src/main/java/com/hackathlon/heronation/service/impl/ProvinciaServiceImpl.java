@@ -59,7 +59,7 @@ public class ProvinciaServiceImpl implements ProvinciaService {
     @Transactional(readOnly = true)
     public Optional<ProvinciaDTO> findOne(Long id) {
         log.debug("Request to get Provincia : {}", id);
-        return Optional.of(ModelMapperUtils.map(provinciaRepository.findById(id), ProvinciaDTO.class));
+        return Optional.of(ModelMapperUtils.map(provinciaRepository.findById(id).get(), ProvinciaDTO.class));
 
     }
 

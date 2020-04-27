@@ -68,7 +68,7 @@ public class UsuarioDonanteServiceImpl implements UsuarioDonanteService {
     @Transactional(readOnly = true)
     public Optional<UsuarioDonanteDTO> findOne(Long id) {
         log.debug("Request to get UsuarioDonante : {}", id);
-        return Optional.of(ModelMapperUtils.map(usuarioDonanteRepository.findById(id), UsuarioDonanteDTO.class));
+        return Optional.of(ModelMapperUtils.map(usuarioDonanteRepository.findById(id).get(), UsuarioDonanteDTO.class));
 
     }
 

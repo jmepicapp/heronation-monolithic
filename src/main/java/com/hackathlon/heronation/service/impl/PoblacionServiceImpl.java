@@ -64,7 +64,7 @@ public class PoblacionServiceImpl implements PoblacionService {
     @Transactional(readOnly = true)
     public Optional<PoblacionDTO> findOne(Long id) {
         log.debug("Request to get Poblacion : {}", id);
-        return Optional.of(ModelMapperUtils.map(poblacionRepository.findById(id), PoblacionDTO.class));
+        return Optional.of(ModelMapperUtils.map(poblacionRepository.findById(id).get(), PoblacionDTO.class));
 
     }
 }

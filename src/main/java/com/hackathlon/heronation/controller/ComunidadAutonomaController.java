@@ -33,11 +33,11 @@ public class ComunidadAutonomaController {
     }
 
     /**
-     * {@code GET  /comunidadAutonomas} : get all the comunidades autonomas.
+     * {@code GET  /comunidad-autonomas} : get all the comunidades autonomas.
      *
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of comunidades autonomas in body.
      */
-    @GetMapping("/comunidadAutonomas")
+    @GetMapping("/comunidad-autonomas")
     public List<ComunidadAutonomaDTO> getAllComunidadAutonomas() {
         log.debug("REST request to get all Comunidades Autonomas");
         return comunidadAutonomaService.findAll();
@@ -45,12 +45,12 @@ public class ComunidadAutonomaController {
 
 
     /**
-     * {@code GET  /comunidadAutonomas/:id} : get the "id" comunidadAutonoma.
+     * {@code GET  /comunidad-autonomas/:id} : get the "id" comunidadAutonoma.
      *
      * @param id the id of the comunidadAutonomaDTO to retrieve.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the comunidadAutonomaDTO, or with status {@code 404 (Not Found)}.
      */
-    @GetMapping("/comunidadAutonomas/{id}")
+    @GetMapping("/comunidad-autonomas/{id}")
     public ResponseEntity<ComunidadAutonomaDTO> getComunidadAutonoma(@PathVariable Long id) {
         log.debug("REST request to get Comunidad Autonoma : {}", id);
         Optional<ComunidadAutonomaDTO> comunidadAutonomaDTO = comunidadAutonomaService.findOne(id);

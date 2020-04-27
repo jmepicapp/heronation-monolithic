@@ -68,7 +68,7 @@ public class PeticionServiceImpl implements PeticionService {
     @Transactional(readOnly = true)
     public Optional<PeticionDTO> findOne(Long id) {
         log.debug("Request to get Peticion : {}", id);
-        return Optional.of(ModelMapperUtils.map(peticionRepository.findById(id), PeticionDTO.class));
+        return Optional.of(ModelMapperUtils.map(peticionRepository.findById(id).get(), PeticionDTO.class));
 
     }
 
