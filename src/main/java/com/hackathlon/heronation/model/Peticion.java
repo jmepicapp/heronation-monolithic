@@ -35,6 +35,8 @@ public class Peticion implements Serializable {
     @Column(name = "fecha")
     private ZonedDateTime fecha;
 
+    private String estado;
+
     @ManyToOne
     @JsonIgnoreProperties("peticionUsuarioDonantes")
     private UsuarioDonante usuarioDonante;
@@ -117,6 +119,14 @@ public class Peticion implements Serializable {
         this.usuarioEmpresa = usuarioEmpresa;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
 
     @Override
     public boolean equals(Object o) {

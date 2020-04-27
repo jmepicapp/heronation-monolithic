@@ -1,11 +1,13 @@
 package com.hackathlon.heronation.service.impl;
 
+import com.hackathlon.heronation.controller.error.BadRequestAlertException;
 import com.hackathlon.heronation.service.PeticionService;
 import com.hackathlon.heronation.model.Peticion;
 import com.hackathlon.heronation.repository.PeticionRepository;
 import com.hackathlon.heronation.model.dto.PeticionDTO;
 import com.hackathlon.heronation.model.dto.PreferenciaDTO;
 import com.hackathlon.heronation.util.ModelMapperUtils;
+import com.hackathlon.heronation.util.type.EstadoPeticion;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -41,9 +43,23 @@ public class PeticionServiceImpl implements PeticionService {
     @Override
     public PeticionDTO save(PeticionDTO peticionDTO) {
         log.debug("Request to save Peticion : {}", peticionDTO);
+        if(validarPeticion(peticionDTO)){
+            throw new BadRequestAlertException("Peticion","Ya existe una donacion en curso");
+        }
         Peticion peticion = ModelMapperUtils.map(peticionDTO, Peticion.class);
+        peticion.setEstado(EstadoPeticion.PENDIENTE.name());
         peticion = peticionRepository.save(peticion);
         return ModelMapperUtils.map(peticion, PeticionDTO.class);
+    }
+
+    private boolean validarPeticion(PeticionDTO peticionDTO) {
+       Long numeroPeticion =  peticionRepository.findAll()
+                .stream()
+                .filter(peticion -> peticion.getUsuarioDonante().getId().equals(peticionDTO.getUsuarioDonante().getId()))
+                .filter(peticion -> peticion.getUsuarioEmpresa().getId().equals(peticionDTO.getUsuarioEmpresa().getId()))
+                .filter(peticion -> EstadoPeticion.PENDIENTE.name().equals(peticion.getEstado()))
+                .count();
+        return numeroPeticion >= 1;
     }
 
     /**

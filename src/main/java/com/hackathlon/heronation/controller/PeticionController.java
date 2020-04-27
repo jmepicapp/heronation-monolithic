@@ -43,24 +43,26 @@ public class PeticionController {
     }
 
     /**
-     * {@code POST  /peticions} : Create a new peticion.
+     * {@code POST  /donacion} : Create a new peticion.
      *
      * @param peticionDTO the peticionDTO to create.
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new peticionDTO, or with status {@code 400 (Bad Request)} if the peticion has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
-    @PostMapping("/peticions")
+    @PostMapping("/donacion")
     public ResponseEntity<PeticionDTO> createPeticion(@RequestBody PeticionDTO peticionDTO) throws URISyntaxException {
         log.debug("REST request to save Peticion : {}", peticionDTO);
         if (peticionDTO.getId() != null) {
             throw new BadRequestAlertException("A new peticion cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        PeticionDTO result = peticionService.save(peticionDTO);
-        return ResponseEntity.created(new URI("/api/peticions/" + result.getId())).body(result);
+        Optional<PeticionDTO> result = Optional.of( peticionService.save(peticionDTO));
+      //  return ResponseEntity.created(new URI("/api/peticions/" + result.getId())).body(result);
+        return result.map(response -> ResponseEntity.ok().body(result.get()))
+                .orElseThrow(() -> new  BadRequestAlertException("Peticion","Ya existe una donacion en curso"));
     }
 
     /**
-     * {@code PUT  /peticions} : Updates an existing peticion.
+     * {@code PUT  /donacion} : Updates an existing peticion.
      *
      * @param peticionDTO the peticionDTO to update.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated peticionDTO,
@@ -68,7 +70,7 @@ public class PeticionController {
      * or with status {@code 500 (Internal Server Error)} if the peticionDTO couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
-    @PutMapping("/peticions")
+    @PutMapping("/donacion")
     public ResponseEntity<PeticionDTO> updatePeticion(@RequestBody PeticionDTO peticionDTO) throws URISyntaxException {
         log.debug("REST request to update Peticion : {}", peticionDTO);
         if (peticionDTO.getId() == null) {
@@ -83,7 +85,7 @@ public class PeticionController {
      *
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of peticions in body.
      */
-    @GetMapping("/peticions")
+    @GetMapping("/donacion")
     public List<PeticionDTO> getAllPeticions() {
         log.debug("REST request to get all Peticions");
         return peticionService.findAll();
@@ -106,7 +108,7 @@ public class PeticionController {
      * @param id the id of the peticionDTO to retrieve.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the peticionDTO, or with status {@code 404 (Not Found)}.
      */
-    @GetMapping("/peticions/{id}")
+    @GetMapping("/donacion/{id}")
     public ResponseEntity<PeticionDTO> getPeticion(@PathVariable Long id) {
         log.debug("REST request to get Peticion : {}", id);
         Optional<PeticionDTO> peticionDTO = peticionService.findOne(id);
@@ -115,12 +117,12 @@ public class PeticionController {
     }
 
     /**
-     * {@code DELETE  /peticions/:id} : delete the "id" peticion.
+     * {@code DELETE  /donacion/:id} : delete the "id" peticion.
      *
      * @param id the id of the peticionDTO to delete.
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
-    @DeleteMapping("/peticions/{id}")
+    @DeleteMapping("/donacion/{id}")
     public ResponseEntity<Void> deletePeticion(@PathVariable Long id) {
         log.debug("REST request to delete Peticion : {}", id);
         peticionService.delete(id);
