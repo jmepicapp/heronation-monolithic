@@ -4,6 +4,7 @@ import com.hackathlon.heronation.service.PeticionService;
 import com.hackathlon.heronation.model.Peticion;
 import com.hackathlon.heronation.repository.PeticionRepository;
 import com.hackathlon.heronation.model.dto.PeticionDTO;
+import com.hackathlon.heronation.model.dto.PreferenciaDTO;
 import com.hackathlon.heronation.util.ModelMapperUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -57,6 +58,17 @@ public class PeticionServiceImpl implements PeticionService {
         return ModelMapperUtils.mapAll(peticionRepository.findAll(), PeticionDTO.class);
 
     }
+    
+    /**
+     * Get all the peticiones by usuario id.
+     *
+     * @param idUsuario the usuario id
+     * @return the list of entities.
+     */
+    public List<PeticionDTO> findAllByIdUsuario(Long idUsuario){
+        return ModelMapperUtils.mapAll(this.peticionRepository.findAllByIdUsuario(idUsuario), PeticionDTO.class);
+
+    }
 
     /**
      * Get one peticion by id.
@@ -82,4 +94,5 @@ public class PeticionServiceImpl implements PeticionService {
         log.debug("Request to delete Peticion : {}", id);
         peticionRepository.deleteById(id);
     }
+
 }
