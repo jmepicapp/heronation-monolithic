@@ -13,7 +13,7 @@ public class UsuarioDonanteDTO implements Serializable {
     private String apellidos;
     private Integer telefono;
     private DireccionDTO direccion;
-    private RolDTO rol;
+    private UsuarioDTO usuarioDTO;
 
     public Long getId() {
         return id;
@@ -39,7 +39,6 @@ public class UsuarioDonanteDTO implements Serializable {
         this.apellidos = apellidos;
     }
 
-
     public Integer getTelefono() {
         return telefono;
     }
@@ -48,6 +47,13 @@ public class UsuarioDonanteDTO implements Serializable {
         this.telefono = telefono;
     }
 
+    public UsuarioDTO getUsuarioDTO() {
+        return usuarioDTO;
+    }
+
+    public void setUsuarioDTO(UsuarioDTO usuarioDTO) {
+        this.usuarioDTO = usuarioDTO;
+    }
 
     public DireccionDTO getDireccion() {
         return direccion;
@@ -55,14 +61,6 @@ public class UsuarioDonanteDTO implements Serializable {
 
     public void setDireccion(DireccionDTO direccion) {
         this.direccion = direccion;
-    }
-
-    public RolDTO getRol() {
-        return rol;
-    }
-
-    public void setRol(RolDTO rol) {
-        this.rol = rol;
     }
 
     @Override
@@ -89,12 +87,12 @@ public class UsuarioDonanteDTO implements Serializable {
     @Override
     public String toString() {
         return "UsuarioDonanteDTO{" +
-            "id=" + getId() +
-            ", nombre='" + getNombre() + "'" +
-            ", apellidos='" + getApellidos() + "'" +
-            ", telefono=" + getTelefono() +
-            ", direccion=" + getDireccion() +
-            ", rol=" + getRol() +
-            "}";
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", apellidos='" + apellidos + '\'' +
+                ", telefono=" + telefono +
+                ", direccion=" + direccion +
+                ", usuarioDTO=" + usuarioDTO +
+                '}';
     }
 }
