@@ -37,7 +37,7 @@ public class UsuarioDonante implements Serializable {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "usuario_id", referencedColumnName = "id")
-    private Usuario usuarioDonante;
+    private Usuario usuario;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -126,12 +126,12 @@ public class UsuarioDonante implements Serializable {
         this.peticionUsuarioDonantes = peticions;
     }
 
-    public Usuario getUsuarioDonante() {
-        return usuarioDonante;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setUsuarioDonante(Usuario rolUsuarioDonante) {
-        this.usuarioDonante = rolUsuarioDonante;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     @Override
@@ -158,7 +158,7 @@ public class UsuarioDonante implements Serializable {
             ", apellidos='" + getApellidos() + "'" +
             ", telefono=" + getTelefono() +
             ", direccion=" + getDireccion() +
-            ", rol=" + getUsuarioDonante() +
+            ", usuario=" + usuario +
             "}";
     }
 }

@@ -2,6 +2,7 @@ package com.hackathlon.heronation.service;
 
 import com.hackathlon.heronation.model.dto.RolDTO;
 import com.hackathlon.heronation.model.dto.UsuarioDTO;
+import com.hackathlon.heronation.model.dto.UsuarioEmpresaDTO;
 
 import java.util.List;
 import java.util.Optional;

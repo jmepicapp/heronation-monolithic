@@ -2,16 +2,16 @@ package com.hackathlon.heronation.service.impl;
 
 import com.hackathlon.heronation.model.dto.PreferenciaDTO;
 import com.hackathlon.heronation.model.dto.UsuarioDonanteDTO;
-import com.hackathlon.heronation.repository.PreferenciaRepository;
+import com.hackathlon.heronation.repository.*;
 import com.hackathlon.heronation.service.UsuarioEmpresaService;
 import com.hackathlon.heronation.model.UsuarioEmpresa;
-import com.hackathlon.heronation.repository.UsuarioEmpresaRepository;
 import com.hackathlon.heronation.model.dto.UsuarioEmpresaDTO;
 import com.hackathlon.heronation.util.ModelMapperUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,8 +33,19 @@ public class UsuarioEmpresaServiceImpl implements UsuarioEmpresaService {
     @Autowired
     private final UsuarioEmpresaRepository usuarioEmpresaRepository;
 
-    public UsuarioEmpresaServiceImpl(UsuarioEmpresaRepository usuarioEmpresaRepository, PreferenciaRepository preferenciaRepository) {
+    @Autowired
+    private final DireccionRepository direccionRepository;
+
+    @Autowired
+    private final UsuarioRepository usuarioRepository;
+
+    @Autowired
+	private BCryptPasswordEncoder passwordEncoder;
+
+    public UsuarioEmpresaServiceImpl(UsuarioEmpresaRepository usuarioEmpresaRepository, DireccionRepository direccionRepository, UsuarioRepository usuarioRepository) {
         this.usuarioEmpresaRepository = usuarioEmpresaRepository;
+        this.direccionRepository = direccionRepository;
+        this.usuarioRepository = usuarioRepository;
     }
 
     /**

@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -42,6 +43,7 @@ public class CategoriaProductoController {
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new categoriaProductoDTO, or with status {@code 400 (Bad Request)} if the categoriaProducto has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
+    @Secured({"ROLE_ADMIN"})
     @PostMapping("/categoria-productos")
     public ResponseEntity<CategoriaProductoDTO> createCategoriaProducto(@RequestBody CategoriaProductoDTO categoriaProductoDTO) throws URISyntaxException {
         log.debug("REST request to save CategoriaProducto : {}", categoriaProductoDTO);
@@ -61,6 +63,7 @@ public class CategoriaProductoController {
      * or with status {@code 500 (Internal Server Error)} if the categoriaProductoDTO couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
+    @Secured({"ROLE_ADMIN"})
     @PutMapping("/categoria-productos")
     public ResponseEntity<CategoriaProductoDTO> updateCategoriaProducto(@RequestBody CategoriaProductoDTO categoriaProductoDTO) throws URISyntaxException {
         log.debug("REST request to update CategoriaProducto : {}", categoriaProductoDTO);
@@ -76,6 +79,7 @@ public class CategoriaProductoController {
      *
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of categoriaProductos in body.
      */
+    @Secured({"ROLE_DONANTE", "ROLE_EMPRESA", "ROLE_ADMIN"})
     @GetMapping("/categoria-productos")
     public List<CategoriaProductoDTO> getAllCategoriaProductos() {
         log.debug("REST request to get all CategoriaProductos");
@@ -88,6 +92,7 @@ public class CategoriaProductoController {
      * @param id the id of the categoriaProductoDTO to retrieve.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the categoriaProductoDTO, or with status {@code 404 (Not Found)}.
      */
+    @Secured({"ROLE_DONANTE", "ROLE_EMPRESA", "ROLE_ADMIN"})
     @GetMapping("/categoria-productos/{id}")
     public ResponseEntity<CategoriaProductoDTO> getCategoriaProducto(@PathVariable Long id) {
         log.debug("REST request to get CategoriaProducto : {}", id);
@@ -102,6 +107,7 @@ public class CategoriaProductoController {
      * @param id the id of the categoriaProductoDTO to delete.
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
+    @Secured({"ROLE_ADMIN"})
     @DeleteMapping("/categoria-productos/{id}")
     public ResponseEntity<Void> deleteCategoriaProducto(@PathVariable Long id) {
         log.debug("REST request to delete CategoriaProducto : {}", id);

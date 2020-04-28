@@ -1,4 +1,4 @@
-INSERT INTO ROL (id, nombre) VALUES (1, 'ROLE_ADMIN'), (2, 'ROLE_EMPRESA'), (3, 'ROLE_DIBABTE');
+INSERT INTO ROL (id, nombre) VALUES (1, 'ROLE_ADMIN'), (2, 'ROLE_EMPRESA'), (3, 'ROLE_DONANTE');
 
 INSERT INTO USUARIO (id, email, password, activo, rol_id) values
 (1, 'josema@soprasteria.com', '$2a$10$rVFTyDj.U/ohiP0o8OTdlekbSziWBao87BbZoy/sQ4nOspdSxhtd6', 1, 1),

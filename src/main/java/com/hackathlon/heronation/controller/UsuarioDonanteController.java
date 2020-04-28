@@ -2,6 +2,7 @@ package com.hackathlon.heronation.controller;
 
 import com.hackathlon.heronation.controller.error.BadRequestAlertException;
 import com.hackathlon.heronation.model.dto.UsuarioDonanteDTO;
+import com.hackathlon.heronation.model.dto.UsuarioDonanteFrontDTO;
 import com.hackathlon.heronation.service.UsuarioDonanteService;
 
 import org.slf4j.Logger;
@@ -38,36 +39,30 @@ public class UsuarioDonanteController {
     /**
      * {@code POST  /usuario-donantes} : Create a new usuarioDonante.
      *
-     * @param usuarioDonanteDTO the usuarioDonanteDTO to create.
+     * @param usuarioDonanteFrontDTO the usuarioDonanteDTO to create.
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new usuarioDonanteDTO, or with status {@code 400 (Bad Request)} if the usuarioDonante has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/usuario-donantes")
-    public ResponseEntity<UsuarioDonanteDTO> createUsuarioDonante(@RequestBody UsuarioDonanteDTO usuarioDonanteDTO) throws URISyntaxException {
-        log.debug("REST request to save UsuarioDonante : {}", usuarioDonanteDTO);
-        if (usuarioDonanteDTO.getId() != null) {
-            throw new BadRequestAlertException("A new usuarioDonante cannot already have an ID", ENTITY_NAME, "idexists");
-        }
-        UsuarioDonanteDTO result = usuarioDonanteService.save(usuarioDonanteDTO);
+    public ResponseEntity<UsuarioDonanteDTO> createUsuarioDonante(@RequestBody UsuarioDonanteFrontDTO usuarioDonanteFrontDTO) throws URISyntaxException {
+        log.debug("REST request to save UsuarioDonante : {}", usuarioDonanteFrontDTO);
+        UsuarioDonanteDTO result = usuarioDonanteService.save(usuarioDonanteFrontDTO);
         return ResponseEntity.created(new URI("/api/usuario-donantes/" + result.getId())).body(result);
     }
 
     /**
      * {@code PUT  /usuario-donantes} : Updates an existing usuarioDonante.
      *
-     * @param usuarioDonanteDTO the usuarioDonanteDTO to update.
+     * @param usuarioDonanteFrontDTO the usuarioDonanteDTO to update.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated usuarioDonanteDTO,
      * or with status {@code 400 (Bad Request)} if the usuarioDonanteDTO is not valid,
      * or with status {@code 500 (Internal Server Error)} if the usuarioDonanteDTO couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/usuario-donantes")
-    public ResponseEntity<UsuarioDonanteDTO> updateUsuarioDonante(@RequestBody UsuarioDonanteDTO usuarioDonanteDTO) throws URISyntaxException {
-        log.debug("REST request to update UsuarioDonante : {}", usuarioDonanteDTO);
-        if (usuarioDonanteDTO.getId() == null) {
-            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
-        }
-        UsuarioDonanteDTO result = usuarioDonanteService.save(usuarioDonanteDTO);
+    public ResponseEntity<UsuarioDonanteDTO> updateUsuarioDonante(@RequestBody UsuarioDonanteFrontDTO usuarioDonanteFrontDTO) throws URISyntaxException {
+        log.debug("REST request to update UsuarioDonante : {}", usuarioDonanteFrontDTO);
+        UsuarioDonanteDTO result = usuarioDonanteService.save(usuarioDonanteFrontDTO);
         return ResponseEntity.ok().body(result);
     }
 

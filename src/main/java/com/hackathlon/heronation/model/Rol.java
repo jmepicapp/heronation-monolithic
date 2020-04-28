@@ -16,13 +16,18 @@ public class Rol implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(unique = true, name = "nombre")
     private String nombre;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+    public Rol(){}
+
+    public Rol(Long id, String nombre) {
+        this.id = id;
+        this.nombre = nombre;
+    }
+
     public Long getId() {
         return id;
     }
