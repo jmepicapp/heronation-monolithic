@@ -1,9 +1,9 @@
 package com.hackathlon.heronation.service;
 
-import com.hackathlon.heronation.model.dto.PeticionDTO;
-
 import java.util.List;
 import java.util.Optional;
+
+import com.hackathlon.heronation.model.dto.PeticionDTO;
 
 /**
  * Service Interface for managing {@link com.hackathlon.heronation.model.Peticion}.
@@ -25,6 +25,14 @@ public interface PeticionService {
      */
     List<PeticionDTO> findAll();
 
+    /**
+     * Get all the peticiones by usuario id.
+     *
+     * @param idUsuario the usuario id
+     * @return the list of entities.
+     */
+    List<PeticionDTO> findAllByIdUsuario(Long idUsuario);
+    
     /**
      * Get the "id" peticion.
      *

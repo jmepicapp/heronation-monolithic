@@ -43,4 +43,8 @@ public class BadRequestAlertException extends BadRequestException {
         parameters.put("params", entityName);
         return parameters;
     }
+    public BadRequestAlertException(String entityName, String errorKey) {
+        this.entityName = entityName;
+        this.errorKey = errorKey;
+    }
 }

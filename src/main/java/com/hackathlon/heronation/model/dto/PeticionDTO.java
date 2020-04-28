@@ -11,19 +11,16 @@ public class PeticionDTO implements Serializable {
     
     private Long id;
 
-    private Long empresa;
-
-    private Long donante;
-
     private String descripcionDonante;
 
     private String descripcionEmpresa;
 
     private ZonedDateTime fecha;
 
-    private Long usuarioDonanteId;
+    private UsuarioDonanteDTO usuarioDonante;
+    private UsuarioEmpresaDTO usuarioEmpresa;
 
-    private Long usuarioEmpresaId;
+    private String estado;
     
     public Long getId() {
         return id;
@@ -33,21 +30,6 @@ public class PeticionDTO implements Serializable {
         this.id = id;
     }
 
-    public Long getEmpresa() {
-        return empresa;
-    }
-
-    public void setEmpresa(Long empresa) {
-        this.empresa = empresa;
-    }
-
-    public Long getDonante() {
-        return donante;
-    }
-
-    public void setDonante(Long donante) {
-        this.donante = donante;
-    }
 
     public String getDescripcionDonante() {
         return descripcionDonante;
@@ -73,20 +55,28 @@ public class PeticionDTO implements Serializable {
         this.fecha = fecha;
     }
 
-    public Long getUsuarioDonanteId() {
-        return usuarioDonanteId;
+    public String getEstado() {
+        return estado;
     }
 
-    public void setUsuarioDonanteId(Long usuarioDonanteId) {
-        this.usuarioDonanteId = usuarioDonanteId;
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
-    public Long getUsuarioEmpresaId() {
-        return usuarioEmpresaId;
+    public UsuarioDonanteDTO getUsuarioDonante() {
+        return usuarioDonante;
     }
 
-    public void setUsuarioEmpresaId(Long usuarioEmpresaId) {
-        this.usuarioEmpresaId = usuarioEmpresaId;
+    public void setUsuarioDonante(UsuarioDonanteDTO usuarioDonante) {
+        this.usuarioDonante = usuarioDonante;
+    }
+
+    public UsuarioEmpresaDTO getUsuarioEmpresa() {
+        return usuarioEmpresa;
+    }
+
+    public void setUsuarioEmpresa(UsuarioEmpresaDTO usuarioEmpresa) {
+        this.usuarioEmpresa = usuarioEmpresa;
     }
 
     @Override
@@ -114,13 +104,11 @@ public class PeticionDTO implements Serializable {
     public String toString() {
         return "PeticionDTO{" +
             "id=" + getId() +
-            ", empresa=" + getEmpresa() +
-            ", donante=" + getDonante() +
             ", descripcionDonante='" + getDescripcionDonante() + "'" +
             ", descripcionEmpresa='" + getDescripcionEmpresa() + "'" +
             ", fecha='" + getFecha() + "'" +
-            ", usuarioDonanteId=" + getUsuarioDonanteId() +
-            ", usuarioEmpresaId=" + getUsuarioEmpresaId() +
+            ", usuarioDonanteId=" + getUsuarioDonante() +
+            ", usuarioEmpresaId=" + getUsuarioEmpresa() +
             "}";
     }
 }
