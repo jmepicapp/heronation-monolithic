@@ -17,13 +17,12 @@ public class HeronationApplication{
 //	@Autowired
 //	private BCryptPasswordEncoder passwordEncoder;
 
-	@Override
-	public void run(String... args) throws Exception {
+//	public void run(String... args) throws Exception {
 //		String password = "12345";
 //
 //		for (int i = 0; i < 5; i++){
 //			String passwordBcrypt = passwordEncoder.encode(password);
 //			System.out.println(passwordBcrypt);
 //		}
-	}
+//	}
 }
