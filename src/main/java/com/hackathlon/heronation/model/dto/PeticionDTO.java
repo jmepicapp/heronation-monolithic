@@ -18,7 +18,7 @@ public class PeticionDTO implements Serializable {
     private UsuarioDonanteDTO usuarioDonante;
     private UsuarioEmpresaDTO usuarioEmpresa;
     private String estado;
-    
+
     public Long getId() {
         return id;
     }
