@@ -1,6 +1,7 @@
 package com.hackathlon.heronation.controller;
 
 import com.hackathlon.heronation.model.dto.PreferenciaDTO;
+import com.hackathlon.heronation.model.dto.UsuarioDonanteDTO;
 import com.hackathlon.heronation.service.UsuarioEmpresaService;
 import com.hackathlon.heronation.model.dto.UsuarioEmpresaDTO;
 import com.hackathlon.heronation.controller.error.BadRequestAlertException;
@@ -95,6 +96,20 @@ public class UsuarioEmpresaController {
     public ResponseEntity<UsuarioEmpresaDTO> getUsuarioEmpresa(@PathVariable Long id) {
         log.debug("REST request to get UsuarioEmpresa : {}", id);
         Optional<UsuarioEmpresaDTO> usuarioEmpresaDTO = usuarioEmpresaService.findOne(id);
+        return usuarioEmpresaDTO.map(response -> ResponseEntity.ok().body(response))
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+    }
+
+    /**
+     * {@code GET  /usuario-empresas/email/{emailUsuario}} : get the "id" usuarioEmpresaDTO.
+     *
+     * @param email the id of the usuario to filter the usuarioEmpresaDTO.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the usuarioEmpresaDTO, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/usuario-empresas/email/{emailUsuario}")
+    public ResponseEntity<UsuarioEmpresaDTO> getUsuarioEmpresaByEmailUsuario(@PathVariable String email) {
+        log.debug("REST request to get UsuarioDonante : {}", email);
+        Optional<UsuarioEmpresaDTO> usuarioEmpresaDTO = usuarioEmpresaService.findByEmailUsuario(email);
         return usuarioEmpresaDTO.map(response -> ResponseEntity.ok().body(response))
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }

@@ -34,6 +34,14 @@ public interface UsuarioDonanteService {
     Optional<UsuarioDonanteDTO> findOne(Long id);
 
     /**
+     * Get the "id" usuarioDonante.
+     *
+     * @param email the email of the entity usuario.
+     * @return the entity.
+     */
+    Optional<UsuarioDonanteDTO> findByEmailUsuario(String email);
+
+    /**
      * Delete the "id" usuarioDonante.
      *
      * @param id the id of the entity.

@@ -1,6 +1,7 @@
 package com.hackathlon.heronation.service.impl;
 
 import com.hackathlon.heronation.model.dto.PreferenciaDTO;
+import com.hackathlon.heronation.model.dto.UsuarioDonanteDTO;
 import com.hackathlon.heronation.repository.PreferenciaRepository;
 import com.hackathlon.heronation.service.UsuarioEmpresaService;
 import com.hackathlon.heronation.model.UsuarioEmpresa;
@@ -75,6 +76,17 @@ public class UsuarioEmpresaServiceImpl implements UsuarioEmpresaService {
         log.debug("Request to get UsuarioEmpresa : {}", id);
         return Optional.of(ModelMapperUtils.map(usuarioEmpresaRepository.findById(id).get(), UsuarioEmpresaDTO.class));
 
+    }
+
+    /**
+     * Get one usuarioEmpresa by id.
+     *
+     * @param email the email of the entity Usuario.
+     * @return the entity.
+     */
+    @Override
+    public Optional<UsuarioEmpresaDTO> findByEmailUsuario(String email) {
+        return Optional.of(ModelMapperUtils.map(usuarioEmpresaRepository.findByEmailUsuario(email).get(), UsuarioEmpresaDTO.class));
     }
 
     /**

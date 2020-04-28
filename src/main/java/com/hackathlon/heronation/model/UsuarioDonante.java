@@ -3,6 +3,7 @@ package com.hackathlon.heronation.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -23,6 +24,7 @@ public class UsuarioDonante implements Serializable {
     private Long id;
 
     @Column(name = "nombre")
+    @NotNull
     private String nombre;
 
     @Column(name = "apellidos")
@@ -32,7 +34,7 @@ public class UsuarioDonante implements Serializable {
     private Integer telefono;
 
     @Column(name = "direccion")
-    private Long direccion;
+    private Direccion direccion;
 
     @OneToMany(mappedBy = "usuarioDonante")
     private Set<Peticion> peticionUsuarioDonantes = new HashSet<>();
@@ -89,16 +91,16 @@ public class UsuarioDonante implements Serializable {
         this.telefono = telefono;
     }
 
-    public Long getDireccion() {
+    public Direccion getDireccion() {
         return direccion;
     }
 
-    public UsuarioDonante direccion(Long direccion) {
+    public UsuarioDonante direccion(Direccion direccion) {
         this.direccion = direccion;
         return this;
     }
 
-    public void setDireccion(Long direccion) {
+    public void setDireccion(Direccion direccion) {
         this.direccion = direccion;
     }
 

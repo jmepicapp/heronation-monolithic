@@ -30,12 +30,6 @@ public class UsuarioEmpresa implements Serializable {
     @Column(name = "direccion")
     private Direccion direccion;
 
-    @Column(name = "activo")
-    private Boolean activo;
-
-    @Column(name = "rol")
-    private Rol rol;
-
     @OneToMany(mappedBy = "usuarioEmpresa")
     private List<Preferencia> preferenciasCategoriaProductos = new ArrayList<>();
 
@@ -92,19 +86,6 @@ public class UsuarioEmpresa implements Serializable {
 
     public void setDireccion(Direccion direccion) {
         this.direccion = direccion;
-    }
-
-    public Boolean isActivo() {
-        return activo;
-    }
-
-    public UsuarioEmpresa activo(Boolean activo) {
-        this.activo = activo;
-        return this;
-    }
-
-    public void setActivo(Boolean activo) {
-        this.activo = activo;
     }
 
     public List<Preferencia> getPreferenciasCategoriaProductos() {
@@ -168,10 +149,6 @@ public class UsuarioEmpresa implements Serializable {
         return id != null && id.equals(((UsuarioEmpresa) o).id);
     }
 
-    public Boolean getActivo() {
-        return activo;
-    }
-
     public Usuario getUsuarioEmpresas() {
         return usuarioEmpresas;
     }
@@ -192,7 +169,6 @@ public class UsuarioEmpresa implements Serializable {
             ", nombre='" + getNombre() + "'" +
             ", telefono=" + getTelefono() +
             ", direccion=" + getDireccion() +
-            ", activo='" + isActivo() + "'" +
             "}";
     }
 }

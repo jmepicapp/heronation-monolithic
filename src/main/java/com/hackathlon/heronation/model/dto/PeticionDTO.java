@@ -21,7 +21,6 @@ public class PeticionDTO implements Serializable {
 
     private ZonedDateTime fecha;
 
-
     private Long usuarioDonanteId;
 
     private Long usuarioEmpresaId;

@@ -23,8 +23,6 @@ public class UsuarioEmpresaDTO implements Serializable {
 
     private Boolean activo;
 
-    private RolDTO rolUsuarioEmpresa;
-    
     public Long getId() {
         return id;
     }
@@ -65,14 +63,6 @@ public class UsuarioEmpresaDTO implements Serializable {
         this.activo = activo;
     }
 
-    public RolDTO getRolUsuarioEmpresa() {
-        return rolUsuarioEmpresa;
-    }
-
-    public void setRolUsuarioEmpresa(RolDTO rol) {
-        this.rolUsuarioEmpresa = rol;
-    }
-
     public Boolean getActivo() {
         return activo;
     }
@@ -106,7 +96,6 @@ public class UsuarioEmpresaDTO implements Serializable {
                 ", telefono=" + telefono +
                 ", direccion=" + direccion +
                 ", activo=" + activo +
-                ", rolUsuarioEmpresa=" + rolUsuarioEmpresa +
                 '}';
     }
 }
