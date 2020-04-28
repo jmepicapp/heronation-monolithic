@@ -23,7 +23,8 @@ public class UsuarioEmpresa implements Serializable {
     @Column(name = "telefono")
     private Integer telefono;
 
-    @Column(name = "direccion")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "direccion_id", referencedColumnName = "id")
     private Direccion direccion;
 
     @OneToMany(mappedBy = "usuarioEmpresa")

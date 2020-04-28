@@ -26,8 +26,8 @@ public class Direccion implements Serializable {
     @Column(name = "codigo_postal")
     private Integer codigoPostal;
 
-    @ManyToOne
-    @JsonIgnoreProperties("direccions")
+    @ManyToOne(cascade=CascadeType.ALL)
+    @JsonIgnoreProperties("poblacion")
     private Poblacion poblacion;
 
     @OneToOne(cascade = CascadeType.ALL)
