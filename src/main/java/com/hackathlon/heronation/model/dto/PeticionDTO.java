@@ -2,24 +2,20 @@ package com.hackathlon.heronation.model.dto;
 
 import java.io.Serializable;
 import java.time.ZonedDateTime;
+import java.util.Date;
 import java.util.Objects;
 
 /**
- * A DTO for the {@link com.hackathlon.heronation.domain.Peticion} entity.
+ * A DTO for the {@link com.hackathlon.heronation.model.Peticion} entity.
  */
 public class PeticionDTO implements Serializable {
     
     private Long id;
-
     private String descripcionDonante;
-
     private String descripcionEmpresa;
-
-    private ZonedDateTime fecha;
-
+    private Date fechaCreacion;
     private UsuarioDonanteDTO usuarioDonante;
     private UsuarioEmpresaDTO usuarioEmpresa;
-
     private String estado;
     
     public Long getId() {
@@ -47,12 +43,12 @@ public class PeticionDTO implements Serializable {
         this.descripcionEmpresa = descripcionEmpresa;
     }
 
-    public ZonedDateTime getFecha() {
-        return fecha;
+    public Date getFechaCreacion() {
+        return fechaCreacion;
     }
 
-    public void setFecha(ZonedDateTime fecha) {
-        this.fecha = fecha;
+    public void setFechaCreacion(Date fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
     }
 
     public String getEstado() {
@@ -103,12 +99,13 @@ public class PeticionDTO implements Serializable {
     @Override
     public String toString() {
         return "PeticionDTO{" +
-            "id=" + getId() +
-            ", descripcionDonante='" + getDescripcionDonante() + "'" +
-            ", descripcionEmpresa='" + getDescripcionEmpresa() + "'" +
-            ", fecha='" + getFecha() + "'" +
-            ", usuarioDonanteId=" + getUsuarioDonante() +
-            ", usuarioEmpresaId=" + getUsuarioEmpresa() +
-            "}";
+                "id=" + id +
+                ", descripcionDonante='" + descripcionDonante + '\'' +
+                ", descripcionEmpresa='" + descripcionEmpresa + '\'' +
+                ", fechaCreacion=" + fechaCreacion +
+                ", usuarioDonante=" + usuarioDonante +
+                ", usuarioEmpresa=" + usuarioEmpresa +
+                ", estado='" + estado + '\'' +
+                '}';
     }
 }

@@ -9,7 +9,6 @@ import java.util.Objects;
 public class RolDTO implements Serializable {
     
     private Long id;
-
     private String nombre;
 
     public Long getId() {

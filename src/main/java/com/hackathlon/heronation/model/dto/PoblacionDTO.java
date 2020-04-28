@@ -11,9 +11,7 @@ import java.util.Objects;
 public class PoblacionDTO implements Serializable {
     
     private Long id;
-
     private String nombre;
-
     private ProvinciaDTO provincia;
     
     public Long getId() {

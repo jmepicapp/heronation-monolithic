@@ -1,9 +1,5 @@
 package com.hackathlon.heronation.model;
 
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import javax.persistence.*;
 
 import java.io.Serializable;
@@ -34,7 +30,7 @@ public class UsuarioEmpresa implements Serializable {
     private List<Preferencia> preferenciasCategoriaProductos = new ArrayList<>();
 
     @OneToMany(mappedBy = "usuarioEmpresa")
-    private Set<Peticion> peticionUsuarioEmpresas = new HashSet<>();
+    private List<Peticion> peticionUsuarioEmpresas = new ArrayList<>();
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "usuario_id", referencedColumnName = "id")
@@ -113,11 +109,11 @@ public class UsuarioEmpresa implements Serializable {
         this.preferenciasCategoriaProductos = preferencias;
     }
 
-    public Set<Peticion> getPeticionUsuarioEmpresas() {
+    public List<Peticion> getPeticionUsuarioEmpresas() {
         return peticionUsuarioEmpresas;
     }
 
-    public UsuarioEmpresa peticionUsuarioEmpresas(Set<Peticion> peticions) {
+    public UsuarioEmpresa peticionUsuarioEmpresas(List<Peticion> peticions) {
         this.peticionUsuarioEmpresas = peticions;
         return this;
     }
@@ -134,7 +130,7 @@ public class UsuarioEmpresa implements Serializable {
         return this;
     }
 
-    public void setPeticionUsuarioEmpresas(Set<Peticion> peticions) {
+    public void setPeticionUsuarioEmpresas(List<Peticion> peticions) {
         this.peticionUsuarioEmpresas = peticions;
     }
 

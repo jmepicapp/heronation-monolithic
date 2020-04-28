@@ -16,7 +16,7 @@ public class UsuarioDTO implements Serializable {
     private String email;
     private String password;
     private Boolean activo;
-    private Rol rol;
+    private RolDTO rol;
 
     public Long getId() {
         return id;
@@ -50,11 +50,11 @@ public class UsuarioDTO implements Serializable {
         this.activo = activo;
     }
 
-    public Rol getRol() {
+    public RolDTO getRol() {
         return rol;
     }
 
-    public void setRol(Rol rol) {
+    public void setRol(RolDTO rol) {
         this.rol = rol;
     }
 

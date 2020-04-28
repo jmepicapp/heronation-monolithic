@@ -9,20 +9,10 @@ import java.util.Objects;
 public class DireccionDTO implements Serializable {
     
     private Long id;
-
     private String calle;
-
     private Integer codigoPostal;
+    private PoblacionDTO poblacion;
 
-    private Long poblacion;
-
-
-    private Long direccionEmpresaId;
-
-    private Long direccionDonanteId;
-
-    private Long direccionPoblacionId;
-    
     public Long getId() {
         return id;
     }
@@ -47,37 +37,14 @@ public class DireccionDTO implements Serializable {
         this.codigoPostal = codigoPostal;
     }
 
-    public Long getPoblacion() {
+    public PoblacionDTO getPoblacion() {
         return poblacion;
     }
 
-    public void setPoblacion(Long poblacion) {
+    public void setPoblacion(PoblacionDTO poblacion) {
         this.poblacion = poblacion;
     }
 
-    public Long getDireccionEmpresaId() {
-        return direccionEmpresaId;
-    }
-
-    public void setDireccionEmpresaId(Long usuarioEmpresaId) {
-        this.direccionEmpresaId = usuarioEmpresaId;
-    }
-
-    public Long getDireccionDonanteId() {
-        return direccionDonanteId;
-    }
-
-    public void setDireccionDonanteId(Long usuarioDonanteId) {
-        this.direccionDonanteId = usuarioDonanteId;
-    }
-
-    public Long getDireccionPoblacionId() {
-        return direccionPoblacionId;
-    }
-
-    public void setDireccionPoblacionId(Long poblacionId) {
-        this.direccionPoblacionId = poblacionId;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -107,9 +74,6 @@ public class DireccionDTO implements Serializable {
             ", calle='" + getCalle() + "'" +
             ", codigoPostal=" + getCodigoPostal() +
             ", poblacion=" + getPoblacion() +
-            ", direccionEmpresaId=" + getDireccionEmpresaId() +
-            ", direccionDonanteId=" + getDireccionDonanteId() +
-            ", direccionPoblacionId=" + getDireccionPoblacionId() +
             "}";
     }
 }

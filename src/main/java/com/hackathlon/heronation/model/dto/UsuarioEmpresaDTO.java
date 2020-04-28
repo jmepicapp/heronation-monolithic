@@ -14,13 +14,9 @@ import java.util.Objects;
 public class UsuarioEmpresaDTO implements Serializable {
     
     private Long id;
-
     private String nombre;
-
     private Integer telefono;
-
     private DireccionDTO direccion;
-
     private Boolean activo;
 
     public Long getId() {
