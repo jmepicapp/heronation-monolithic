@@ -23,7 +23,8 @@ public class UsuarioEmpresa implements Serializable {
     @Column(name = "telefono")
     private Integer telefono;
 
-    @Column(name = "direccion")
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "direccion_id")
     private Direccion direccion;
 
     @OneToMany(mappedBy = "usuarioEmpresa")
@@ -32,11 +33,10 @@ public class UsuarioEmpresa implements Serializable {
     @OneToMany(mappedBy = "usuarioEmpresa")
     private List<Peticion> peticionUsuarioEmpresas = new ArrayList<>();
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "usuario_id", referencedColumnName = "id")
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
     }

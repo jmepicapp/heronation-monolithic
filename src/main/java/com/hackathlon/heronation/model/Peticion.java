@@ -2,7 +2,6 @@ package com.hackathlon.heronation.model;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 import javax.persistence.*;
 
@@ -30,13 +29,16 @@ public class Peticion implements Serializable {
     @Column(name = "fechaCreacion")
     private LocalDateTime fechaCreacion;
 
+    @Column(name = "estado")
     private String estado;
 
     @ManyToOne
+    @JoinColumn(name = "usuario_donante_id")
     @JsonIgnoreProperties("peticionUsuarioDonantes")
     private UsuarioDonante usuarioDonante;
 
     @ManyToOne
+    @JoinColumn(name = "usuario_empresa_id")
     @JsonIgnoreProperties("peticionUsuarioEmpresas")
     private UsuarioEmpresa usuarioEmpresa;
 

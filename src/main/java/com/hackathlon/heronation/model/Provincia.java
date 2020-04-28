@@ -24,6 +24,7 @@ public class Provincia implements Serializable {
     private String nombre;
 
     @ManyToOne
+    @JoinColumn(name = "comunidad_autonoma_id")
     @JsonIgnoreProperties("comunidadAutonomas")
     private ComunidadAutonoma comunidad;
 

@@ -78,7 +78,7 @@ public class UsuarioDonanteServiceImpl implements UsuarioDonanteService {
     }
 
     private Usuario crearUsuario(UsuarioDonanteFrontDTO usuarioDonanteFrontDTO) {
-        //Creeación entidad usuario
+        //Creación entidad usuario
         Usuario usuario = new Usuario();
         usuario.setActivo(true);
         usuario.setEmail(usuarioDonanteFrontDTO.getEmail());
