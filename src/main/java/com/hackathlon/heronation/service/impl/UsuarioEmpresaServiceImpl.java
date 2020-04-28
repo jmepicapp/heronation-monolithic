@@ -74,7 +74,7 @@ public class UsuarioEmpresaServiceImpl implements UsuarioEmpresaService {
     }
 
     private Usuario crearUsuario(UsuarioEmpresaFrontDTO usuarioEmpresaFrontDTO) {
-        //Creeación entidad usuario
+        //Creación entidad usuario
         Usuario usuario = new Usuario();
         usuario.setActivo(true);
         usuario.setEmail(usuarioEmpresaFrontDTO.getEmail());

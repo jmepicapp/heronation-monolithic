@@ -1,5 +1,6 @@
 package com.hackathlon.heronation.model.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.hackathlon.heronation.model.Rol;
 
 import javax.persistence.Column;
@@ -14,6 +15,7 @@ public class UsuarioDTO implements Serializable {
 
     private Long id;
     private String email;
+    @JsonIgnore
     private String password;
     private Boolean activo;
     private RolDTO rol;

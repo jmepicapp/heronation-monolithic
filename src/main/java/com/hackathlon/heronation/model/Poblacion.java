@@ -24,7 +24,8 @@ public class Poblacion implements Serializable {
     @Column(name = "nombre")
     private String nombre;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "provincia_id")
     @JsonIgnoreProperties("poblacions")
     private Provincia provincia;
 

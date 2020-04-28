@@ -1,5 +1,6 @@
 package com.hackathlon.heronation.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -26,12 +27,13 @@ public class Direccion implements Serializable {
     @Column(name = "codigo_postal")
     private Integer codigoPostal;
 
-    @ManyToOne(cascade=CascadeType.ALL)
-    @JsonIgnoreProperties("poblacion")
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "poblacion_id")
+    @JsonIgnoreProperties("poblacions")
     private Poblacion poblacion;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "coordenada_id", referencedColumnName = "id")
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "coordenada_id")
     private Coordenada coordenada;
 
     public Long getId() {

@@ -13,7 +13,7 @@ public class UsuarioDonanteDTO implements Serializable {
     private String apellidos;
     private Integer telefono;
     private DireccionDTO direccion;
-    private UsuarioDTO usuarioDTO;
+    private UsuarioDTO usuario;
 
     public Long getId() {
         return id;
@@ -47,12 +47,12 @@ public class UsuarioDonanteDTO implements Serializable {
         this.telefono = telefono;
     }
 
-    public UsuarioDTO getUsuarioDTO() {
-        return usuarioDTO;
+    public UsuarioDTO getUsuario() {
+        return usuario;
     }
 
-    public void setUsuarioDTO(UsuarioDTO usuarioDTO) {
-        this.usuarioDTO = usuarioDTO;
+    public void setUsuario(UsuarioDTO usuario) {
+        this.usuario = usuario;
     }
 
     public DireccionDTO getDireccion() {
@@ -92,7 +92,7 @@ public class UsuarioDonanteDTO implements Serializable {
                 ", apellidos='" + apellidos + '\'' +
                 ", telefono=" + telefono +
                 ", direccion=" + direccion +
-                ", usuarioDTO=" + usuarioDTO +
+                ", usuarioDTO=" + usuario +
                 '}';
     }
 }

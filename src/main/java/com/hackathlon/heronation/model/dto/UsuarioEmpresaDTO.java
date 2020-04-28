@@ -12,12 +12,13 @@ import java.util.Objects;
  * A DTO for the {@link com.hackathlon.heronation.model.UsuarioEmpresa} entity.
  */
 public class UsuarioEmpresaDTO implements Serializable {
-    
+
     private Long id;
     private String nombre;
     private Integer telefono;
     private DireccionDTO direccion;
     private Boolean activo;
+    private UsuarioDTO usuario;
 
     public Long getId() {
         return id;
@@ -63,6 +64,14 @@ public class UsuarioEmpresaDTO implements Serializable {
         return activo;
     }
 
+    public UsuarioDTO getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(UsuarioDTO usuario) {
+        this.usuario = usuario;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -92,6 +101,7 @@ public class UsuarioEmpresaDTO implements Serializable {
                 ", telefono=" + telefono +
                 ", direccion=" + direccion +
                 ", activo=" + activo +
+                ", usuario=" + usuario +
                 '}';
     }
 }
