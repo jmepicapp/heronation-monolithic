@@ -30,6 +30,10 @@ public class Direccion implements Serializable {
     @JsonIgnoreProperties("direccions")
     private Poblacion poblacion;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "coordenada_id", referencedColumnName = "id")
+    private Coordenada coordenada;
+
     public Long getId() {
         return id;
     }
@@ -77,6 +81,14 @@ public class Direccion implements Serializable {
         return this;
     }
 
+    public Coordenada getCoordenada() {
+        return coordenada;
+    }
+
+    public void setCoordenada(Coordenada coordenada) {
+        this.coordenada = coordenada;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -96,10 +108,11 @@ public class Direccion implements Serializable {
     @Override
     public String toString() {
         return "Direccion{" +
-            "id=" + getId() +
-            ", calle='" + getCalle() + "'" +
-            ", codigoPostal=" + getCodigoPostal() +
-            ", poblacion=" + getPoblacion() +
-            "}";
+                "id=" + id +
+                ", calle='" + calle + '\'' +
+                ", codigoPostal=" + codigoPostal +
+                ", poblacion=" + poblacion +
+                ", coordenada=" + coordenada +
+                '}';
     }
 }

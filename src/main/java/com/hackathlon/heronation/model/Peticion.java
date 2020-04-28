@@ -1,7 +1,7 @@
 package com.hackathlon.heronation.model;
 
 import java.io.Serializable;
-import java.time.ZonedDateTime;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import javax.persistence.*;
@@ -27,9 +27,8 @@ public class Peticion implements Serializable {
     @Column(name = "descripcion_empresa")
     private String descripcionEmpresa;
 
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "fechaCreacion")
-    private Date fechaCreacion;
+    private LocalDateTime fechaCreacion;
 
     private String estado;
 
@@ -75,18 +74,18 @@ public class Peticion implements Serializable {
         this.descripcionEmpresa = descripcionEmpresa;
     }
 
-    public Date getFechaCreacion() {
+    public LocalDateTime getFechaCreacion() {
         return fechaCreacion;
     }
 
-    public Peticion fechaCreacion(Date fechaCreacion) {
+    public Peticion fechaCreacion(LocalDateTime fechaCreacion) {
         this.fechaCreacion = fechaCreacion;
         return this;
     }
 
     @PrePersist
     public void setFechaCreacion() {
-        this.fechaCreacion = new Date();
+        this.fechaCreacion = LocalDateTime.now();
     }
 
     public UsuarioDonante getUsuarioDonante() {

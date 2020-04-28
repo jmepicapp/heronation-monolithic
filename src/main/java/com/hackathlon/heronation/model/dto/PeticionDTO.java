@@ -1,6 +1,7 @@
 package com.hackathlon.heronation.model.dto;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.Objects;
@@ -13,7 +14,7 @@ public class PeticionDTO implements Serializable {
     private Long id;
     private String descripcionDonante;
     private String descripcionEmpresa;
-    private Date fechaCreacion;
+    private LocalDateTime fechaCreacion;
     private UsuarioDonanteDTO usuarioDonante;
     private UsuarioEmpresaDTO usuarioEmpresa;
     private String estado;
@@ -43,11 +44,11 @@ public class PeticionDTO implements Serializable {
         this.descripcionEmpresa = descripcionEmpresa;
     }
 
-    public Date getFechaCreacion() {
+    public LocalDateTime getFechaCreacion() {
         return fechaCreacion;
     }
 
-    public void setFechaCreacion(Date fechaCreacion) {
+    public void setFechaCreacion(LocalDateTime fechaCreacion) {
         this.fechaCreacion = fechaCreacion;
     }
 

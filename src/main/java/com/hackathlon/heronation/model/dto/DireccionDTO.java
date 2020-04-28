@@ -12,6 +12,7 @@ public class DireccionDTO implements Serializable {
     private String calle;
     private Integer codigoPostal;
     private PoblacionDTO poblacion;
+    private CoordenadaDTO coordenada;
 
     public Long getId() {
         return id;
@@ -45,6 +46,13 @@ public class DireccionDTO implements Serializable {
         this.poblacion = poblacion;
     }
 
+    public CoordenadaDTO getCoordenada() {
+        return coordenada;
+    }
+
+    public void setCoordenada(CoordenadaDTO coordenada) {
+        this.coordenada = coordenada;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -70,10 +78,11 @@ public class DireccionDTO implements Serializable {
     @Override
     public String toString() {
         return "DireccionDTO{" +
-            "id=" + getId() +
-            ", calle='" + getCalle() + "'" +
-            ", codigoPostal=" + getCodigoPostal() +
-            ", poblacion=" + getPoblacion() +
-            "}";
+                "id=" + id +
+                ", calle='" + calle + '\'' +
+                ", codigoPostal=" + codigoPostal +
+                ", poblacion=" + poblacion +
+                ", coordenada=" + coordenada +
+                '}';
     }
 }
