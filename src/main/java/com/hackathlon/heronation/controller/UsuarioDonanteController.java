@@ -97,7 +97,7 @@ public class UsuarioDonanteController {
      * @param email the id of the usuario to filter the UsuarioDonanteDTO.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the usuarioDonanteDTO, or with status {@code 404 (Not Found)}.
      */
-    @GetMapping("/usuario-donantes/email/{emailUsuario}")
+    @GetMapping("/usuario-donantes/email/{email}")
     public ResponseEntity<UsuarioDonanteDTO> getUsuarioDonanteByEmailUsuario(@PathVariable String email) {
         log.debug("REST request to get UsuarioDonante : {}", email);
         Optional<UsuarioDonanteDTO> usuarioDonanteDTO = usuarioDonanteService.findByEmailUsuario(email);
