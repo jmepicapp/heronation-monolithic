@@ -19,7 +19,7 @@ public class Rol implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "nombre")
+    @Column(unique = true, name = "nombre")
     private String nombre;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove

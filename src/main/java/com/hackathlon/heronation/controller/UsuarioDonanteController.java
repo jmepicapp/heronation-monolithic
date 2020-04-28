@@ -97,6 +97,20 @@ public class UsuarioDonanteController {
     }
 
     /**
+     * {@code GET  /usuario-donantes/email/{emailUsuario}} : get the "id" usuarioDonante.
+     *
+     * @param email the id of the usuario to filter the UsuarioDonanteDTO.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the usuarioDonanteDTO, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/usuario-donantes/email/{emailUsuario}")
+    public ResponseEntity<UsuarioDonanteDTO> getUsuarioDonanteByEmailUsuario(@PathVariable String email) {
+        log.debug("REST request to get UsuarioDonante : {}", email);
+        Optional<UsuarioDonanteDTO> usuarioDonanteDTO = usuarioDonanteService.findByEmailUsuario(email);
+        return usuarioDonanteDTO.map(response -> ResponseEntity.ok().body(response))
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+    }
+
+    /**
      * {@code DELETE  /usuario-donantes/:id} : delete the "id" usuarioDonante.
      *
      * @param id the id of the usuarioDonanteDTO to delete.

@@ -1,25 +1,30 @@
 package com.hackathlon.heronation.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import javax.persistence.*;
-import java.util.Set;
+import java.io.Serializable;
 
 @Entity
-@Table
-public class Usuario {
+@Table(name = "usuario")
+public class Usuario implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true, name = "email")
     private String email;
+
+    @Column(name = "password")
     private String password;
 
+    @Column(name = "activo")
+    private Boolean activo;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "usuario_rol", joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "id"))
-    private Set<Rol> rolUsuario;
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "rol_id")
+    private Rol rol;
 
     public Long getId() {
         return id;
@@ -45,11 +50,30 @@ public class Usuario {
         this.password = password;
     }
 
-    public Set<Rol> getRolUsuario() {
-        return rolUsuario;
+    public Rol getRol() {
+        return rol;
     }
 
-    public void setRolUsuario(Set<Rol> rolUsuario) {
-        this.rolUsuario = rolUsuario;
+    public void setRol(Rol rol) {
+        this.rol = rol;
+    }
+
+    public Boolean getActivo() {
+        return activo;
+    }
+
+    public void setActivo(Boolean activo) {
+        this.activo = activo;
+    }
+
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "id=" + id +
+                ", activo=" + activo +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", rol=" + rol +
+                '}';
     }
 }

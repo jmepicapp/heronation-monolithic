@@ -9,15 +9,10 @@ import java.util.Objects;
 public class UsuarioDonanteDTO implements Serializable {
     
     private Long id;
-
     private String nombre;
-
     private String apellidos;
-
     private Integer telefono;
-
     private DireccionDTO direccion;
-
     private RolDTO rol;
 
     public Long getId() {

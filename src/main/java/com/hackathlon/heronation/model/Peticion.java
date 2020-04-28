@@ -1,15 +1,10 @@
 package com.hackathlon.heronation.model;
 
 import java.io.Serializable;
-import java.time.ZonedDateTime;
+import java.time.LocalDateTime;
+import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -32,8 +27,8 @@ public class Peticion implements Serializable {
     @Column(name = "descripcion_empresa")
     private String descripcionEmpresa;
 
-    @Column(name = "fecha")
-    private ZonedDateTime fecha;
+    @Column(name = "fechaCreacion")
+    private LocalDateTime fechaCreacion;
 
     private String estado;
 
@@ -75,22 +70,22 @@ public class Peticion implements Serializable {
         this.descripcionEmpresa = descripcionEmpresa;
         return this;
     }
-
     public void setDescripcionEmpresa(String descripcionEmpresa) {
         this.descripcionEmpresa = descripcionEmpresa;
     }
 
-    public ZonedDateTime getFecha() {
-        return fecha;
+    public LocalDateTime getFechaCreacion() {
+        return fechaCreacion;
     }
 
-    public Peticion fecha(ZonedDateTime fecha) {
-        this.fecha = fecha;
+    public Peticion fechaCreacion(LocalDateTime fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
         return this;
     }
 
-    public void setFecha(ZonedDateTime fecha) {
-        this.fecha = fecha;
+    @PrePersist
+    public void setFechaCreacion() {
+        this.fechaCreacion = LocalDateTime.now();
     }
 
     public UsuarioDonante getUsuarioDonante() {
@@ -147,10 +142,13 @@ public class Peticion implements Serializable {
     @Override
     public String toString() {
         return "Peticion{" +
-            "id=" + getId() +
-            ", descripcionDonante='" + getDescripcionDonante() + "'" +
-            ", descripcionEmpresa='" + getDescripcionEmpresa() + "'" +
-            ", fecha='" + getFecha() + "'" +
-            "}";
+                "id=" + id +
+                ", descripcionDonante='" + descripcionDonante + '\'' +
+                ", descripcionEmpresa='" + descripcionEmpresa + '\'' +
+                ", fechaCreacion=" + fechaCreacion +
+                ", estado='" + estado + '\'' +
+                ", usuarioDonante=" + usuarioDonante +
+                ", usuarioEmpresa=" + usuarioEmpresa +
+                '}';
     }
 }

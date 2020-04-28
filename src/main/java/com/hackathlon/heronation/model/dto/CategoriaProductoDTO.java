@@ -9,9 +9,7 @@ import java.util.Objects;
 public class CategoriaProductoDTO implements Serializable {
     
     private Long id;
-
     private String nombre;
-
     private String descripcion;
     
     public Long getId() {

@@ -9,7 +9,6 @@ import java.util.Objects;
 public class ComunidadAutonomaDTO implements Serializable {
     
     private Long id;
-
     private String nombre;
 
     public Long getId() {

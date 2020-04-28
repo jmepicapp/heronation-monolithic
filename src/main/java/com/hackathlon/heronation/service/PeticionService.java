@@ -47,4 +47,36 @@ public interface PeticionService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+    
+    /**
+     * Get the historical of peticiones by usuario id for UsuarioDonante.
+     *
+     * @param idUsuario the usuario id
+     * @return the list of entities.
+     */
+	List<PeticionDTO> findAllByIdUsuarioDonanteEstadoCanceladoYAceptado(Long idUsuario);
+
+    /**
+     * Get the historical of peticiones by usuario id for UsuarioEmpresa.
+     *
+     * @param idUsuario the usuario id
+     * @return the list of entities.
+     */
+	List<PeticionDTO> findAllByIdUsuarioEmpresaEstadoCanceladoYAceptado(Long idUsuario);
+	
+    /**
+     * Get the pendant peticiones by usuario id for UsuarioDonante.
+     *
+     * @param idUsuario the usuario id
+     * @return the list of entities.
+     */
+	List<PeticionDTO> findAllByIdUsuarioDonanteEstadoPendiente(Long idUsuario);
+	
+    /**
+     * Get the pendant peticiones by usuario id for UsuarioEmpresa.
+     *
+     * @param idUsuario the usuario id
+     * @return the list of entities.
+     */
+	List<PeticionDTO> findAllByIdUsuarioEmpresaEstadoPendiente(Long idUsuario);
 }

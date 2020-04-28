@@ -73,6 +73,17 @@ public class UsuarioDonanteServiceImpl implements UsuarioDonanteService {
     }
 
     /**
+     * Get one usuarioDonante by id.
+     *
+     * @param email the email of the entity Usuario.
+     * @return the entity.
+     */
+    @Override
+    public Optional<UsuarioDonanteDTO> findByEmailUsuario(String email) {
+        return Optional.of(ModelMapperUtils.map(usuarioDonanteRepository.findByEmailUsuario(email).get(), UsuarioDonanteDTO.class));
+    }
+
+    /**
      * Delete the usuarioDonante by id.
      *
      * @param id the id of the entity.

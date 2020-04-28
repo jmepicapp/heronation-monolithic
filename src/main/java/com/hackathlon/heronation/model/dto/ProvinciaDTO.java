@@ -9,9 +9,7 @@ import java.util.Objects;
 public class ProvinciaDTO implements Serializable {
     
     private Long id;
-
     private String nombre;
-
     private ComunidadAutonomaDTO comunidad;
     
     public Long getId() {

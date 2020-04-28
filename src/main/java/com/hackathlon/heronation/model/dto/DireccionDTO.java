@@ -9,20 +9,11 @@ import java.util.Objects;
 public class DireccionDTO implements Serializable {
     
     private Long id;
-
     private String calle;
-
     private Integer codigoPostal;
+    private PoblacionDTO poblacion;
+    private CoordenadaDTO coordenada;
 
-    private Long poblacion;
-
-
-    private Long direccionEmpresaId;
-
-    private Long direccionDonanteId;
-
-    private Long direccionPoblacionId;
-    
     public Long getId() {
         return id;
     }
@@ -47,36 +38,20 @@ public class DireccionDTO implements Serializable {
         this.codigoPostal = codigoPostal;
     }
 
-    public Long getPoblacion() {
+    public PoblacionDTO getPoblacion() {
         return poblacion;
     }
 
-    public void setPoblacion(Long poblacion) {
+    public void setPoblacion(PoblacionDTO poblacion) {
         this.poblacion = poblacion;
     }
 
-    public Long getDireccionEmpresaId() {
-        return direccionEmpresaId;
+    public CoordenadaDTO getCoordenada() {
+        return coordenada;
     }
 
-    public void setDireccionEmpresaId(Long usuarioEmpresaId) {
-        this.direccionEmpresaId = usuarioEmpresaId;
-    }
-
-    public Long getDireccionDonanteId() {
-        return direccionDonanteId;
-    }
-
-    public void setDireccionDonanteId(Long usuarioDonanteId) {
-        this.direccionDonanteId = usuarioDonanteId;
-    }
-
-    public Long getDireccionPoblacionId() {
-        return direccionPoblacionId;
-    }
-
-    public void setDireccionPoblacionId(Long poblacionId) {
-        this.direccionPoblacionId = poblacionId;
+    public void setCoordenada(CoordenadaDTO coordenada) {
+        this.coordenada = coordenada;
     }
 
     @Override
@@ -103,13 +78,11 @@ public class DireccionDTO implements Serializable {
     @Override
     public String toString() {
         return "DireccionDTO{" +
-            "id=" + getId() +
-            ", calle='" + getCalle() + "'" +
-            ", codigoPostal=" + getCodigoPostal() +
-            ", poblacion=" + getPoblacion() +
-            ", direccionEmpresaId=" + getDireccionEmpresaId() +
-            ", direccionDonanteId=" + getDireccionDonanteId() +
-            ", direccionPoblacionId=" + getDireccionPoblacionId() +
-            "}";
+                "id=" + id +
+                ", calle='" + calle + '\'' +
+                ", codigoPostal=" + codigoPostal +
+                ", poblacion=" + poblacion +
+                ", coordenada=" + coordenada +
+                '}';
     }
 }

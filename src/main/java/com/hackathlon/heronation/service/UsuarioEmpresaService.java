@@ -1,6 +1,7 @@
 package com.hackathlon.heronation.service;
 
 import com.hackathlon.heronation.model.dto.PreferenciaDTO;
+import com.hackathlon.heronation.model.dto.UsuarioDonanteDTO;
 import com.hackathlon.heronation.model.dto.UsuarioEmpresaDTO;
 
 import org.springframework.data.domain.Page;
@@ -36,6 +37,14 @@ public interface UsuarioEmpresaService {
      * @return the entity.
      */
     Optional<UsuarioEmpresaDTO> findOne(Long id);
+
+    /**
+     * Get the "id" usuarioEmpresa.
+     *
+     * @param email the email of the entity usuario.
+     * @return the entity.
+     */
+    Optional<UsuarioEmpresaDTO> findByEmailUsuario(String email);
 
     /**
      * Delete the "id" usuarioEmpresa.

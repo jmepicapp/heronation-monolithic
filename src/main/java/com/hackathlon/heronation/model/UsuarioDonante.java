@@ -1,13 +1,10 @@
 package com.hackathlon.heronation.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 import java.io.Serializable;
-import java.util.Objects;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * A UsuarioDonante.
@@ -23,6 +20,7 @@ public class UsuarioDonante implements Serializable {
     private Long id;
 
     @Column(name = "nombre")
+    @NotNull
     private String nombre;
 
     @Column(name = "apellidos")
@@ -32,10 +30,10 @@ public class UsuarioDonante implements Serializable {
     private Integer telefono;
 
     @Column(name = "direccion")
-    private Long direccion;
+    private Direccion direccion;
 
     @OneToMany(mappedBy = "usuarioDonante")
-    private Set<Peticion> peticionUsuarioDonantes = new HashSet<>();
+    private List<Peticion> peticionUsuarioDonantes = new ArrayList<>();
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "usuario_id", referencedColumnName = "id")
@@ -89,25 +87,25 @@ public class UsuarioDonante implements Serializable {
         this.telefono = telefono;
     }
 
-    public Long getDireccion() {
+    public Direccion getDireccion() {
         return direccion;
     }
 
-    public UsuarioDonante direccion(Long direccion) {
+    public UsuarioDonante direccion(Direccion direccion) {
         this.direccion = direccion;
         return this;
     }
 
-    public void setDireccion(Long direccion) {
+    public void setDireccion(Direccion direccion) {
         this.direccion = direccion;
     }
 
 
-    public Set<Peticion> getPeticionUsuarioDonantes() {
+    public List<Peticion> getPeticionUsuarioDonantes() {
         return peticionUsuarioDonantes;
     }
 
-    public UsuarioDonante peticionUsuarioDonantes(Set<Peticion> peticions) {
+    public UsuarioDonante peticionUsuarioDonantes(List<Peticion> peticions) {
         this.peticionUsuarioDonantes = peticions;
         return this;
     }
@@ -124,7 +122,7 @@ public class UsuarioDonante implements Serializable {
         return this;
     }
 
-    public void setPeticionUsuarioDonantes(Set<Peticion> peticions) {
+    public void setPeticionUsuarioDonantes(List<Peticion> peticions) {
         this.peticionUsuarioDonantes = peticions;
     }
 
