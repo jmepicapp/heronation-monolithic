@@ -34,7 +34,7 @@ public class UsuarioEmpresa implements Serializable {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "usuario_id", referencedColumnName = "id")
-    private Usuario usuarioEmpresas;
+    private Usuario usuario;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -145,12 +145,12 @@ public class UsuarioEmpresa implements Serializable {
         return id != null && id.equals(((UsuarioEmpresa) o).id);
     }
 
-    public Usuario getUsuarioEmpresas() {
-        return usuarioEmpresas;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setUsuarioEmpresas(Usuario usuarioEmpresas) {
-        this.usuarioEmpresas = usuarioEmpresas;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     @Override

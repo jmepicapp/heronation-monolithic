@@ -83,7 +83,7 @@ public class UsuarioDonanteServiceImpl implements UsuarioDonanteService {
         usuario.setActivo(true);
         usuario.setEmail(usuarioDonanteFrontDTO.getEmail());
         usuario.setPassword(passwordEncoder.encode(usuarioDonanteFrontDTO.getPassword()));
-        usuario.setRol(new Rol(Long.valueOf(1), "ROLE_DONANTE"));
+        usuario.setRol(new Rol(Long.valueOf(3), "ROLE_DONANTE"));
         return usuario;
     }
 

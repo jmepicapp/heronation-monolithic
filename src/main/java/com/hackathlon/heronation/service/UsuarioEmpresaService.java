@@ -4,6 +4,7 @@ import com.hackathlon.heronation.model.dto.PreferenciaDTO;
 import com.hackathlon.heronation.model.dto.UsuarioDonanteDTO;
 import com.hackathlon.heronation.model.dto.UsuarioEmpresaDTO;
 
+import com.hackathlon.heronation.model.dto.UsuarioEmpresaFrontDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -18,10 +19,10 @@ public interface UsuarioEmpresaService {
     /**
      * Save a usuarioEmpresa.
      *
-     * @param usuarioEmpresaDTO the entity to save.
+     * @param usuarioEmpresaFrontDTO the entity to save.
      * @return the persisted entity.
      */
-    UsuarioEmpresaDTO save(UsuarioEmpresaDTO usuarioEmpresaDTO);
+    UsuarioEmpresaDTO save(UsuarioEmpresaFrontDTO usuarioEmpresaFrontDTO);
 
     /**
      * Get all the usuarioEmpresas.

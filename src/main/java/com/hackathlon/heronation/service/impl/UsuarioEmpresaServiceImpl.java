@@ -1,11 +1,9 @@
 package com.hackathlon.heronation.service.impl;
 
-import com.hackathlon.heronation.model.dto.PreferenciaDTO;
-import com.hackathlon.heronation.model.dto.UsuarioDonanteDTO;
+import com.hackathlon.heronation.model.*;
+import com.hackathlon.heronation.model.dto.*;
 import com.hackathlon.heronation.repository.*;
 import com.hackathlon.heronation.service.UsuarioEmpresaService;
-import com.hackathlon.heronation.model.UsuarioEmpresa;
-import com.hackathlon.heronation.model.dto.UsuarioEmpresaDTO;
 import com.hackathlon.heronation.util.ModelMapperUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,15 +49,38 @@ public class UsuarioEmpresaServiceImpl implements UsuarioEmpresaService {
     /**
      * Save a usuarioEmpresa.
      *
-     * @param usuarioEmpresaDTO the entity to save.
+     * @param usuarioEmpresaFrontDTO the entity to save.
      * @return the persisted entity.
      */
     @Override
-    public UsuarioEmpresaDTO save(UsuarioEmpresaDTO usuarioEmpresaDTO) {
-        log.debug("Request to save UsuarioEmpresa : {}", usuarioEmpresaDTO);
-        UsuarioEmpresa usuarioEmpresa = ModelMapperUtils.map(usuarioEmpresaDTO, UsuarioEmpresa.class);
+    public UsuarioEmpresaDTO save(UsuarioEmpresaFrontDTO usuarioEmpresaFrontDTO) {
+        log.debug("Request to save UsuarioEmpresa : {}", usuarioEmpresaFrontDTO);
+        Usuario usuario = crearUsuario(usuarioEmpresaFrontDTO);
+
+        UsuarioEmpresa usuarioEmpresa = crearUsuarioDonante(usuarioEmpresaFrontDTO);
+
         usuarioEmpresa = usuarioEmpresaRepository.save(usuarioEmpresa);
         return ModelMapperUtils.map(usuarioEmpresa, UsuarioEmpresaDTO.class);
+    }
+
+    private UsuarioEmpresa crearUsuarioDonante(UsuarioEmpresaFrontDTO usuarioEmpresaFrontDTO) {
+        UsuarioEmpresa usuarioEmpresa = new UsuarioEmpresa();
+        usuarioEmpresa.setId(usuarioEmpresaFrontDTO.getId());
+        usuarioEmpresa.setDireccion(ModelMapperUtils.map(usuarioEmpresaFrontDTO.getDireccion(), Direccion.class));
+        usuarioEmpresa.setNombre(usuarioEmpresaFrontDTO.getNombre());
+        usuarioEmpresa.setTelefono(usuarioEmpresaFrontDTO.getTelefono());
+        usuarioEmpresa.setUsuario(crearUsuario(usuarioEmpresaFrontDTO));
+        return usuarioEmpresa;
+    }
+
+    private Usuario crearUsuario(UsuarioEmpresaFrontDTO usuarioEmpresaFrontDTO) {
+        //Creeación entidad usuario
+        Usuario usuario = new Usuario();
+        usuario.setActivo(true);
+        usuario.setEmail(usuarioEmpresaFrontDTO.getEmail());
+        usuario.setPassword(passwordEncoder.encode(usuarioEmpresaFrontDTO.getPassword()));
+        usuario.setRol(new Rol(Long.valueOf(2), "ROLE_EMPRESA"));
+        return usuario;
     }
 
     /**
