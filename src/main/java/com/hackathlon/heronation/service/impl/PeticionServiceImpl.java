@@ -1,22 +1,21 @@
 package com.hackathlon.heronation.service.impl;
 
-import com.hackathlon.heronation.controller.error.BadRequestAlertException;
-import com.hackathlon.heronation.service.PeticionService;
-import com.hackathlon.heronation.model.Peticion;
-import com.hackathlon.heronation.repository.PeticionRepository;
-import com.hackathlon.heronation.model.dto.PeticionDTO;
-import com.hackathlon.heronation.model.dto.PreferenciaDTO;
-import com.hackathlon.heronation.util.ModelMapperUtils;
-import com.hackathlon.heronation.util.type.EstadoPeticion;
+import java.util.List;
+import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.Optional;
+import com.hackathlon.heronation.controller.error.BadRequestAlertException;
+import com.hackathlon.heronation.model.Peticion;
+import com.hackathlon.heronation.model.dto.PeticionDTO;
+import com.hackathlon.heronation.repository.PeticionRepository;
+import com.hackathlon.heronation.service.PeticionService;
+import com.hackathlon.heronation.util.ModelMapperUtils;
+import com.hackathlon.heronation.util.type.EstadoPeticion;
 
 /**
  * Service Implementation for managing {@link Peticion}.
@@ -110,5 +109,49 @@ public class PeticionServiceImpl implements PeticionService {
         log.debug("Request to delete Peticion : {}", id);
         peticionRepository.deleteById(id);
     }
+
+    /**
+     * Get the historical of peticiones by usuario id for UsuarioDonante.
+     *
+     * @param idUsuario the usuario id
+     * @return the list of entities.
+     */
+	@Override
+	public List<PeticionDTO> findAllByIdUsuarioDonanteEstadoCanceladoYAceptado(Long idUsuario) {
+        return ModelMapperUtils.mapAll(this.peticionRepository.findAllByIdUsuarioDonanteEstadoCanceladoYAceptado(idUsuario), PeticionDTO.class);
+	}
+
+	 /**
+     * Get the historical of peticiones by usuario id for UsuarioEmpresa.
+     *
+     * @param idUsuario the usuario id
+     * @return the list of entities.
+     */
+	@Override
+	public List<PeticionDTO> findAllByIdUsuarioEmpresaEstadoCanceladoYAceptado(Long idUsuario) {
+        return ModelMapperUtils.mapAll(this.peticionRepository.findAllByIdUsuarioEmpresaEstadoCanceladoYAceptado(idUsuario), PeticionDTO.class);
+	}
+
+	   /**
+     * Get the pendant peticiones by usuario id for UsuarioDonante.
+     *
+     * @param idUsuario the usuario id
+     * @return the list of entities.
+     */
+	@Override
+	public List<PeticionDTO> findAllByIdUsuarioDonanteEstadoPendiente(Long idUsuario) {
+        return ModelMapperUtils.mapAll(this.peticionRepository.findAllByIdUsuarioDonanteEstadoPendiente(idUsuario), PeticionDTO.class);
+	}
+
+	   /**
+     * Get the pendant peticiones by usuario id for UsuarioEmpresa.
+     *
+     * @param idUsuario the usuario id
+     * @return the list of entities.
+     */
+	@Override
+	public List<PeticionDTO> findAllByIdUsuarioEmpresaEstadoPendiente(Long idUsuario) {
+        return ModelMapperUtils.mapAll(this.peticionRepository.findAllByIdUsuarioDonanteEstadoPendiente(idUsuario), PeticionDTO.class);
+	}
 
 }
