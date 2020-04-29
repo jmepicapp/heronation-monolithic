@@ -1,25 +1,20 @@
 package com.hackathlon.heronation.service.impl;
 
-import com.hackathlon.heronation.model.dto.PreferenciaDTO;
-import com.hackathlon.heronation.model.dto.UsuarioDonanteDTO;
-import com.hackathlon.heronation.repository.PreferenciaRepository;
+import com.hackathlon.heronation.model.*;
+import com.hackathlon.heronation.model.dto.*;
+import com.hackathlon.heronation.repository.*;
 import com.hackathlon.heronation.service.UsuarioEmpresaService;
-import com.hackathlon.heronation.model.UsuarioEmpresa;
-import com.hackathlon.heronation.repository.UsuarioEmpresaRepository;
-import com.hackathlon.heronation.model.dto.UsuarioEmpresaDTO;
 import com.hackathlon.heronation.util.ModelMapperUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.swing.text.html.Option;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 /**
  * Service Implementation for managing {@link UsuarioEmpresa}.
@@ -33,22 +28,48 @@ public class UsuarioEmpresaServiceImpl implements UsuarioEmpresaService {
     @Autowired
     private final UsuarioEmpresaRepository usuarioEmpresaRepository;
 
-    public UsuarioEmpresaServiceImpl(UsuarioEmpresaRepository usuarioEmpresaRepository, PreferenciaRepository preferenciaRepository) {
+    @Autowired
+	private BCryptPasswordEncoder passwordEncoder;
+
+    public UsuarioEmpresaServiceImpl(UsuarioEmpresaRepository usuarioEmpresaRepository) {
         this.usuarioEmpresaRepository = usuarioEmpresaRepository;
     }
 
     /**
      * Save a usuarioEmpresa.
      *
-     * @param usuarioEmpresaDTO the entity to save.
+     * @param usuarioEmpresaFrontDTO the entity to save.
      * @return the persisted entity.
      */
     @Override
-    public UsuarioEmpresaDTO save(UsuarioEmpresaDTO usuarioEmpresaDTO) {
-        log.debug("Request to save UsuarioEmpresa : {}", usuarioEmpresaDTO);
-        UsuarioEmpresa usuarioEmpresa = ModelMapperUtils.map(usuarioEmpresaDTO, UsuarioEmpresa.class);
+    public UsuarioEmpresaDTO save(UsuarioEmpresaFrontDTO usuarioEmpresaFrontDTO) {
+        log.debug("Request to save UsuarioEmpresa : {}", usuarioEmpresaFrontDTO);
+
+        UsuarioEmpresa usuarioEmpresa = crearUsuarioEmpresa(usuarioEmpresaFrontDTO);
+        usuarioEmpresa.setUsuario(crearUsuario(usuarioEmpresaFrontDTO));
+
         usuarioEmpresa = usuarioEmpresaRepository.save(usuarioEmpresa);
         return ModelMapperUtils.map(usuarioEmpresa, UsuarioEmpresaDTO.class);
+    }
+
+    private UsuarioEmpresa crearUsuarioEmpresa(UsuarioEmpresaFrontDTO usuarioEmpresaFrontDTO) {
+        UsuarioEmpresa usuarioEmpresa = new UsuarioEmpresa();
+        usuarioEmpresa.setId(usuarioEmpresaFrontDTO.getId());
+        usuarioEmpresa.setDireccion(ModelMapperUtils.map(usuarioEmpresaFrontDTO.getDireccion(), Direccion.class));
+        usuarioEmpresa.setNombre(usuarioEmpresaFrontDTO.getNombre());
+        usuarioEmpresa.setTelefono(usuarioEmpresaFrontDTO.getTelefono());
+        usuarioEmpresa.setUsuario(crearUsuario(usuarioEmpresaFrontDTO));
+        return usuarioEmpresa;
+    }
+
+    private Usuario crearUsuario(UsuarioEmpresaFrontDTO usuarioEmpresaFrontDTO) {
+        //Creación entidad usuario
+        Usuario usuario = new Usuario();
+        usuario.setActivo(true);
+        usuario.setEmail(usuarioEmpresaFrontDTO.getEmail());
+        usuario.setPassword(passwordEncoder.encode(usuarioEmpresaFrontDTO.getPassword()));
+        usuario.setRol(new Rol(Long.valueOf(2), "ROLE_EMPRESA"));
+        return usuario;
     }
 
     /**

@@ -23,7 +23,8 @@ public class UsuarioEmpresa implements Serializable {
     @Column(name = "telefono")
     private Integer telefono;
 
-    @Column(name = "direccion")
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "direccion_id")
     private Direccion direccion;
 
     @OneToMany(mappedBy = "usuarioEmpresa")
@@ -32,11 +33,10 @@ public class UsuarioEmpresa implements Serializable {
     @OneToMany(mappedBy = "usuarioEmpresa")
     private List<Peticion> peticionUsuarioEmpresas = new ArrayList<>();
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "usuario_id", referencedColumnName = "id")
-    private Usuario usuarioEmpresas;
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
     }
@@ -145,12 +145,12 @@ public class UsuarioEmpresa implements Serializable {
         return id != null && id.equals(((UsuarioEmpresa) o).id);
     }
 
-    public Usuario getUsuarioEmpresas() {
-        return usuarioEmpresas;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setUsuarioEmpresas(Usuario usuarioEmpresas) {
-        this.usuarioEmpresas = usuarioEmpresas;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     @Override
@@ -161,10 +161,13 @@ public class UsuarioEmpresa implements Serializable {
     @Override
     public String toString() {
         return "UsuarioEmpresa{" +
-            "id=" + getId() +
-            ", nombre='" + getNombre() + "'" +
-            ", telefono=" + getTelefono() +
-            ", direccion=" + getDireccion() +
-            "}";
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", telefono=" + telefono +
+                ", direccion=" + direccion +
+                ", preferenciasCategoriaProductos=" + preferenciasCategoriaProductos +
+                ", peticionUsuarioEmpresas=" + peticionUsuarioEmpresas +
+                ", usuario=" + usuario +
+                '}';
     }
 }

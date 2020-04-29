@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -88,15 +89,15 @@ public class PreferenciaController {
      *
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of preferencias by categoria producto in body.
      */
-    @GetMapping("/preferencias/categoriaProducto")
-    public ResponseEntity<List<PreferenciaDTO>> getAllByCategoriaProducto(@RequestBody List<Long> idCategorias) {
+    @PostMapping("/preferencias/categoria-producto")
+    public ResponseEntity<List<UsuarioEmpresaDTO>> getAllByCategoriaProducto(@RequestBody List<Long> idCategorias) {
         log.debug("REST request to get all Preferencias by Categoria Producto");
-        List<PreferenciaDTO> list = preferenciaService.findAllByCategoriaProducto(idCategorias);
+        List<UsuarioEmpresaDTO> list = preferenciaService.findAllByCategoriaProducto(idCategorias);
         return ResponseEntity.ok().body(list);
     }
 
     /**
-     * {@code GET  /preferencias/categoriaProducto/:idEmpresa} : get all the preferencias by categoria producto.
+     * {@code GET  /preferencias/empresa/:idEmpresa} : get all the preferencias by empresa.
      *
      * @param idEmpresa
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of preferencias by categoria producto in body.
@@ -105,6 +106,20 @@ public class PreferenciaController {
     public ResponseEntity<List<PreferenciaDTO>> getAllByCategoriaProducto(@PathVariable Long idEmpresa) {
         log.debug("REST request to get all Preferencias by Empresa");
         List<PreferenciaDTO> list = preferenciaService.findAllByUsuarioEmpresa(idEmpresa);
+        return ResponseEntity.ok().body(list);
+    }
+
+    /**
+     * {@code GET  /preferencias/empresa/:idEmpresa} : get all the preferencias by empresa.
+     *
+     * @param emailUsuarioEmpresa
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of preferencias by categoria producto in body.
+     */
+    @Secured({"ROLE_ADMIN", "ROLE_EMPRESA"})
+    @GetMapping("/preferencias/empresa/email/{emailUsuarioEmpresa}")
+    public ResponseEntity<List<PreferenciaDTO>> getAllByEmailUsuarioEmpresa(@PathVariable String emailUsuarioEmpresa) {
+        log.debug("REST request to get all Preferencias by Email Usuario Empresa");
+        List<PreferenciaDTO> list = preferenciaService.findAllByEmailUsuarioEmpresa(emailUsuarioEmpresa);
         return ResponseEntity.ok().body(list);
     }
 

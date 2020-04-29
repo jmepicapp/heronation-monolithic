@@ -1,6 +1,7 @@
 package com.hackathlon.heronation.service;
 
 import com.hackathlon.heronation.model.dto.UsuarioDonanteDTO;
+import com.hackathlon.heronation.model.dto.UsuarioDonanteFrontDTO;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,10 +14,10 @@ public interface UsuarioDonanteService {
     /**
      * Save a usuarioDonante.
      *
-     * @param usuarioDonanteDTO the entity to save.
+     * @param usuarioDonanteFrontDTO the entity to save.
      * @return the persisted entity.
      */
-    UsuarioDonanteDTO save(UsuarioDonanteDTO usuarioDonanteDTO);
+    UsuarioDonanteDTO save(UsuarioDonanteFrontDTO usuarioDonanteFrontDTO);
 
     /**
      * Get all the usuarioDonantes.

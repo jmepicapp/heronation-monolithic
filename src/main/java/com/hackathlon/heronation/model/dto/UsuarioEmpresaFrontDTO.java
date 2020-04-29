@@ -1,18 +1,13 @@
 package com.hackathlon.heronation.model.dto;
 
-import java.io.Serializable;
-import java.util.Objects;
-
-/**
- * A DTO for the {@link com.hackathlon.heronation.model.UsuarioEmpresa} entity.
- */
-public class UsuarioEmpresaDTO implements Serializable {
+public class UsuarioEmpresaFrontDTO {
 
     private Long id;
     private String nombre;
     private Integer telefono;
     private DireccionDTO direccion;
-    private UsuarioDTO usuario;
+    private String email;
+    private String password;
 
     public Long getId() {
         return id;
@@ -46,43 +41,31 @@ public class UsuarioEmpresaDTO implements Serializable {
         this.direccion = direccion;
     }
 
-    public UsuarioDTO getUsuario() {
-        return usuario;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUsuario(UsuarioDTO usuario) {
-        this.usuario = usuario;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-
-        UsuarioEmpresaDTO usuarioEmpresaDTO = (UsuarioEmpresaDTO) o;
-        if (usuarioEmpresaDTO.getId() == null || getId() == null) {
-            return false;
-        }
-        return Objects.equals(getId(), usuarioEmpresaDTO.getId());
+    public String getPassword() {
+        return password;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(getId());
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override
     public String toString() {
-        return "UsuarioEmpresaDTO{" +
+        return "UsuarioEmpresaFrontDTO{" +
                 "id=" + id +
                 ", nombre='" + nombre + '\'' +
                 ", telefono=" + telefono +
                 ", direccion=" + direccion +
-                ", usuario=" + usuario +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
                 '}';
     }
 }

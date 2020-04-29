@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -12,12 +13,12 @@ import java.util.Objects;
 public class PeticionDTO implements Serializable {
     
     private Long id;
-    private String descripcionDonante;
     private String descripcionEmpresa;
     private LocalDateTime fechaCreacion;
     private UsuarioDonanteDTO usuarioDonante;
     private UsuarioEmpresaDTO usuarioEmpresa;
     private String estado;
+    private List<ProductoDTO> productos;
 
     public Long getId() {
         return id;
@@ -25,15 +26,6 @@ public class PeticionDTO implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-
-    public String getDescripcionDonante() {
-        return descripcionDonante;
-    }
-
-    public void setDescripcionDonante(String descripcionDonante) {
-        this.descripcionDonante = descripcionDonante;
     }
 
     public String getDescripcionEmpresa() {
@@ -76,6 +68,14 @@ public class PeticionDTO implements Serializable {
         this.usuarioEmpresa = usuarioEmpresa;
     }
 
+    public List<ProductoDTO> getProductos() {
+        return productos;
+    }
+
+    public void setProductos(List<ProductoDTO> productos) {
+        this.productos = productos;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -101,12 +101,12 @@ public class PeticionDTO implements Serializable {
     public String toString() {
         return "PeticionDTO{" +
                 "id=" + id +
-                ", descripcionDonante='" + descripcionDonante + '\'' +
                 ", descripcionEmpresa='" + descripcionEmpresa + '\'' +
                 ", fechaCreacion=" + fechaCreacion +
                 ", usuarioDonante=" + usuarioDonante +
                 ", usuarioEmpresa=" + usuarioEmpresa +
                 ", estado='" + estado + '\'' +
+                ", productos=" + productos +
                 '}';
     }
 }

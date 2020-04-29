@@ -106,10 +106,10 @@ public class PeticionController {
      *
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of peticiones by idUsuario in body.
      */
-    @GetMapping("/historico-peticions/{idDonante}")
-    public List<PeticionDTO> getDonanteHistoricalPeticions(@PathVariable Long idDonante) {
+    @GetMapping("/historico-peticions/usuario-donante/{idDonante}")
+    public ResponseEntity<List<PeticionDTO>> getDonanteHistoricalPeticions(@PathVariable Long idDonante) {
         log.debug("REST request to get all Preferencias");
-        return peticionService.findAllByIdUsuarioDonanteEstadoCanceladoYAceptado(idDonante);
+        return ResponseEntity.ok().body(peticionService.findAllByIdUsuarioDonanteEstadoCanceladoYAceptado(idDonante));
     }
     /**
      * {@code GET  /historico-peticions} : get all the Historical petitions of an Empresa.
@@ -117,19 +117,19 @@ public class PeticionController {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of peticiones by idUsuario in body.
      */
     @GetMapping("/historico-peticions/{idEmpresa}")
-    public List<PeticionDTO> getEmpresaHistoricalPeticions(@PathVariable Long idEmpresa) {
+    public ResponseEntity<List<PeticionDTO>> getEmpresaHistoricalPeticions(@PathVariable Long idEmpresa) {
         log.debug("REST request to get all Preferencias");
-        return peticionService.findAllByIdUsuarioEmpresaEstadoCanceladoYAceptado(idEmpresa);
+        return ResponseEntity.ok().body(peticionService.findAllByIdUsuarioEmpresaEstadoCanceladoYAceptado(idEmpresa));
     }
     /**
      * {@code GET  /pendant-peticions} : get all the pendant peticions of an Donante.
      *
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of peticiones by idUsuario in body.
      */
-    @GetMapping("/pendant-peticions/{idDonante}")
-    public List<PeticionDTO> getDonantePendantPeticions(@PathVariable Long idDonante) {
+    @GetMapping("/pendant-peticions/usuario-donante/{idDonante}")
+    public ResponseEntity<List<PeticionDTO>> getDonantePendantPeticions(@PathVariable Long idDonante) {
         log.debug("REST request to get all Preferencias");
-        return peticionService.findAllByIdUsuarioDonanteEstadoPendiente(idDonante);
+        return ResponseEntity.ok().body(peticionService.findAllByIdUsuarioDonanteEstadoPendiente(idDonante));
     }
     /**
      * {@code GET  /pendant-peticions} : get all the pendant peticions of an Empresa.
@@ -137,9 +137,9 @@ public class PeticionController {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of peticiones by idUsuario in body.
      */
     @GetMapping("/pendant-peticions/{idEmpresa}")
-    public List<PeticionDTO> getEmpresaPendantPeticions(@PathVariable Long idEmpresa) {
+    public ResponseEntity<List<PeticionDTO>> getEmpresaPendantPeticions(@PathVariable Long idEmpresa) {
         log.debug("REST request to get all Preferencias");
-        return peticionService.findAllByIdUsuarioEmpresaEstadoPendiente(idEmpresa);
+        return ResponseEntity.ok().body(peticionService.findAllByIdUsuarioEmpresaEstadoPendiente(idEmpresa));
     }
     
     /**

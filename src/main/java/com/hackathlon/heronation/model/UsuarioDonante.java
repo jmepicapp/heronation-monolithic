@@ -29,17 +29,17 @@ public class UsuarioDonante implements Serializable {
     @Column(name = "telefono")
     private Integer telefono;
 
-    @Column(name = "direccion")
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "direccion_id")
     private Direccion direccion;
 
     @OneToMany(mappedBy = "usuarioDonante")
     private List<Peticion> peticionUsuarioDonantes = new ArrayList<>();
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "usuario_id", referencedColumnName = "id")
-    private Usuario usuarioDonante;
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
     }
@@ -126,12 +126,12 @@ public class UsuarioDonante implements Serializable {
         this.peticionUsuarioDonantes = peticions;
     }
 
-    public Usuario getUsuarioDonante() {
-        return usuarioDonante;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setUsuarioDonante(Usuario rolUsuarioDonante) {
-        this.usuarioDonante = rolUsuarioDonante;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     @Override
@@ -153,12 +153,13 @@ public class UsuarioDonante implements Serializable {
     @Override
     public String toString() {
         return "UsuarioDonante{" +
-            "id=" + getId() +
-            ", nombre='" + getNombre() + "'" +
-            ", apellidos='" + getApellidos() + "'" +
-            ", telefono=" + getTelefono() +
-            ", direccion=" + getDireccion() +
-            ", rol=" + getUsuarioDonante() +
-            "}";
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", apellidos='" + apellidos + '\'' +
+                ", telefono=" + telefono +
+                ", direccion=" + direccion +
+                ", peticionUsuarioDonantes=" + peticionUsuarioDonantes +
+                ", usuario=" + usuario +
+                '}';
     }
 }

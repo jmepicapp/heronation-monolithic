@@ -1,6 +1,7 @@
 package com.hackathlon.heronation.service.impl;
 
 import com.hackathlon.heronation.model.dto.UsuarioEmpresaDTO;
+import com.hackathlon.heronation.repository.UsuarioEmpresaRepository;
 import com.hackathlon.heronation.service.PreferenciaService;
 import com.hackathlon.heronation.model.Preferencia;
 import com.hackathlon.heronation.repository.PreferenciaRepository;
@@ -30,8 +31,12 @@ public class PreferenciaServiceImpl implements PreferenciaService {
     @Autowired
     private final PreferenciaRepository preferenciaRepository;
 
-    public PreferenciaServiceImpl(PreferenciaRepository preferenciaRepository) {
+    @Autowired
+    private final UsuarioEmpresaRepository usuarioEmpresaRepository;
+
+    public PreferenciaServiceImpl(PreferenciaRepository preferenciaRepository, UsuarioEmpresaRepository usuarioEmpresaRepository) {
         this.preferenciaRepository = preferenciaRepository;
+        this.usuarioEmpresaRepository = usuarioEmpresaRepository;
     }
 
     /**
@@ -67,13 +72,29 @@ public class PreferenciaServiceImpl implements PreferenciaService {
      * @param idCategorias the list of categorias producto id
      * @return the list of entities.
      */
-    public List<PreferenciaDTO> findAllByCategoriaProducto(List<Long> idCategorias){
-        return this.preferenciaRepository.findAll()
-                .stream()
-                .filter(pr -> idCategorias.contains(pr.getCategoriaProducto().getId()))
-                .filter(pr -> !pr.getExclusion())
-                .map(pr ->  ModelMapperUtils.map(pr, PreferenciaDTO.class))
-                .collect(Collectors.toList());
+    public List<UsuarioEmpresaDTO> findAllByCategoriaProducto(List<Long> idCategorias) {
+
+        List<UsuarioEmpresaDTO> usuarioEmpresaDTOList = ModelMapperUtils.mapAll(usuarioEmpresaRepository.findAll(), UsuarioEmpresaDTO.class);
+
+        for (PreferenciaDTO preferencia : ModelMapperUtils.mapAll(preferenciaRepository.findAll(), PreferenciaDTO.class)) {
+            if (idCategorias.contains(preferencia.getCategoriaProducto().getId())) {
+                if(usuarioEmpresaDTOList.contains(preferencia.getUsuarioEmpresa())){
+                    usuarioEmpresaDTOList.remove(preferencia.getUsuarioEmpresa());
+                }
+            }
+        }
+
+        return usuarioEmpresaDTOList;
+
+
+//        return this.preferenciaRepository.findAll()
+//                .stream()
+//                .filter(pr -> idCategorias.contains(pr.getCategoriaProducto().getId()))
+//                .filter(usuarioEmpresaDTOList.contains(preferencia.getUsuarioEmpresa())
+//                .map(pr ->  ModelMapperUtils.map(pr, PreferenciaDTO.class))
+//                .map(pr -> pr.getUsuarioEmpresa())
+//                .distinct()
+//                .collect(Collectors.toList());
 
     }
 
@@ -83,8 +104,19 @@ public class PreferenciaServiceImpl implements PreferenciaService {
      * @param idEmpresa the list of categorias producto id
      * @return the list of entities.
      */
-    public List<PreferenciaDTO> findAllByUsuarioEmpresa(Long idEmpresa){
+    public List<PreferenciaDTO> findAllByUsuarioEmpresa(Long idEmpresa) {
         return ModelMapperUtils.mapAll(this.preferenciaRepository.findAllByUsuarioEmpresa(idEmpresa), PreferenciaDTO.class);
+
+    }
+
+    /**
+     * Get all the preferencias by empresa id.
+     *
+     * @param emailUsuarioEmpresa the list of categorias producto id
+     * @return the list of entities.
+     */
+    public List<PreferenciaDTO> findAllByEmailUsuarioEmpresa(String emailUsuarioEmpresa) {
+        return ModelMapperUtils.mapAll(this.preferenciaRepository.findAllByEmailUsuarioEmpresa(emailUsuarioEmpresa), PreferenciaDTO.class);
 
     }
 

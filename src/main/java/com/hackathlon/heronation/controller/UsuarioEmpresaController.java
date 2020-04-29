@@ -2,6 +2,7 @@ package com.hackathlon.heronation.controller;
 
 import com.hackathlon.heronation.model.dto.PreferenciaDTO;
 import com.hackathlon.heronation.model.dto.UsuarioDonanteDTO;
+import com.hackathlon.heronation.model.dto.UsuarioEmpresaFrontDTO;
 import com.hackathlon.heronation.service.UsuarioEmpresaService;
 import com.hackathlon.heronation.model.dto.UsuarioEmpresaDTO;
 import com.hackathlon.heronation.controller.error.BadRequestAlertException;
@@ -40,36 +41,30 @@ public class UsuarioEmpresaController {
     /**
      * {@code POST  /usuario-empresas} : Create a new usuarioEmpresa.
      *
-     * @param usuarioEmpresaDTO the usuarioEmpresaDTO to create.
+     * @param usuarioEmpresaFrontDTO the usuarioEmpresaDTO to create.
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new usuarioEmpresaDTO, or with status {@code 400 (Bad Request)} if the usuarioEmpresa has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/usuario-empresas")
-    public ResponseEntity<UsuarioEmpresaDTO> createUsuarioEmpresa(@RequestBody UsuarioEmpresaDTO usuarioEmpresaDTO) throws URISyntaxException {
-        log.debug("REST request to save UsuarioEmpresa : {}", usuarioEmpresaDTO);
-        if (usuarioEmpresaDTO.getId() != null) {
-            throw new BadRequestAlertException("A new usuarioEmpresa cannot already have an ID", ENTITY_NAME, "idexists");
-        }
-        UsuarioEmpresaDTO result = usuarioEmpresaService.save(usuarioEmpresaDTO);
-        return ResponseEntity.created(new URI("/api/usuario-empresas/" + result.getId())).body(result);
+    public ResponseEntity<UsuarioEmpresaDTO> createUsuarioEmpresa(@RequestBody UsuarioEmpresaFrontDTO usuarioEmpresaFrontDTO) throws URISyntaxException {
+        log.debug("REST request to save UsuarioEmpresa : {}", usuarioEmpresaFrontDTO);
+        UsuarioEmpresaDTO result = usuarioEmpresaService.save(usuarioEmpresaFrontDTO);
+        return ResponseEntity.ok().body(result);
     }
 
     /**
      * {@code PUT  /usuario-empresas} : Updates an existing usuarioEmpresa.
      *
-     * @param usuarioEmpresaDTO the usuarioEmpresaDTO to update.
+     * @param usuarioEmpresaFrontDTO the usuarioEmpresaDTO to update.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated usuarioEmpresaDTO,
      * or with status {@code 400 (Bad Request)} if the usuarioEmpresaDTO is not valid,
      * or with status {@code 500 (Internal Server Error)} if the usuarioEmpresaDTO couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/usuario-empresas")
-    public ResponseEntity<UsuarioEmpresaDTO> updateUsuarioEmpresa(@RequestBody UsuarioEmpresaDTO usuarioEmpresaDTO) throws URISyntaxException {
-        log.debug("REST request to update UsuarioEmpresa : {}", usuarioEmpresaDTO);
-        if (usuarioEmpresaDTO.getId() == null) {
-            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
-        }
-        UsuarioEmpresaDTO result = usuarioEmpresaService.save(usuarioEmpresaDTO);
+    public ResponseEntity<UsuarioEmpresaDTO> updateUsuarioEmpresa(@RequestBody UsuarioEmpresaFrontDTO usuarioEmpresaFrontDTO) throws URISyntaxException {
+        log.debug("REST request to update UsuarioEmpresa : {}", usuarioEmpresaFrontDTO);
+        UsuarioEmpresaDTO result = usuarioEmpresaService.save(usuarioEmpresaFrontDTO);
         return ResponseEntity.ok().body(result);
     }
 
@@ -103,13 +98,13 @@ public class UsuarioEmpresaController {
     /**
      * {@code GET  /usuario-empresas/email/{emailUsuario}} : get the "id" usuarioEmpresaDTO.
      *
-     * @param email the id of the usuario to filter the usuarioEmpresaDTO.
+     * @param emailUsuario the id of the usuario to filter the usuarioEmpresaDTO.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the usuarioEmpresaDTO, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/usuario-empresas/email/{emailUsuario}")
-    public ResponseEntity<UsuarioEmpresaDTO> getUsuarioEmpresaByEmailUsuario(@PathVariable String email) {
-        log.debug("REST request to get UsuarioDonante : {}", email);
-        Optional<UsuarioEmpresaDTO> usuarioEmpresaDTO = usuarioEmpresaService.findByEmailUsuario(email);
+    public ResponseEntity<UsuarioEmpresaDTO> getUsuarioEmpresaByEmailUsuario(@PathVariable String emailUsuario) {
+        log.debug("REST request to get UsuarioDonante : {}", emailUsuario);
+        Optional<UsuarioEmpresaDTO> usuarioEmpresaDTO = usuarioEmpresaService.findByEmailUsuario(emailUsuario);
         return usuarioEmpresaDTO.map(response -> ResponseEntity.ok().body(response))
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
