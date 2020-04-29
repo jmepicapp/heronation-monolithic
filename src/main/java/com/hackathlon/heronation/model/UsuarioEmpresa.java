@@ -161,10 +161,13 @@ public class UsuarioEmpresa implements Serializable {
     @Override
     public String toString() {
         return "UsuarioEmpresa{" +
-            "id=" + getId() +
-            ", nombre='" + getNombre() + "'" +
-            ", telefono=" + getTelefono() +
-            ", direccion=" + getDireccion() +
-            "}";
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", telefono=" + telefono +
+                ", direccion=" + direccion +
+                ", preferenciasCategoriaProductos=" + preferenciasCategoriaProductos +
+                ", peticionUsuarioEmpresas=" + peticionUsuarioEmpresas +
+                ", usuario=" + usuario +
+                '}';
     }
 }

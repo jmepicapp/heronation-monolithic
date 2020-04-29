@@ -1,11 +1,6 @@
 package com.hackathlon.heronation.model.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.hackathlon.heronation.model.Preferencia;
-
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 /**
@@ -17,7 +12,6 @@ public class UsuarioEmpresaDTO implements Serializable {
     private String nombre;
     private Integer telefono;
     private DireccionDTO direccion;
-    private Boolean activo;
     private UsuarioDTO usuario;
 
     public Long getId() {
@@ -50,18 +44,6 @@ public class UsuarioEmpresaDTO implements Serializable {
 
     public void setDireccion(DireccionDTO direccion) {
         this.direccion = direccion;
-    }
-
-    public Boolean isActivo() {
-        return activo;
-    }
-
-    public void setActivo(Boolean activo) {
-        this.activo = activo;
-    }
-
-    public Boolean getActivo() {
-        return activo;
     }
 
     public UsuarioDTO getUsuario() {
@@ -100,7 +82,6 @@ public class UsuarioEmpresaDTO implements Serializable {
                 ", nombre='" + nombre + '\'' +
                 ", telefono=" + telefono +
                 ", direccion=" + direccion +
-                ", activo=" + activo +
                 ", usuario=" + usuario +
                 '}';
     }

@@ -3,7 +3,6 @@ package com.hackathlon.heronation.service.impl;
 import com.hackathlon.heronation.model.Direccion;
 import com.hackathlon.heronation.model.Rol;
 import com.hackathlon.heronation.model.Usuario;
-import com.hackathlon.heronation.model.dto.DireccionDTO;
 import com.hackathlon.heronation.model.dto.UsuarioDonanteFrontDTO;
 import com.hackathlon.heronation.repository.DireccionRepository;
 import com.hackathlon.heronation.repository.UsuarioRepository;
@@ -36,18 +35,10 @@ public class UsuarioDonanteServiceImpl implements UsuarioDonanteService {
     private final UsuarioDonanteRepository usuarioDonanteRepository;
 
     @Autowired
-    private final DireccionRepository direccionRepository;
-
-    @Autowired
-    private final UsuarioRepository usuarioRepository;
-
-    @Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 
-    public UsuarioDonanteServiceImpl(UsuarioDonanteRepository usuarioDonanteRepository, DireccionRepository direccionRepository, UsuarioRepository usuarioRepository) {
+    public UsuarioDonanteServiceImpl(UsuarioDonanteRepository usuarioDonanteRepository) {
         this.usuarioDonanteRepository = usuarioDonanteRepository;
-        this.direccionRepository = direccionRepository;
-        this.usuarioRepository = usuarioRepository;
     }
 
     /**
@@ -59,9 +50,9 @@ public class UsuarioDonanteServiceImpl implements UsuarioDonanteService {
     @Override
     public UsuarioDonanteDTO save(UsuarioDonanteFrontDTO usuarioDonanteFrontDTO) {
         log.debug("Request to save UsuarioDonante : {}", usuarioDonanteFrontDTO);
-        Usuario usuario = crearUsuario(usuarioDonanteFrontDTO);
 
         UsuarioDonante usuarioDonante = crearUsuarioDonante(usuarioDonanteFrontDTO);
+        usuarioDonante.setUsuario(crearUsuario(usuarioDonanteFrontDTO));
 
         usuarioDonante = usuarioDonanteRepository.save(usuarioDonante);
         return ModelMapperUtils.map(usuarioDonante, UsuarioDonanteDTO.class);
@@ -83,7 +74,7 @@ public class UsuarioDonanteServiceImpl implements UsuarioDonanteService {
         usuario.setActivo(true);
         usuario.setEmail(usuarioDonanteFrontDTO.getEmail());
         usuario.setPassword(passwordEncoder.encode(usuarioDonanteFrontDTO.getPassword()));
-        usuario.setRol(new Rol(Long.valueOf(3), "ROLE_DONANTE"));
+        usuario.setRol(new Rol(Long.valueOf(2), "ROLE_EMPRESA"));
         return usuario;
     }
 

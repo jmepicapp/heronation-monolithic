@@ -49,7 +49,7 @@ public class UsuarioEmpresaController {
     public ResponseEntity<UsuarioEmpresaDTO> createUsuarioEmpresa(@RequestBody UsuarioEmpresaFrontDTO usuarioEmpresaFrontDTO) throws URISyntaxException {
         log.debug("REST request to save UsuarioEmpresa : {}", usuarioEmpresaFrontDTO);
         UsuarioEmpresaDTO result = usuarioEmpresaService.save(usuarioEmpresaFrontDTO);
-        return ResponseEntity.created(new URI("/api/usuario-empresas/" + result.getId())).body(result);
+        return ResponseEntity.ok().body(result);
     }
 
     /**

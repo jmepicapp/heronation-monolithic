@@ -13,11 +13,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.swing.text.html.Option;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 /**
  * Service Implementation for managing {@link UsuarioEmpresa}.
@@ -32,18 +29,10 @@ public class UsuarioEmpresaServiceImpl implements UsuarioEmpresaService {
     private final UsuarioEmpresaRepository usuarioEmpresaRepository;
 
     @Autowired
-    private final DireccionRepository direccionRepository;
-
-    @Autowired
-    private final UsuarioRepository usuarioRepository;
-
-    @Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 
-    public UsuarioEmpresaServiceImpl(UsuarioEmpresaRepository usuarioEmpresaRepository, DireccionRepository direccionRepository, UsuarioRepository usuarioRepository) {
+    public UsuarioEmpresaServiceImpl(UsuarioEmpresaRepository usuarioEmpresaRepository) {
         this.usuarioEmpresaRepository = usuarioEmpresaRepository;
-        this.direccionRepository = direccionRepository;
-        this.usuarioRepository = usuarioRepository;
     }
 
     /**
@@ -55,15 +44,15 @@ public class UsuarioEmpresaServiceImpl implements UsuarioEmpresaService {
     @Override
     public UsuarioEmpresaDTO save(UsuarioEmpresaFrontDTO usuarioEmpresaFrontDTO) {
         log.debug("Request to save UsuarioEmpresa : {}", usuarioEmpresaFrontDTO);
-        Usuario usuario = crearUsuario(usuarioEmpresaFrontDTO);
 
-        UsuarioEmpresa usuarioEmpresa = crearUsuarioDonante(usuarioEmpresaFrontDTO);
+        UsuarioEmpresa usuarioEmpresa = crearUsuarioEmpresa(usuarioEmpresaFrontDTO);
+        usuarioEmpresa.setUsuario(crearUsuario(usuarioEmpresaFrontDTO));
 
         usuarioEmpresa = usuarioEmpresaRepository.save(usuarioEmpresa);
         return ModelMapperUtils.map(usuarioEmpresa, UsuarioEmpresaDTO.class);
     }
 
-    private UsuarioEmpresa crearUsuarioDonante(UsuarioEmpresaFrontDTO usuarioEmpresaFrontDTO) {
+    private UsuarioEmpresa crearUsuarioEmpresa(UsuarioEmpresaFrontDTO usuarioEmpresaFrontDTO) {
         UsuarioEmpresa usuarioEmpresa = new UsuarioEmpresa();
         usuarioEmpresa.setId(usuarioEmpresaFrontDTO.getId());
         usuarioEmpresa.setDireccion(ModelMapperUtils.map(usuarioEmpresaFrontDTO.getDireccion(), Direccion.class));
