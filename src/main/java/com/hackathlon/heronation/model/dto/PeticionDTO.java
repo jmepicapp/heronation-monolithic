@@ -12,7 +12,6 @@ import java.util.Objects;
 public class PeticionDTO implements Serializable {
     
     private Long id;
-    private String descripcionDonante;
     private String descripcionEmpresa;
     private LocalDateTime fechaCreacion;
     private UsuarioDonanteDTO usuarioDonante;
@@ -25,15 +24,6 @@ public class PeticionDTO implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-
-    public String getDescripcionDonante() {
-        return descripcionDonante;
-    }
-
-    public void setDescripcionDonante(String descripcionDonante) {
-        this.descripcionDonante = descripcionDonante;
     }
 
     public String getDescripcionEmpresa() {
@@ -101,7 +91,6 @@ public class PeticionDTO implements Serializable {
     public String toString() {
         return "PeticionDTO{" +
                 "id=" + id +
-                ", descripcionDonante='" + descripcionDonante + '\'' +
                 ", descripcionEmpresa='" + descripcionEmpresa + '\'' +
                 ", fechaCreacion=" + fechaCreacion +
                 ", usuarioDonante=" + usuarioDonante +

@@ -2,6 +2,8 @@ package com.hackathlon.heronation.model;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -19,9 +21,6 @@ public class Peticion implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(name = "descripcion_donante")
-    private String descripcionDonante;
 
     @Column(name = "descripcion_empresa")
     private String descripcionEmpresa;
@@ -42,26 +41,15 @@ public class Peticion implements Serializable {
     @JsonIgnoreProperties("peticionUsuarioEmpresas")
     private UsuarioEmpresa usuarioEmpresa;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+    @OneToMany(mappedBy = "peticion", cascade = CascadeType.ALL, orphanRemoval = true)
+    List<Producto> listaProducto = new ArrayList<>();
+
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getDescripcionDonante() {
-        return descripcionDonante;
-    }
-
-    public Peticion descripcionDonante(String descripcionDonante) {
-        this.descripcionDonante = descripcionDonante;
-        return this;
-    }
-
-    public void setDescripcionDonante(String descripcionDonante) {
-        this.descripcionDonante = descripcionDonante;
     }
 
     public String getDescripcionEmpresa() {
@@ -145,12 +133,12 @@ public class Peticion implements Serializable {
     public String toString() {
         return "Peticion{" +
                 "id=" + id +
-                ", descripcionDonante='" + descripcionDonante + '\'' +
                 ", descripcionEmpresa='" + descripcionEmpresa + '\'' +
                 ", fechaCreacion=" + fechaCreacion +
                 ", estado='" + estado + '\'' +
                 ", usuarioDonante=" + usuarioDonante +
                 ", usuarioEmpresa=" + usuarioEmpresa +
+                ", listaProducto=" + listaProducto +
                 '}';
     }
 }
