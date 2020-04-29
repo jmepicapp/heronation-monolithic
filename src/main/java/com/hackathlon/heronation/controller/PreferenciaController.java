@@ -88,7 +88,7 @@ public class PreferenciaController {
      *
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of preferencias by categoria producto in body.
      */
-    @GetMapping("/preferencias/categoriaProducto")
+    @GetMapping("/preferencias/categoria-producto")
     public ResponseEntity<List<PreferenciaDTO>> getAllByCategoriaProducto(@RequestBody List<Long> idCategorias) {
         log.debug("REST request to get all Preferencias by Categoria Producto");
         List<PreferenciaDTO> list = preferenciaService.findAllByCategoriaProducto(idCategorias);
@@ -96,7 +96,7 @@ public class PreferenciaController {
     }
 
     /**
-     * {@code GET  /preferencias/categoriaProducto/:idEmpresa} : get all the preferencias by categoria producto.
+     * {@code GET  /preferencias/empresa/:idEmpresa} : get all the preferencias by categoria producto.
      *
      * @param idEmpresa
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of preferencias by categoria producto in body.
