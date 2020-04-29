@@ -79,7 +79,6 @@ public class CategoriaProductoController {
      *
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of categoriaProductos in body.
      */
-    @Secured({"ROLE_DONANTE", "ROLE_EMPRESA", "ROLE_ADMIN"})
     @GetMapping("/categoria-productos")
     public List<CategoriaProductoDTO> getAllCategoriaProductos() {
         log.debug("REST request to get all CategoriaProductos");
@@ -92,7 +91,6 @@ public class CategoriaProductoController {
      * @param id the id of the categoriaProductoDTO to retrieve.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the categoriaProductoDTO, or with status {@code 404 (Not Found)}.
      */
-    @Secured({"ROLE_DONANTE", "ROLE_EMPRESA", "ROLE_ADMIN"})
     @GetMapping("/categoria-productos/{id}")
     public ResponseEntity<CategoriaProductoDTO> getCategoriaProducto(@PathVariable Long id) {
         log.debug("REST request to get CategoriaProducto : {}", id);

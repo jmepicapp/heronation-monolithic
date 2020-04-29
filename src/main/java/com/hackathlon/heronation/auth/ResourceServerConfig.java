@@ -21,7 +21,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/usuario-empresas", "/api/usuario-empresas/{id}").permitAll()
+        http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/usuario-empresas", "/api/usuario-empresas/{id}", "/api/categoria-productos", "/api/preferencias/categoriaProducto").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/usuario-empresas", "/api/usuario-donantes").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/donacion").hasAnyRole("DONANTE", "EMPRESA", "ADMIN")
                 .anyRequest().authenticated()
