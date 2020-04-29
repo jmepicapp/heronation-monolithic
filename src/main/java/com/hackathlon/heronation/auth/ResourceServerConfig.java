@@ -21,7 +21,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/usuario-empresas", "/api/usuario-empresas/{id}", "/api/categoria-productos", "/api/preferencias/categoriaProducto").permitAll()
+        http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/usuario-empresas", "/api/usuario-empresas/{id}", "/api/categoria-productos", "/api/preferencias/categoria-producto").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/usuario-empresas", "/api/usuario-donantes").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/donacion").hasAnyRole("DONANTE", "EMPRESA", "ADMIN")
                 .anyRequest().authenticated()
@@ -42,7 +42,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     }
 
     @Bean
-    public FilterRegistrationBean<CorsFilter> corsFilter(){
+    public FilterRegistrationBean<CorsFilter> corsFilter() {
         FilterRegistrationBean<CorsFilter> bean = new FilterRegistrationBean<CorsFilter>(new CorsFilter(corsConfigurationSource()));
         bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
         return bean;
