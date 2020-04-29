@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -17,6 +18,7 @@ public class PeticionDTO implements Serializable {
     private UsuarioDonanteDTO usuarioDonante;
     private UsuarioEmpresaDTO usuarioEmpresa;
     private String estado;
+    private List<ProductoDTO> productos;
 
     public Long getId() {
         return id;
@@ -66,6 +68,14 @@ public class PeticionDTO implements Serializable {
         this.usuarioEmpresa = usuarioEmpresa;
     }
 
+    public List<ProductoDTO> getProductos() {
+        return productos;
+    }
+
+    public void setProductos(List<ProductoDTO> productos) {
+        this.productos = productos;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -96,6 +106,7 @@ public class PeticionDTO implements Serializable {
                 ", usuarioDonante=" + usuarioDonante +
                 ", usuarioEmpresa=" + usuarioEmpresa +
                 ", estado='" + estado + '\'' +
+                ", productos=" + productos +
                 '}';
     }
 }
