@@ -89,9 +89,9 @@ public class PreferenciaController {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of preferencias by categoria producto in body.
      */
     @PostMapping("/preferencias/categoria-producto")
-    public ResponseEntity<List<PreferenciaDTO>> getAllByCategoriaProducto(@RequestBody List<Long> idCategorias) {
+    public ResponseEntity<List<UsuarioEmpresaDTO>> getAllByCategoriaProducto(@RequestBody List<Long> idCategorias) {
         log.debug("REST request to get all Preferencias by Categoria Producto");
-        List<PreferenciaDTO> list = preferenciaService.findAllByCategoriaProducto(idCategorias);
+        List<UsuarioEmpresaDTO> list = preferenciaService.findAllByCategoriaProducto(idCategorias);
         return ResponseEntity.ok().body(list);
     }
 

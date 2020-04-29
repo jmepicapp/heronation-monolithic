@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -67,12 +66,14 @@ public class PreferenciaServiceImpl implements PreferenciaService {
      * @param idCategorias the list of categorias producto id
      * @return the list of entities.
      */
-    public List<PreferenciaDTO> findAllByCategoriaProducto(List<Long> idCategorias){
+    public List<UsuarioEmpresaDTO> findAllByCategoriaProducto(List<Long> idCategorias){
         return this.preferenciaRepository.findAll()
                 .stream()
                 .filter(pr -> idCategorias.contains(pr.getCategoriaProducto().getId()))
                 .filter(pr -> !pr.getExclusion())
                 .map(pr ->  ModelMapperUtils.map(pr, PreferenciaDTO.class))
+                .map(pr -> pr.getUsuarioEmpresa())
+                .distinct()
                 .collect(Collectors.toList());
 
     }

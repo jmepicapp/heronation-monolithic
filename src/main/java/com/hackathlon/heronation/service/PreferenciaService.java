@@ -32,7 +32,7 @@ public interface PreferenciaService {
      * @param id the categoriaProducto id
      * @return the list of entities.
      */
-    List<PreferenciaDTO> findAllByCategoriaProducto(List<Long> id);
+    List<UsuarioEmpresaDTO> findAllByCategoriaProducto(List<Long> id);
 
     /**
      * Get all the preferencias.
