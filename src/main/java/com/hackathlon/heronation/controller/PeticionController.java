@@ -106,7 +106,7 @@ public class PeticionController {
      *
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of peticiones by idUsuario in body.
      */
-    @GetMapping("/historico-peticions/{idDonante}")
+    @GetMapping("/historico-peticions/usuario-donante/{idDonante}")
     public ResponseEntity<List<PeticionDTO>> getDonanteHistoricalPeticions(@PathVariable Long idDonante) {
         log.debug("REST request to get all Preferencias");
         return ResponseEntity.ok().body(peticionService.findAllByIdUsuarioDonanteEstadoCanceladoYAceptado(idDonante));
