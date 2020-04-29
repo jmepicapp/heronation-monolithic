@@ -5,7 +5,6 @@ public class UsuarioEmpresaFrontDTO {
     private Long id;
     private String nombre;
     private Integer telefono;
-    private Boolean activo;
     private DireccionDTO direccion;
     private String email;
     private String password;
@@ -24,14 +23,6 @@ public class UsuarioEmpresaFrontDTO {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public Boolean getActivo() {
-        return activo;
-    }
-
-    public void setActivo(Boolean activo) {
-        this.activo = activo;
     }
 
     public Integer getTelefono() {
@@ -72,7 +63,6 @@ public class UsuarioEmpresaFrontDTO {
                 "id=" + id +
                 ", nombre='" + nombre + '\'' +
                 ", telefono=" + telefono +
-                ", activo=" + activo +
                 ", direccion=" + direccion +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +

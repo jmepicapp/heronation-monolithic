@@ -90,6 +90,17 @@ public class PreferenciaServiceImpl implements PreferenciaService {
     }
 
     /**
+     * Get all the preferencias by empresa id.
+     *
+     * @param emailUsuarioEmpresa the list of categorias producto id
+     * @return the list of entities.
+     */
+    public List<PreferenciaDTO> findAllByEmailUsuarioEmpresa(String emailUsuarioEmpresa){
+        return ModelMapperUtils.mapAll(this.preferenciaRepository.findAllByEmailUsuarioEmpresa(emailUsuarioEmpresa), PreferenciaDTO.class);
+
+    }
+
+    /**
      * Get one preferencia by id.
      *
      * @param id the id of the entity.

@@ -37,7 +37,7 @@ public class UsuarioDonante implements Serializable {
     private List<Peticion> peticionUsuarioDonantes = new ArrayList<>();
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "usuario_id", referencedColumnName = "id")
+    @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 
     public Long getId() {
@@ -153,12 +153,13 @@ public class UsuarioDonante implements Serializable {
     @Override
     public String toString() {
         return "UsuarioDonante{" +
-            "id=" + getId() +
-            ", nombre='" + getNombre() + "'" +
-            ", apellidos='" + getApellidos() + "'" +
-            ", telefono=" + getTelefono() +
-            ", direccion=" + getDireccion() +
-            ", usuario=" + usuario +
-            "}";
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", apellidos='" + apellidos + '\'' +
+                ", telefono=" + telefono +
+                ", direccion=" + direccion +
+                ", peticionUsuarioDonantes=" + peticionUsuarioDonantes +
+                ", usuario=" + usuario +
+                '}';
     }
 }
